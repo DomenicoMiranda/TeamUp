@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "530480275624",
+    "firebase_url": "https://teamup-2489b.firebaseio.com",
+    "project_id": "teamup-2489b",
+    "storage_bucket": "teamup-2489b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530480275624:android:52fb8eca7512095c33e29d",
+        "android_client_info": {
+          "package_name": "it.intolleranti.teamup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530480275624-fph0586vu1gkosiaq3a421jkfmvo7aui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQmRR9FMimaToi4hknowg9wseYalA9TYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530480275624-fph0586vu1gkosiaq3a421jkfmvo7aui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
