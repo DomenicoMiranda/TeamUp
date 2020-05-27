@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamup/user_not_logged_in/home_not_logged.dart';
 
 void main() {
   runApp(MyApp());
@@ -6,7 +7,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
-  //aaaaa
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TeamUp',
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'TeamUp'),
+      home: HomeNotLoggedIn(),
     );
   }
 }
