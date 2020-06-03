@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teamup/user_not_logged_in/home_not_logged.dart';
 
 import 'authentication/login.dart';
+import 'authentication/sign_in.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: SignIn(),
     );
   }
 }
