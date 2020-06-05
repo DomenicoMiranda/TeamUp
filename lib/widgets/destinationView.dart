@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamup/screens/home.dart';
-import 'package:teamup/screens/projects.dart';
-import 'package:teamup/screens/search.dart';
+import 'package:teamup/screens/myprojects.dart';
+import 'package:teamup/screens/nominations.dart';
 import 'package:teamup/screens/settings.dart';
 
 
@@ -16,8 +16,8 @@ class _DestinationViewState extends State<DestinationView> {
 
     final List<Widget>_pageOption = [
       Homepage(),
-      SearcPage(),
-      ProjectsList(),
+      Nominations(),
+      MyProjectsList(),
       SettingsPage()
     ];
 
@@ -49,7 +49,7 @@ class _DestinationViewState extends State<DestinationView> {
                     ),
                     BottomNavigationBarItem(
                         icon: Icon(Icons.search),
-                        title: Text('Cerca')
+                        title: Text('Candidature')
                     ),
                     BottomNavigationBarItem(
                         icon: Icon(Icons.list),
