@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class ProjectsList extends StatefulWidget {
+class MyProjectsList extends StatefulWidget {
   @override
-  _ProjectsListState createState() => _ProjectsListState();
+  _MyProjectsListState createState() => _MyProjectsListState();
 }
 
-class _ProjectsListState extends State<ProjectsList> {
+class _MyProjectsListState extends State<MyProjectsList> {
   @override
   Widget build(BuildContext context) {
     return Container(
