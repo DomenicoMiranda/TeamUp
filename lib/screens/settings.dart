@@ -3,12 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/home.dart';
 
+import '../widgets/destinationView.dart';
+
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+  var firebaseUser;
+  @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   wrapper() {
-    if (FirebaseAuth.instance.currentUser() != null) {
-      print("Logged");
+    if (firebaseUser != null) {
       return loggedIn();
     } else {
       print("not logged");
@@ -58,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
       child: RaisedButton(
         onPressed: () async {
           await AuthService().signOut();
-          return new Homepage();
+          return new DestinationView();
         },
         child: Container(
           height: 30,
@@ -67,5 +75,12 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     ));
+  }
+
+  getUser()async {
+    firebaseUser = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      
+    });
   }
 }

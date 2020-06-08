@@ -126,6 +126,7 @@ class _SignInState extends State<SignIn> {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
                     dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim());
+                    print(result.toString());
                     if(result == null){
                       setState(() {
                       error = 'Inserisci una email valida';
