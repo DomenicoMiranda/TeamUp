@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/authentication/login.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/home.dart';
+import 'package:getflutter/getflutter.dart';
 
 import '../widgets/destinationView.dart';
 
@@ -50,11 +53,18 @@ class _SettingsPageState extends State<SettingsPage> {
               textAlign: TextAlign.center,
             )),
         RaisedButton(
-            onPressed: null,
+          color: Colors.lightBlueAccent,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+            },
             child: Container(
+              alignment: Alignment.center,
               height: 30,
               width: MediaQuery.of(context).size.width / 2,
-              child: Text("LOGIN"),
+              child: Text("LOGIN",textAlign: TextAlign.center,),
             ))
       ]),
     ));
@@ -63,16 +73,68 @@ class _SettingsPageState extends State<SettingsPage> {
   loggedIn() {
     return SingleChildScrollView(
         child: Center(
-      child: RaisedButton(
-        onPressed: () async {
-          await AuthService().signOut();
-          return new DestinationView();
-        },
-        child: Container(
-          height: 30,
-          width: MediaQuery.of(context).size.width / 2,
-          child: Text("LOGOUT"),
-        ),
+      child:
+      Column(
+        children: [
+          new GFAvatar(
+            maxRadius: 50,
+            backgroundImage: NetworkImage("https://i1.sndcdn.com/avatars-000673793789-z0ovap-t500x500.jpg"),
+            shape: GFAvatarShape.circle,
+          ),
+          RaisedButton(
+            onPressed: (){},
+            child: Container(
+              alignment: Alignment.center,
+              height: 30,
+              width: MediaQuery.of(context).size.width / 2,
+              child: Text("CARICA CV"),
+            ),
+          ),
+          Card(
+            child: Container(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("Nome: "),
+                      Text("Nome utente")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("Cognome: "),
+                      Text("Cognome utente")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("Nickname: "),
+                      Text("Nickname utente")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("Email: "),
+                      Text("Email utente")
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+          RaisedButton(
+            onPressed: () async {
+              await AuthService().signOut();
+              return new DestinationView();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 30,
+              width: MediaQuery.of(context).size.width / 2,
+              child: Text("LOGOUT"),
+            ),
+          ),
+        ],
       ),
     ));
   }

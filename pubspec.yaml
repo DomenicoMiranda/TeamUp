@@ -52,6 +52,9 @@ dev_dependencies:
 
   provider: ^4.0.4
 
+  getflutter: ^1.0.11
+
+
 # The following section is specific to Flutter.
 flutter:
 
