@@ -156,7 +156,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   getUser()async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
-    uid = firebaseUser.uid;
     print(firebaseUser.toString());
     setState(() {
       
@@ -164,6 +163,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   getData() async {
+        uid = firebaseUser.uid;
         user = await DatabaseService().getUserData(uid);
         print(user.nickname);
         if(mounted){
