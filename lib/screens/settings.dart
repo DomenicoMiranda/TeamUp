@@ -7,7 +7,8 @@ import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/home.dart';
 import 'package:getflutter/getflutter.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:teamup/widgets/loading.dart';
 import '../widgets/destinationView.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -18,8 +19,9 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
 
   FirebaseUser firebaseUser;
-  User user;
+  UserData user;
   var uid;
+  bool loading = true;
   @override
   void initState() {
     getUser();
@@ -27,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
         appBar: AppBar(
           title: Text("Profilo"),
           centerTitle: true,
@@ -37,7 +39,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   wrapper() {
     if (firebaseUser != null) {
-      return loggedIn();
+      getData();
+      return loading ? Loading() : loggedIn();
     } else {
       print("not logged");
       return notLoggedIn();
@@ -102,25 +105,25 @@ class _SettingsPageState extends State<SettingsPage> {
                   Row(
                     children: [
                       Text("Nome: "),
-                      Text(" ")
+                      Text(user.name)
                     ],
                   ),
                   Row(
                     children: [
                       Text("Cognome: "),
-                      Text("Cognome utente")
+                      Text(user.surname)
                     ],
                   ),
                   Row(
                     children: [
                       Text("Nickname: "),
-                      Text("Nickname utente")
+                      Text(user.nickname)
                     ],
                   ),
                   Row(
                     children: [
                       Text("Email: "),
-                      Text("Email utente")
+                      Text(user.email)
                     ],
                   )
                 ],
@@ -154,10 +157,19 @@ class _SettingsPageState extends State<SettingsPage> {
   getUser()async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
     uid = firebaseUser.uid;
-
     print(firebaseUser.toString());
     setState(() {
       
     });
   }
+
+  getData() async {
+        user = await DatabaseService().getUserData(uid);
+        print(user.nickname);
+        if(mounted){
+        setState(() {
+          loading = false;
+        });}
+  }
+
 }

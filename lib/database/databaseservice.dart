@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/user.dart';
 import 'auth.dart';
@@ -16,6 +14,7 @@ class DatabaseService {
   final CollectionReference usersCollection = Firestore.instance.collection('users');
   final CollectionReference childrenCollection = Firestore.instance.collection('projects');
   final CollectionReference postsCollection = Firestore.instance.collection('report');
+  final Firestore _firestoreInstance = Firestore.instance;
 
   AuthService auth = AuthService();
 
@@ -27,7 +26,7 @@ class DatabaseService {
       'name': name,
       'surname': surname,
       'email' : email,
-      'nickanme' : nickname,
+      'nickname' : nickname,
       'admin' : false,
     });
   }
@@ -57,8 +56,17 @@ class DatabaseService {
         .map(_userDataFromSnapshot);
     }
 
+            Future<UserData> getUserData( String uid) async {
+    DocumentSnapshot documentSnapshot = await _firestoreInstance
+        .collection("users")
+        .document(uid)
+        .get();
 
-    
+    return UserData.fromFirestoreDocumentSnapshot(documentSnapshot);
+  }
+
+
+
 
 
 
