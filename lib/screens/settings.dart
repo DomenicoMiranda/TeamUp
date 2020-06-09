@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/authentication/login.dart';
 import 'package:teamup/database/auth.dart';
+import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/home.dart';
 import 'package:getflutter/getflutter.dart';
 
@@ -15,7 +17,9 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  var firebaseUser;
+  FirebaseUser firebaseUser;
+  User user;
+  var uid;
   @override
   void initState() {
     getUser();
@@ -94,10 +98,11 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Container(
               child: Column(
                 children: [
+                  Text("I MIEI DATI"),
                   Row(
                     children: [
                       Text("Nome: "),
-                      Text("Nome utente")
+                      Text(" ")
                     ],
                   ),
                   Row(
@@ -122,6 +127,13 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
+          Card(
+            child: Container(
+              child: Column(children: [
+                Text("LE MIE COMPETENZE"),
+              ],)
+            ),
+          ),
           RaisedButton(
             onPressed: () async {
               await AuthService().signOut();
@@ -141,6 +153,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   getUser()async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
+    uid = firebaseUser.uid;
+
+    print(firebaseUser.toString());
     setState(() {
       
     });
