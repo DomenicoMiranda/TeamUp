@@ -8,6 +8,7 @@ import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/home.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:teamup/screens/profile/editprofile.dart';
 import 'package:teamup/widgets/loading.dart';
 import '../widgets/destinationView.dart';
 
@@ -33,6 +34,18 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           title: Text("Profilo"),
           centerTitle: true,
+          actions: <Widget>[
+            // action button
+            IconButton(
+              icon: Icon(Icons.mode_edit),
+              onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditProfile(user: this.user, uid: this.uid,)),
+              );
+              },
+            ),
+          ]
         ),
         body: wrapper());
   }
@@ -85,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           new GFAvatar(
             maxRadius: 50,
-            backgroundImage: NetworkImage("https://i1.sndcdn.com/avatars-000673793789-z0ovap-t500x500.jpg"),
+            backgroundImage: NetworkImage(user.image),
             shape: GFAvatarShape.circle,
           ),
           RaisedButton(
@@ -140,7 +153,11 @@ class _SettingsPageState extends State<SettingsPage> {
           RaisedButton(
             onPressed: () async {
               await AuthService().signOut();
-              return new DestinationView();
+             Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => DestinationView()));
+            
+             
             },
             child: Container(
               alignment: Alignment.center,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/global/constants.dart';
+import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
  
 class SignIn extends StatefulWidget {
@@ -125,7 +126,11 @@ class _SignInState extends State<SignIn> {
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim());
+                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim(), null);
+                    Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DestinationView()),
+              );
                     print(result.toString());
                     if(result == null){
                       setState(() {
