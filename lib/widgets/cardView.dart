@@ -113,4 +113,8 @@ class _CardViewState extends State<CardView> {
       ),
     );
   }
+
+  getPosts() async {
+
+  }
 }
