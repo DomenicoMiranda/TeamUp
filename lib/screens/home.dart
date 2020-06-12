@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamup/widgets/cardView.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -9,10 +10,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-                    child:
-                Text(" HomePage()"),
-               
-
+                  child: CardView(),
     );
   }
 }
