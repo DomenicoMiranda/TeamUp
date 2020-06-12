@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamup/widgets/cardView.dart';
+import 'package:teamup/authentication/login.dart';
+import 'package:teamup/authentication/resetpassword.dart';
 
 class Homepage extends StatefulWidget {
   @override

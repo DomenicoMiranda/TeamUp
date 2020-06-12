@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/user.dart';
 import 'auth.dart';
@@ -16,18 +14,21 @@ class DatabaseService {
   final CollectionReference usersCollection = Firestore.instance.collection('users');
   final CollectionReference childrenCollection = Firestore.instance.collection('projects');
   final CollectionReference postsCollection = Firestore.instance.collection('report');
+  final Firestore _firestoreInstance = Firestore.instance;
 
   AuthService auth = AuthService();
 
 
   // add/update user data
-  Future updateUserData(String name, String surname, String email, String nickname, bool admin) async {
+  Future updateUserData(String name, String surname, String email, String nickname,String date, String image, bool admin) async {
 
     return await usersCollection.document(uid).setData({
       'name': name,
       'surname': surname,
       'email' : email,
-      'nickanme' : nickname,
+      'nickname' : nickname,
+      'date' : date,
+      'image' : image,
       'admin' : false,
     });
   }
@@ -57,8 +58,17 @@ class DatabaseService {
         .map(_userDataFromSnapshot);
     }
 
+            Future<UserData> getUserData( String uid) async {
+    DocumentSnapshot documentSnapshot = await _firestoreInstance
+        .collection("users")
+        .document(uid)
+        .get();
 
-    
+    return UserData.fromFirestoreDocumentSnapshot(documentSnapshot);
+  }
+
+
+
 
 
 
