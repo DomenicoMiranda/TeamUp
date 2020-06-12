@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/global/constants.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
+import 'package:intl/intl.dart';
  
 class SignIn extends StatefulWidget {
 
@@ -20,6 +22,8 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
+  DateFormat dateFormat = DateFormat("dd-MM-yyyy – kk:mm");
+
   // text filed state 
   String email = '';
   String password = '';
@@ -27,6 +31,7 @@ class _SignInState extends State<SignIn> {
   String surname = '';
   String error = '';
   String nickname = '';
+  String date= '';
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +94,37 @@ class _SignInState extends State<SignIn> {
                 }
               ),
               SizedBox(height: 20.0),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.calendar_today, color: Colors.white,),
+                    RaisedButton(
+                      onPressed: (){
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2021),
+                        ).then((value) {
+                          setState(() {
+                            date =  DateFormat("d/MM/y").format(value);
+                          });
+                        });
+                      },
+                      child: Container(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(3),
+                            child: Text("scegli una data",style: TextStyle(color: Colors.black),),
+                          )),
+                    ),
+                    Text(date, style: TextStyle(color: Colors.white),),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.0),
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Email',
@@ -126,7 +162,7 @@ class _SignInState extends State<SignIn> {
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim(), null);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim(), date.trim(), null);
                     Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DestinationView()),

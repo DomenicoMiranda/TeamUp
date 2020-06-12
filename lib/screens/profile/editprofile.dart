@@ -43,6 +43,7 @@ String _currentEmail;
 String _currentImage;
 String _uploadedFileURL;
 String _currentNickname;
+String _currentDate;
 
 Future chooseFile() async {    
    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {    
@@ -160,7 +161,12 @@ Future chooseFile() async {
                         setState(() => _currentNickname = val);
                       }
                       ),
-                      
+                      SizedBox(height: 20.0),
+                      TextFormField(
+                        readOnly: true,
+                        initialValue: widget.user.date,
+                        decoration: InputDecoration(labelText: "Data di nascita"),
+                      ),
                       SizedBox(height: 20.0),
                       TextFormField(
                         readOnly: true,
@@ -183,6 +189,7 @@ Future chooseFile() async {
                                         _currentSurname ?? widget.user.surname,
                                         _currentEmail ?? widget.user.email,
                                         _currentNickname ?? widget.user.nickname,
+                                        _currentDate ?? widget.user.date,
                                         _uploadedFileURL ?? widget.user.image,
                                         null,
                                       );

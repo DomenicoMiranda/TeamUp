@@ -56,14 +56,14 @@ import 'databaseservice.dart';
    }
 
    //register with email & password
-   Future registerWithEmailAndPassword(String email, String password, String name, String surname, String nickname, String image) async {
+   Future registerWithEmailAndPassword(String email, String password, String name, String surname, String nickname, String date, String image) async {
     
       try{
         AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
         FirebaseUser user = result.user;
 
         // create a new document for the user with the uid
-        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, nickname, image, false);
+        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, nickname, date, image, false);
         return _userFromFirebaseUser(user);
       } catch(e) {
         print(e.toString);

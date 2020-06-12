@@ -20,13 +20,14 @@ class DatabaseService {
 
 
   // add/update user data
-  Future updateUserData(String name, String surname, String email, String nickname,String image, bool admin) async {
+  Future updateUserData(String name, String surname, String email, String nickname,String date, String image, bool admin) async {
 
     return await usersCollection.document(uid).setData({
       'name': name,
       'surname': surname,
       'email' : email,
       'nickname' : nickname,
+      'date' : date,
       'image' : image,
       'admin' : false,
     });
