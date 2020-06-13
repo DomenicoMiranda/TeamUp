@@ -4,37 +4,40 @@ import 'package:teamup/widgets/teamView.dart';
 
 import 'home.dart';
 
-class CreateTeam extends StatefulWidget {
+class CreateProject extends StatefulWidget {
   @override
-  _CreateTeamState createState() => _CreateTeamState();
+  _CreateProjectState createState() => _CreateProjectState();
 }
 
-class _CreateTeamState extends State<CreateTeam> {
+class _CreateProjectState extends State<CreateProject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text("Crea Team", style: TextStyle(
+        title: Text("Crea Progetto", style: TextStyle(
           fontSize: 25.0,
           fontWeight: FontWeight.bold,
         )),
+        centerTitle: true,
         leading:
         IconButton(
           iconSize: 30.0,
           color: Colors.white,
-          icon: Icon(CupertinoIcons.back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TeamForms(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              TeamForms(),
+            ],
+          ),
         ),
       ),
     );
