@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,9 +7,7 @@ import 'package:teamup/authentication/login.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/user.dart';
-import 'package:teamup/screens/home.dart';
 import 'package:getflutter/getflutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/screens/profile/editprofile.dart';
 import 'package:teamup/widgets/loading.dart';
 import '../widgets/destinationView.dart';
@@ -102,7 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
             shape: GFAvatarShape.circle,
           ),
           RaisedButton(
-            onPressed: (){},
+            onPressed: () => _openFileExplorer(),
             child: Container(
               alignment: Alignment.center,
               height: 30,
@@ -187,6 +187,17 @@ class _SettingsPageState extends State<SettingsPage> {
         setState(() {
           loading = false;
         });}
+  }
+
+  _openFileExplorer() async {
+    File file = await FilePicker.getFile(
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc']);
+    Row(
+      children: <Widget>[
+          
+      ],
+    );
   }
 
 }
