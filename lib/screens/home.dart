@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/widgets/cardView.dart';
-import 'package:teamup/authentication/login.dart';
-import 'package:teamup/authentication/resetpassword.dart';
-import 'package:teamup/widgets/teamView.dart';
+import 'package:teamup/widgets/category_selector.dart';
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -29,9 +28,23 @@ class _HomepageState extends State<Homepage> {
               },
             ),
           ]
-
       ),
-                  body: CardView(),
+      body: Column(
+        children: <Widget>[
+          CategorySelector(),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+              ),
+              child: Container(
+                child: CardView(),
+                //Text('ciao'),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

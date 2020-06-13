@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
         const Locale('it', 'IT'),
       ],
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.blueAccent,
+        accentColor: Color(0xFFFEF9EB),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: DestinationView(),
