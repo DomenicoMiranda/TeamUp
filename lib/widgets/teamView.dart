@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:teamup/models/project.dart';
+
 
 class TeamForms extends StatefulWidget {
   @override
@@ -7,8 +9,10 @@ class TeamForms extends StatefulWidget {
 }
 
 class _TeamFormsState extends State<TeamForms> {
-
-  String value = "";
+// text field state
+  String name = '';
+  String description = '';
+  int numTeam = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +21,7 @@ class _TeamFormsState extends State<TeamForms> {
         TextField(
               //catturo l'input inserito
               onChanged: (text) {
-                value = text;
-                //lo stampo nella console ogni volta che cambia
-
+                setState(() => name = text);
               },
               decoration: InputDecoration(
                 labelText: 'Nome Progetto',
@@ -34,9 +36,7 @@ class _TeamFormsState extends State<TeamForms> {
         TextField(
           //catturo l'input inserito
           onChanged: (text) {
-            value = text;
-            //lo stampo nella console ogni volta che cambia
-
+            setState(() => description = text);
           },
           decoration: InputDecoration(
             //TODO: Far andare a capo quando raggiunge il limite
@@ -52,10 +52,8 @@ class _TeamFormsState extends State<TeamForms> {
         TextField(
           keyboardType: TextInputType.number,
           inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-          //catturo l'input inserito
-          onChanged: (text) {
-            value = text;
-            //lo stampo nella console ogni volta che cambia
+          onChanged: (num) {
+            setState(() => numTeam = num as int);
           },
           decoration: InputDecoration(
             labelText: 'Numero teammates',
@@ -66,7 +64,19 @@ class _TeamFormsState extends State<TeamForms> {
             ),
           ),
         ),
-
+        MaterialButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          minWidth: double.infinity,
+          height: 42,
+          color: Colors.blue.shade500,
+          onPressed: () {
+            //TODO inserire funzione che aggiunge progetto a firebase
+          },
+          child: Text("CREA PROGETTO",
+              style: TextStyle(color: Colors.white)),
+        ),
       ],
     );
   }

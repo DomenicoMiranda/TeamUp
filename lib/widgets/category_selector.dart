@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
+import 'cardView.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategorySelector extends StatefulWidget {
   @override
-  _CategorySelectorState createState() => _CategorySelectorState();
+  CategorySelectorState createState() => CategorySelectorState();
 }
 
-class _CategorySelectorState extends State<CategorySelector> {
+class CategorySelectorState extends State<CategorySelector> {
 
+  String selectedCategory = "Arte";
   int selectedIndex = 0;
-  final List<String> categories = ["Tutte", "Musica", "Arte", "Sport", "Cinema", "Business"];
+  final List<String> categories = [
+    "Tutte",
+    "Musica",
+    "Arte",
+    "Sport",
+    "Cinema",
+    "Business"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
         height: 50.0,
         //setto lo stesso colore dell'app principale --> primary color
-        color: Theme.of(context).primaryColor,
+        color: Theme
+            .of(context)
+            .primaryColor,
         //visualizzo la lista di categories
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -26,6 +38,7 @@ class _CategorySelectorState extends State<CategorySelector> {
                 onTap: () {
                   setState(() {
                     selectedIndex = index;
+                    selectedCategory = categories[index];
                   });
                 },
                 child: Padding(
@@ -33,14 +46,14 @@ class _CategorySelectorState extends State<CategorySelector> {
                       horizontal: 20.0,
                       vertical: 15.0),
                   child: Text(categories[index], style: TextStyle(
-                      color: index == selectedIndex ? Colors.white : Colors.white60,
+                      color: index == selectedIndex ? Colors.white : Colors
+                          .white60,
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.2)),
                 ),
               );
             })
-
     );
   }
 }
