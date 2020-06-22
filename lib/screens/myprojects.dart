@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:teamup/database/auth.dart';
 
 class MyProjectsList extends StatefulWidget {
   @override
@@ -7,7 +8,6 @@ class MyProjectsList extends StatefulWidget {
 }
 
 class _MyProjectsListState extends State<MyProjectsList> {
-
 
   List<Widget> containersProjects = [
 
@@ -89,11 +89,13 @@ Widget buildOnHold() {
 
 @override
 Widget buildCompleted() {
+  AuthService authUser = new AuthService();
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
             .where("stato", isEqualTo: "1")
+            .where("ownerId", isEqualTo: authUser.currentUser())
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -208,8 +210,3 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
 
 }
 
-
-
-void main() {
-  runApp(new MyProjectsList());
-}
