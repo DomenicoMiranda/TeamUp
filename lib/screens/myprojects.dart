@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/database/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class MyProjectsList extends StatefulWidget {
   @override
@@ -9,14 +11,21 @@ class MyProjectsList extends StatefulWidget {
 
 class _MyProjectsListState extends State<MyProjectsList> {
 
+  FirebaseUser firebaseUser;
+   static String uid;
   List<Widget> containersProjects = [
-
-    buildOnHold(),
-
-    buildCompleted(),
-
+    buildOnHold(uid),
+    buildCompleted(uid),
   ];
 
+
+  @override
+  void initState() {
+    getUser();
+
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     //TODO CAPIRE SE IMPORTARE LA CARDVIEW O LASCIARE IL CODICE INTERNAMENTE
@@ -66,15 +75,23 @@ class _MyProjectsListState extends State<MyProjectsList> {
       ),
     );
   }
+
+
+  getUser()async {
+    firebaseUser = await FirebaseAuth.instance.currentUser();
+    print(firebaseUser.toString());
+    uid = firebaseUser.uid;
+  }
+
 }
 
-@override
-Widget buildOnHold() {
+Widget buildOnHold(String uid) {
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
             .where("stato", isEqualTo: "0")
+            .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -87,15 +104,14 @@ Widget buildOnHold() {
   );
 }
 
-@override
-Widget buildCompleted() {
-  AuthService authUser = new AuthService();
+
+Widget buildCompleted(String uid) {
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
             .where("stato", isEqualTo: "1")
-            .where("ownerId", isEqualTo: authUser.currentUser())
+            .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -206,6 +222,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
       ),
     ),
   );
+
 
 
 }
