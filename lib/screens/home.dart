@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/widgets/cardView.dart';
-import 'package:teamup/widgets/category_selector.dart';
-
 
 class Homepage extends StatefulWidget {
   @override
