@@ -192,7 +192,7 @@ class _SettingsPageState extends State<SettingsPage> {
   _openFileExplorer() async {
     File file = await FilePicker.getFile(
         type: FileType.custom,
-        allowedExtensions: ['jpg', 'pdf', 'doc']);
+        allowedExtensions: ['pdf']);
     Row(
       children: <Widget>[
           

@@ -49,11 +49,11 @@ class _DestinationViewState extends State<DestinationView> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              title: Text('Candidature')
+              title: Text('Mie Candidature')
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              title: Text('Progetti')
+              title: Text('Miei Progetti')
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'cardView.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategorySelector extends StatefulWidget {
   @override
@@ -9,8 +7,7 @@ class CategorySelector extends StatefulWidget {
 
 class CategorySelectorState extends State<CategorySelector> {
 
-  String selectedCategory = "Arte";
-  int selectedIndex = 0;
+  int selectedIndex = 2;
   final List<String> categories = [
     "Tutte",
     "Musica",
@@ -22,6 +19,7 @@ class CategorySelectorState extends State<CategorySelector> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO MODIFICARE CATEGORYFILTER CON TABBAR COME myprojects.dart
     return Container(
         height: 50.0,
         //setto lo stesso colore dell'app principale --> primary color
@@ -38,7 +36,7 @@ class CategorySelectorState extends State<CategorySelector> {
                 onTap: () {
                   setState(() {
                     selectedIndex = index;
-                    selectedCategory = categories[index];
+                    return selectedIndex;
                   });
                 },
                 child: Padding(
@@ -56,4 +54,11 @@ class CategorySelectorState extends State<CategorySelector> {
             })
     );
   }
+
+  String getSelected() {
+    String result = categories[selectedIndex];
+    return result;
+  }
+
+
 }

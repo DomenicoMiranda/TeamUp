@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'category_selector.dart';
-
 class CardView extends StatefulWidget {
 
   @override
@@ -11,27 +9,12 @@ class CardView extends StatefulWidget {
 
 class _CardViewState extends State<CardView> {
   DocumentSnapshot document;
-  CategorySelectorState _c = CategorySelectorState();
-  TextEditingController controller = new TextEditingController();
-  String filter;
 
-  @override
-  initState() {
-    controller.addListener(() {
-      setState(() {
-        filter = _c.selectedCategory;
-      });
-    });
-  }
+  String category;
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-       Container(
+    return Container(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -66,7 +49,6 @@ class _CardViewState extends State<CardView> {
                       ),
 
                       SizedBox(width: 20),
-
                       //titolo e material button
                       Expanded(
                         child: Column(
@@ -137,17 +119,14 @@ class _CardViewState extends State<CardView> {
     Widget build(BuildContext context) {
       return Container(
         child: StreamBuilder(
-            stream: Firestore.instance.collection('projects').snapshots(),
+            stream: Firestore.instance
+                .collection('projects')
+                .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('Loading');
+             if (!snapshot.hasData) return const Text('Loading');
               return ListView.builder(
                 itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) {
-                  return filter == null || filter == "" ?
-                  new Container() :
-                      _buildListItem(context, snapshot.data.documents[index]);
-                }
-
+                itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
               );
             }
         ),
