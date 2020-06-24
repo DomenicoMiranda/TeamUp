@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/create_project.dart';
+import 'package:teamup/screens/project_details.dart';
 
 class CardView extends StatefulWidget {
   @override
@@ -114,7 +115,20 @@ Widget buildAllCategories() {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                  title: snapshot.data.documents[index]['name'],
+                                  description:snapshot.data.documents[index]['description'],
+                                  uid: snapshot.data.documents[index].documentID,
+                                  qualities: snapshot.data.documents[index]['qualities'],
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
@@ -129,14 +143,27 @@ Widget buildArte() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .where("category", isEqualTo: "Arte")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                  title: snapshot.data.documents[index]['name'],
+                                  description:snapshot.data.documents[index]['description'],
+                                  uid: snapshot.data.documents[index].documentID,
+                                  qualities: snapshot.data.documents[index]['qualities'],
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
@@ -150,14 +177,27 @@ Widget buildMusica() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .where("category", isEqualTo: "Musica")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                  title: snapshot.data.documents[index]['name'],
+                                  description:snapshot.data.documents[index]['description'],
+                                  uid: snapshot.data.documents[index].documentID,
+                                  qualities: snapshot.data.documents[index]['qualities'],
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
@@ -171,14 +211,27 @@ Widget buildSport() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .where("category", isEqualTo: "Sport")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                  title: snapshot.data.documents[index]['name'],
+                                  description:snapshot.data.documents[index]['description'],
+                                  uid: snapshot.data.documents[index].documentID,
+                                  qualities: snapshot.data.documents[index]['qualities'],
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
@@ -192,14 +245,27 @@ Widget buildCinema() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .where("category", isEqualTo: "Cinema")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                  title: snapshot.data.documents[index]['name'],
+                                  description:snapshot.data.documents[index]['description'],
+                                  uid: snapshot.data.documents[index].documentID,
+                                  qualities: snapshot.data.documents[index]['qualities'],
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
@@ -213,14 +279,27 @@ Widget buildBusiness() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .where("category", isEqualTo: "Business")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                  title: snapshot.data.documents[index]['name'],
+                                  description:snapshot.data.documents[index]['description'],
+                                  uid: snapshot.data.documents[index].documentID,
+                                  qualities: snapshot.data.documents[index]['qualities'],
+                                    )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
