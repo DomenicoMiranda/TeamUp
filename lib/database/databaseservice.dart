@@ -115,6 +115,14 @@ class DatabaseService {
     return ProjectData.fromFirestoreDocumentSnapshot(documentSnapshot);
   }
 
+  Future addProject(ProjectData project) async {
+      await _firestoreInstance
+          .collection("projects")
+          .document(project.id)
+          .setData(project.toMap());
+  }
+
+
 }
 
 

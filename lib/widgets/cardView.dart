@@ -108,7 +108,7 @@ Widget buildAllCategories() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');

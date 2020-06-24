@@ -63,8 +63,7 @@ dev_dependencies:
 
   intl: ^0.16.1
 
-
-
+  toast: ^0.1.5
 
 # The following section is specific to Flutter.
 flutter:
