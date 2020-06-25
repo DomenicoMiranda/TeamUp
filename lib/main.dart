@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ],
       theme: ThemeData(
         primaryColor: Colors.blueAccent,
-        accentColor: Color(0xFFFEF9EB),
+        accentColor: Colors.grey.shade400,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: DestinationView(),

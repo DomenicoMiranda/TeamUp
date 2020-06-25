@@ -335,14 +335,14 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
         //margin: new EdgeInsets.only(right: 46.0),
         decoration: new BoxDecoration(
           //color: Colors.blueGrey.shade200,
-          color: Colors.blueGrey.shade200,
+          color: Colors.white,
           shape: BoxShape.rectangle,
           borderRadius: new BorderRadius.circular(30.0),
           boxShadow: <BoxShadow>[
             new BoxShadow(
               color: Colors.black12,
-              blurRadius: 10.0,
-              offset: new Offset(0.0, 10.0),
+              blurRadius: 8.0,
+              offset: new Offset(0.0, 0.0),
             ),
           ],
         ),
@@ -364,15 +364,18 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                   SizedBox(width: 20),
                   //titolo e material button
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(document['name'],
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white70)),
-                      ],),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.only(bottom:30.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(document['name'],
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade700)),
+                        ],),
+                    ),
                   )
                 ],
               ),
@@ -382,53 +385,41 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
               SizedBox(
                 width: double.infinity,
                 child: Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        document['ownerName'],
-                        textAlign: TextAlign.left,
-                      ),
-                      Text(
-                        document['ownerSurname'],
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          document['ownerName'] + " " + document['ownerSurname'],
+                          textAlign: TextAlign.left, style: TextStyle(color: Colors.grey.shade700),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
 
-              //descrizione Card
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                  ],
-                ),
-              ),
-
-              //SizedBox(height: 30),
-
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 8.0, end: 8.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Num. Posti disponibili", style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white70)),
+                          color: Colors.grey)),
                       if(document['maxTeammate'] != null)
                            Text(document['maxTeammate'].toString(),
                               style: TextStyle(
-                                  //fontSize: 15,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white54)),
+                                  color: Colors.grey.shade700)),
                       if(document['maxTeammate'] == null)
                         Text("Illimitati",
                             style: TextStyle(
                                 //fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white54)),
+                                color: Colors.grey.shade700)),
                     ],
                   ),
                 ),
