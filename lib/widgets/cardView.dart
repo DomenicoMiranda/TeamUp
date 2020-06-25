@@ -51,30 +51,30 @@ class _CardViewState extends State<CardView> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: TabBar(
-                        isScrollable: true, tabs: [
+                        isScrollable: true, indicatorColor: Colors.lime, tabs: [
                       new Container(
                           width: MediaQuery.of(context).size.width / 2,
-                          child: new Tab(text: 'Tutte')
+                          child: new Tab(text: 'TUTTE'),
                       ),
                       new Container(
                         width: MediaQuery.of(context).size.width / 2,
-                        child: new Tab(text: 'Musica'),
+                        child: new Tab(text: 'MUSICA'),
                       ),
                       new Container(
                           width: MediaQuery.of(context).size.width / 2,
-                          child: new Tab(text: 'Arte')
+                          child: new Tab(text: 'ARTE')
                       ),
                       new Container(
                           width: MediaQuery.of(context).size.width / 2,
-                          child: new Tab(text: 'Sport')
+                          child: new Tab(text: 'SPORT')
                       ),
                       new Container(
                           width: MediaQuery.of(context).size.width / 2,
-                          child: new Tab(text: 'Cinema')
+                          child: new Tab(text: 'CINEMA')
                       ),
                       new Container(
                           width: MediaQuery.of(context).size.width / 2,
-                          child: new Tab(text: 'Business')
+                          child: new Tab(text: 'BUSINESS')
                       ),
 
                     ]),
