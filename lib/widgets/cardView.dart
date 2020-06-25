@@ -45,7 +45,7 @@ class _CardViewState extends State<CardView> {
                   ),
                 ],
               bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(20.0),
+                preferredSize: const Size.fromHeight(30.0),
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
