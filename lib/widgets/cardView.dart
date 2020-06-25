@@ -51,7 +51,10 @@ class _CardViewState extends State<CardView> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: TabBar(
-                        isScrollable: true, indicatorColor: Colors.lime, tabs: [
+                        isScrollable: true,
+                        indicatorColor: Colors.lightBlueAccent,
+                        unselectedLabelColor: Colors.white70,
+                        tabs: [
                       new Container(
                           width: MediaQuery.of(context).size.width / 2,
                           child: new Tab(text: 'TUTTE'),
