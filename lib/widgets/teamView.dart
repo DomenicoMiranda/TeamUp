@@ -257,9 +257,9 @@ class _TeamFormsState extends State<TeamForms> {
     project.status = "0";
     project.category = dropdownValue;
     project.ownerImage = user.image;
-    project.ownerNickname = user.nickname;
+    project.ownerName = user.name;
+    project.ownerSurname = user.surname;
     print(project.toMap());
-
   }
 
   getUserData() async {

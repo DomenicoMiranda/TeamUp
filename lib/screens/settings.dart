@@ -11,6 +11,9 @@ import 'package:getflutter/getflutter.dart';
 import 'package:teamup/screens/profile/editprofile.dart';
 import 'package:teamup/widgets/loading.dart';
 import '../widgets/destinationView.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as Path;
+
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -23,6 +26,13 @@ class _SettingsPageState extends State<SettingsPage> {
   UserData user;
   var uid;
   bool loading = true;
+  String _uploadedCvURL;
+  String _currentCv;
+
+  File _cv;
+
+
+
   @override
   void initState() {
     getUser();
@@ -110,6 +120,10 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Text("CARICA CV"),
             ),
           ),
+          if(_cv != null)
+            Text("CV PRESENTE"),
+          if(_cv == null)
+            Text("CV ASSENTE"),
           Card(
             child: Container(
               child: Column(
@@ -193,11 +207,28 @@ class _SettingsPageState extends State<SettingsPage> {
     File file = await FilePicker.getFile(
         type: FileType.custom,
         allowedExtensions: ['pdf']);
-    Row(
-      children: <Widget>[
-          
-      ],
-    );
+
+    setState(() {
+      _cv = file;
+      uploadCv();
+
+    });
   }
+
+  Future uploadCv() async {
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('Curriculum/${Path.basename(_cv.path)}}');
+    StorageUploadTask uploadTask = storageReference.putFile(_cv);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) {
+      setState(() {
+        _uploadedCvURL = fileURL;
+        _currentCv = _uploadedCvURL;
+      });
+    });
+  }
+
 
 }

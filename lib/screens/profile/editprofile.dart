@@ -75,9 +75,7 @@ Future chooseFile() async {
        _currentImage = _uploadedFileURL;    
      });    
    });    
- }  
-
-    
+ }
 
 
   @override

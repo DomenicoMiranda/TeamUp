@@ -127,6 +127,9 @@ Widget buildAllCategories() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
+                                  name: snapshot.data.documents[index]['ownerName'],
+                                  surname: snapshot.data.documents[index]['ownerSurname'],
+
                                 )
                         ));
                   },
@@ -163,7 +166,8 @@ Widget buildArte() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
-                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
+                                  name: snapshot.data.documents[index]['ownerName'],
+                                  surname: snapshot.data.documents[index]['ownerSurname'],
                                 )
                         ));
                   },
@@ -199,7 +203,8 @@ Widget buildMusica() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
-                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
+                                  name: snapshot.data.documents[index]['ownerName'],
+                                  surname: snapshot.data.documents[index]['ownerSurname'],
                                 )
                         ));
                   },
@@ -234,7 +239,9 @@ Widget buildSport() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
-                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
+                                  owner: snapshot.data.documents[index]['ownerId'],
+                                  name: snapshot.data.documents[index]['ownerName'],
+                                  surname: snapshot.data.documents[index]['ownerSurname'],
                                 )
                         ));
                   },
@@ -270,7 +277,8 @@ Widget buildCinema() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
-                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
+                                  name: snapshot.data.documents[index]['ownerName'],
+                                  surname: snapshot.data.documents[index]['ownerSurname'],
                                 )
                         ));
                   },
@@ -306,7 +314,8 @@ Widget buildBusiness() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
-                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
+                                  name: snapshot.data.documents[index]['ownerName'],
+                                  surname: snapshot.data.documents[index]['ownerSurname'],
                                     )
                         ));
                   },
@@ -373,9 +382,17 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
               SizedBox(
                 width: double.infinity,
                 child: Container(
-                  child: Text(
-                    document['ownerNickname'],
-                    textAlign: TextAlign.left,
+                  child: Row(
+                    children: [
+                      Text(
+                        document['ownerName'],
+                        textAlign: TextAlign.left,
+                      ),
+                      Text(
+                        document['ownerSurname'],
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
                   ),
                 ),
               ),

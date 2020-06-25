@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 class ProjectDetails extends StatefulWidget {
 
 
-  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerNickname, this.ownerImage});
+  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname});
   var title;
   var description;
   List<dynamic> qualities;
   var category;
   var uid;
   var owner;
-  var ownerNickname;
   var ownerImage;
+  var name;
+  var surname;
 
   @override
   _ProjectDetailsState createState() => _ProjectDetailsState();
@@ -33,6 +34,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             Text(widget.description),
             Text(widget.qualities.toString()),
             Text(widget.owner),
+            Text(widget.name),
+            Text(widget.surname),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: MaterialButton(

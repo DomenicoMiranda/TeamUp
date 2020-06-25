@@ -90,7 +90,7 @@ Widget buildOnHold(String uid) {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "0")
+            .where("status", isEqualTo: "0")
             .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
@@ -110,7 +110,7 @@ Widget buildCompleted(String uid) {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("stato", isEqualTo: "1")
+            .where("status", isEqualTo: "1")
             .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
