@@ -125,6 +125,7 @@ Widget buildAllCategories() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
+                                  owner: snapshot.data.documents[index]['ownerId'],
                                 )
                         ));
                   },
@@ -160,6 +161,7 @@ Widget buildArte() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
+                                  owner: snapshot.data.documents[index]['ownerId'],
                                 )
                         ));
                   },
@@ -194,6 +196,7 @@ Widget buildMusica() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
+                                  owner: snapshot.data.documents[index]['ownerId'],
                                 )
                         ));
                   },
@@ -262,6 +265,7 @@ Widget buildCinema() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
+                                  owner: snapshot.data.documents[index]['ownerId'],
                                 )
                         ));
                   },
@@ -296,6 +300,7 @@ Widget buildBusiness() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
+                                  owner: snapshot.data.documents[index]['ownerId'],
                                     )
                         ));
                   },
@@ -338,36 +343,36 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                   CircleAvatar(
                     radius: 40,
                     backgroundImage: NetworkImage(
-                        "http://49.231.30.115/emrcleft/assets/images/avatars/avatar2_big@2x.png"),
+                        "https://images.wired.it/wp-content/uploads/2019/09/30170357/Memoji-denti.jpg"),
                   ),
 
                   SizedBox(width: 20),
                   //titolo e material button
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(document['name'],
                             style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white70)),
-                        MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          minWidth: double.infinity,
-                          height: 32,
-                          color: Colors.blue.shade500,
-                          onPressed: () {},
-                          child: Text("Candidami!",
-                              style: TextStyle(color: Colors.white)),
-                        ),
                       ],),
                   )
                 ],
               ),
 
-              SizedBox(height: 3),
+              SizedBox(height: 5),
+
+              SizedBox(
+                width: double.infinity,
+                child: Container(
+                  child: Text(
+                    "Nome Cognome",
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
 
               //descrizione Card
               Padding(
@@ -378,11 +383,11 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                 ),
               ),
 
-              SizedBox(height: 40),
+              SizedBox(height: 30),
 
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 8.0),
+                  padding: const EdgeInsetsDirectional.only(start: 8.0, end: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -397,7 +402,6 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
