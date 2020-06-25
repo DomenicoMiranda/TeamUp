@@ -143,12 +143,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   Row(
                     children: [
-                      Text("Nickname: "),
-                      Text(user.nickname)
-                    ],
-                  ),
-                  Row(
-                    children: [
                       Text("Email: "),
                       Text(user.email)
                     ],
@@ -211,8 +205,12 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       _cv = file;
       uploadCv();
+      //DatabaseService(uid: user.uid).updateUserCv(_currentCv);
 
     });
+
+    print(_currentCv);
+    DatabaseService(uid: user.uid).updateUserCv(_currentCv);
   }
 
   Future uploadCv() async {

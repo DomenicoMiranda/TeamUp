@@ -20,6 +20,7 @@ class DatabaseService {
 
   AuthService auth = AuthService();
 
+  //----------------USER------------------
 
   // add/update user data
   Future updateUserData(String name, String surname, String email, String nickname,String date, String image, bool admin) async {
@@ -35,7 +36,11 @@ class DatabaseService {
     });
   }
 
-  //----------------USER------------------
+  Future updateUserCv(String cv) async {
+
+    return await usersCollection.document(uid).updateData({'cv': cv});
+  }
+
 
   // userData from snapshot
     UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
@@ -82,6 +87,8 @@ class DatabaseService {
       'teammate' : teammate,
     });
   }
+
+
 
   //projectData from snapshot
   ProjectData _projectDataFromSnapshot(DocumentSnapshot snapshot) {
