@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/user_not_logged_in/home_not_logged.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-
-import 'authentication/login.dart';
-import 'authentication/sign_in.dart';
 
 void main() {
   runApp(MyApp());

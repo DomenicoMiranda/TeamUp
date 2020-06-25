@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/database/auth.dart';
@@ -162,6 +163,7 @@ Widget buildArte() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
+                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
                                 )
                         ));
                   },
@@ -197,6 +199,7 @@ Widget buildMusica() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
+                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
                                 )
                         ));
                   },
@@ -231,6 +234,7 @@ Widget buildSport() {
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
+                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
                                 )
                         ));
                   },
@@ -266,6 +270,7 @@ Widget buildCinema() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
+                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
                                 )
                         ));
                   },
@@ -301,6 +306,7 @@ Widget buildBusiness() {
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
+                                  ownerNickname: snapshot.data.documents[index]['ownerNickname'],
                                     )
                         ));
                   },
@@ -316,7 +322,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 200.0,
+        height: 150.0,
         //margin: new EdgeInsets.only(right: 46.0),
         decoration: new BoxDecoration(
           //color: Colors.blueGrey.shade200,
@@ -337,13 +343,13 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               Row(
-                children: <Widget>[
+                children: [
                   CircleAvatar(
                     radius: 40,
                     backgroundImage: NetworkImage(
-                        "https://images.wired.it/wp-content/uploads/2019/09/30170357/Memoji-denti.jpg"),
+                        document['ownerImage']),
                   ),
 
                   SizedBox(width: 20),
@@ -351,7 +357,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
+                      children: [
                         Text(document['name'],
                             style: TextStyle(
                                 fontSize: 22,
@@ -368,7 +374,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                 width: double.infinity,
                 child: Container(
                   child: Text(
-                    "Nome Cognome",
+                    document['ownerNickname'],
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -378,26 +384,34 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  children: <Widget>[
+                  children: [
                   ],
                 ),
               ),
 
-              SizedBox(height: 30),
+              //SizedBox(height: 30),
 
               Expanded(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(start: 8.0, end: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
+                    children: [
                       Text("Num. Posti disponibili", style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white70)),
-                      Text(document['maxTeammate'].toString(),
-                          style: TextStyle(fontSize: 30,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white54)),
+                      if(document['maxTeammate'] != null)
+                           Text(document['maxTeammate'].toString(),
+                              style: TextStyle(
+                                  //fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white54)),
+                      if(document['maxTeammate'] == null)
+                        Text("Illimitati",
+                            style: TextStyle(
+                                //fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white54)),
                     ],
                   ),
                 ),
@@ -408,6 +422,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
       ),
     ),
   );
+
 
 
 }

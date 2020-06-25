@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
+import 'package:teamup/models/user.dart';
 import 'package:toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,6 +19,8 @@ class TeamForms extends StatefulWidget {
 class _TeamFormsState extends State<TeamForms> {
 
   FirebaseUser firebaseUser;
+  UserData user;
+
 
   final controller = TextEditingController();
 
@@ -36,7 +39,7 @@ class _TeamFormsState extends State<TeamForms> {
 
   @override
   void initState() {
-    getUser();
+    getUserData();
     super.initState();
   }
 
@@ -234,18 +237,34 @@ class _TeamFormsState extends State<TeamForms> {
   getUser()async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
     print(firebaseUser.toString());
-    setState(() {
-      loading = false;
-    });
+//    setState(() {
+//      loading = false;
+//    });
 
+  }
+
+  getData() async {
+    user = await DatabaseService().getUserData(firebaseUser.uid);
+    print(user.nickname);
+    if(mounted){
+      setState(() {
+        loading = false;
+      });}
   }
 
   saveToProject()  {
     project.ownerId = firebaseUser.uid;
     project.status = "0";
     project.category = dropdownValue;
+    project.ownerImage = user.image;
+    project.ownerNickname = user.nickname;
     print(project.toMap());
 
+  }
+
+  getUserData() async {
+    await getUser();
+    getData();
   }
 
   submit() async {

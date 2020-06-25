@@ -19,14 +19,18 @@ class ProjectData {
   List<String> teammate = [];
   String status;
   List<String> qualities = [];
+  String ownerNickname;
+  String ownerImage;
 
-  ProjectData({String ownerId, String id, String name, String description, int maxTeammate, String category, List<String> teammate, List<String> qualities, String status}) {
+  ProjectData({String ownerId, String id, String name, String description, int maxTeammate, String category, List<String> teammate, List<String> qualities, String status, String ownerNickname, String ownerImage}) {
     this.ownerId = ownerId;
     this.id = id;
     this.name = name;
     this.description = description;
     this.maxTeammate = maxTeammate;
     this.category = category;
+    this.ownerNickname = ownerNickname;
+    this.ownerImage = ownerImage;
     if(teammate == null){
       this.teammate = [];
     }else{
@@ -49,6 +53,8 @@ class ProjectData {
     maxTeammate = documentSnapshot.data['maxTeammate'];
     category = documentSnapshot.data['category'];
     ownerId = documentSnapshot.data['ownerId'];
+    ownerNickname = documentSnapshot.data['ownerNickname'];
+    ownerImage = documentSnapshot.data['ownerImage'];
     teammate = [];
     if(documentSnapshot.data['teammate'] != null) {
       documentSnapshot.data['teammate'].forEach((element){
@@ -73,6 +79,8 @@ class ProjectData {
       "category" : category,
       "teammate" : teammate,
       "qualities" : qualities,
+      "ownerNickaname" : ownerNickname,
+      "ownerImage" : ownerImage,
     };
     return data;
   }

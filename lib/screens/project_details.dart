@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/models/project.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProjectDetails extends StatefulWidget {
 
 
-  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner});
+  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerNickname, this.ownerImage});
   var title;
   var description;
   List<dynamic> qualities;
   var category;
   var uid;
   var owner;
+  var ownerNickname;
+  var ownerImage;
 
   @override
   _ProjectDetailsState createState() => _ProjectDetailsState();
