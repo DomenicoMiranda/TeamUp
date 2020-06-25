@@ -33,9 +33,9 @@ class _DestinationViewState extends State<DestinationView> {
       body: _pageOption[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.yellowAccent,
-        unselectedItemColor: Colors.white,
+        backgroundColor: Colors.white70,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey.shade700,
         currentIndex: _selectedPage,
         onTap: (int index) {
           setState(() {
@@ -49,7 +49,7 @@ class _DestinationViewState extends State<DestinationView> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              title: Text('Mie Candidature')
+              title: Text('Candidature')
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
