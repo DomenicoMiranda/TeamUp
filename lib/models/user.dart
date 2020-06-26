@@ -19,8 +19,9 @@ class UserData {
    bool  admin;
    String image;
    String date;
+   String cv;
 
-  UserData({String uid, String name, String surname, String email, String nickname, bool admin, String image, String date}){
+  UserData({String uid, String name, String surname, String email, String nickname, bool admin, String image, String date, String cv}){
     this.uid = uid;
     this.name = name; 
     this.surname = surname; 
@@ -29,6 +30,7 @@ class UserData {
     this.admin = admin;
     this.image = image;
     this.date = date;
+    this.cv = cv;
     }
 
   UserData.fromFirestoreDocumentSnapshot(DocumentSnapshot documentSnapshot) {
@@ -43,6 +45,10 @@ class UserData {
       image = "https://i1.sndcdn.com/avatars-000673793789-z0ovap-t500x500.jpg";
     }else
     image = documentSnapshot.data["image"];
+    if( documentSnapshot.data["cv"] == null ){
+      cv = "Nessun CV caricato";
+    }else
+      cv = documentSnapshot.data["cv"];
   }
 
 
