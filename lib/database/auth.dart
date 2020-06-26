@@ -63,7 +63,7 @@ import 'databaseservice.dart';
         FirebaseUser user = result.user;
 
         // create a new document for the user with the uid
-        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, nickname, date, image, false);
+        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, date, image, false);
         return _userFromFirebaseUser(user);
       } catch(e) {
         print(e.toString);

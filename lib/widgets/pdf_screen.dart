@@ -20,6 +20,7 @@ class _PDFScreenState extends State<PDFScreen> {
   }
 
   loadDocument() async {
+    print("CV PASSATO: "+widget.cv);
     document = await PDFDocument.fromURL(widget.cv);
     setState(() {
       _isLoading = false;

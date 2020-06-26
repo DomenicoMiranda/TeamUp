@@ -64,9 +64,9 @@ class _SettingsPageState extends State<SettingsPage> {
   wrapper() {
     if (firebaseUser != null) {
       getData();
+
       return loading ? Loading() : loggedIn();
     } else {
-      print("not logged");
       return notLoggedIn();
     }
   }
@@ -128,7 +128,8 @@ class _SettingsPageState extends State<SettingsPage> {
           if (user.cv != null)
           Text("CV PRESENTE"),
 
-          if (user.cv == null) Text("CV ASSENTE"),
+          if (user.cv == null)
+            Text("CV ASSENTE"),
           Card(
             child: Container(
               child: Column(
@@ -220,7 +221,13 @@ class _SettingsPageState extends State<SettingsPage> {
               MaterialPageRoute(builder: (context) => PDFScreen(cv: user.cv),
             ),
           ),
+          ),          RaisedButton(
+            child: Text("check PDF"),
+            onPressed: () {
+              print("CHECK "+user.cv.toString());
+            }
           )
+
         ],
       ),
     ));
@@ -235,7 +242,6 @@ class _SettingsPageState extends State<SettingsPage> {
   getData() async {
     uid = firebaseUser.uid;
     user = await DatabaseService().getUserData(uid);
-    print(user.nickname);
     if (mounted) {
       setState(() {
         loading = false;
@@ -253,8 +259,8 @@ class _SettingsPageState extends State<SettingsPage> {
       //DatabaseService(uid: user.uid).updateUserCv(_currentCv);
     });
 
-    print(_currentCv);
-    DatabaseService(uid: user.uid).updateUserCv(_currentCv);
+
+
   }
 
   Future uploadCv() async {
@@ -263,6 +269,7 @@ class _SettingsPageState extends State<SettingsPage> {
         .child('Curriculum/${Path.basename(_cv.path)}}');
     StorageUploadTask uploadTask = storageReference.putFile(_cv);
     await uploadTask.onComplete;
+    Toast.show("Curriculum caricato correttamente", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
     print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
       setState(() {
@@ -272,12 +279,18 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  checkCV(){
+  checkCV() async {
     if(user.cv == null){
-      _openFileExplorer();
+     await _openFileExplorer();
+     uploadCVOnDB();
+     print("current cv: "+_currentCv);
     }else{
       Toast.show("Hai già aggiunto il tuo curriculum", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
     }
+  }
+
+  uploadCVOnDB() {
+    DatabaseService(uid: user.uid).updateUserCv(_currentCv);
   }
 
 }

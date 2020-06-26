@@ -39,16 +39,12 @@ class UserData {
     name = documentSnapshot.data['name'];
     surname = documentSnapshot.data['surname'];
     email = documentSnapshot.data['email'];
-    nickname = documentSnapshot.data['nickname'];
     date = documentSnapshot.data["date"];
     if(documentSnapshot.data["image"] == null){
       image = "https://i1.sndcdn.com/avatars-000673793789-z0ovap-t500x500.jpg";
     }else
     image = documentSnapshot.data["image"];
-    if( documentSnapshot.data["cv"] == null ){
-      cv = "Nessun CV caricato";
-    }else
-      cv = documentSnapshot.data["cv"];
+    cv = documentSnapshot.data["cv"];
   }
 
 
