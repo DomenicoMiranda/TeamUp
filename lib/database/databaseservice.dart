@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
 import 'auth.dart';
@@ -16,6 +19,7 @@ class DatabaseService {
   final CollectionReference usersCollection = Firestore.instance.collection('users');
   final CollectionReference projectCollection = Firestore.instance.collection('projects');
   final CollectionReference postsCollection = Firestore.instance.collection('report');
+  final CollectionReference candidatureCollection = Firestore.instance.collection('applications');
   final Firestore _firestoreInstance = Firestore.instance;
 
   AuthService auth = AuthService();
@@ -128,6 +132,12 @@ class DatabaseService {
           .setData(project.toMap());
   }
 
+  Future addCandidatura(Map<String, dynamic> m, String projectSelected) async {
+    return await candidatureCollection.document(projectSelected).setData({
+      'candidature': m,
+
+    });
+  }
 
 }
 

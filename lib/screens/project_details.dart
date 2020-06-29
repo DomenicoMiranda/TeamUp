@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/models/project.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
+import 'package:toast/toast.dart';
 
 
 class ProjectDetails extends StatefulWidget {
-
 
   ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv});
   var title;
@@ -21,6 +23,7 @@ class ProjectDetails extends StatefulWidget {
   var surname;
   var cv;
 
+
   @override
   _ProjectDetailsState createState() => _ProjectDetailsState();
 }
@@ -29,17 +32,19 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   FirebaseUser firebaseUser;
   bool loading = true;
+  ProjectData project = new ProjectData();
+  static int statoCandidatura = 1;
 
   @override
   void initState() {
-   getUser();
-   print("CV: "+widget.cv.toString());
+    getUser();
+    print("CV: " + widget.cv.toString());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return  loading ? Loading() : Scaffold(
+    return loading ? Loading() : Scaffold(
       appBar: AppBar(
         title: Text("DETTAGLI"),
         centerTitle: true,
@@ -48,13 +53,16 @@ class _ProjectDetailsState extends State<ProjectDetails> {
         child: Column(
           children: [
             Container(
-              alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width ,
+                alignment: Alignment.center,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 child: Text(widget.title,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),)),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                  ),)),
             Row(
               children: [
                 Padding(
@@ -70,7 +78,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Descrizione", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                        Text("Descrizione",
+                            style: TextStyle(fontWeight: FontWeight.bold,
+                                fontSize: 15)),
                         Text(widget.description, maxLines: 2,),
                       ],
                     ),
@@ -79,7 +89,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 ),
               ],
             ),
-          Text("Competenze richieste " , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+            Text("Competenze richieste ",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -88,24 +99,25 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               ],
             ),
 
-           Card(
-             color: Colors.grey,
-             shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.circular(8.0),
-             ),
-             child: Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: Column(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   Text("Ideatore", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                   Text(widget.name+" "+widget.surname)
-                 ],
-               ),
-             ),
-           ),
+            Card(
+              color: Colors.grey,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Ideatore", style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15)),
+                    Text(widget.name + " " + widget.surname)
+                  ],
+                ),
+              ),
+            ),
 
-           // Text(widget.owner),
+            // Text(widget.owner),
             showButton(),
           ],
         ),
@@ -116,16 +128,16 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   getUser() async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
     print(firebaseUser.toString());
-    print("OWNERID: "+widget.owner);
-    print("UID CORRENTE: "+firebaseUser.uid);
-    print("IMAGE "+widget.ownerImage.toString());
+    print("OWNERID: " + widget.owner);
+    print("UID CORRENTE: " + firebaseUser.uid);
+    print("IMAGE " + widget.ownerImage.toString());
     setState(() {
       loading = false;
     });
   }
 
-  Widget showButton(){
-    if(widget.owner != firebaseUser.uid){
+  Widget showButton() {
+    if (widget.owner != firebaseUser.uid) {
       return Column(
         children: [
           Padding(
@@ -137,7 +149,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               minWidth: double.infinity,
               height: 32,
               color: Colors.blue.shade500,
-              onPressed: () {},
+              onPressed: () {
+                submit();
+              },
               child: Text("Candidami!",
                   style: TextStyle(color: Colors.white)),
             ),
@@ -153,14 +167,15 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               color: Colors.blue.shade500,
               onPressed: () {
                 Navigator.push(context,
-                  MaterialPageRoute(
-                    builder: (_) => OwnerProfile(
-                      name: widget.name,
-                      surname: widget.surname,
-                      image: widget.ownerImage,
-                      uid: widget.owner,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            OwnerProfile(
+                              name: widget.name,
+                              surname: widget.surname,
+                              image: widget.ownerImage,
+                              uid: widget.owner,
+                            )
                     )
-                  )
                 );
               },
               child: Text("Visualizza profilo ideatore",
@@ -184,8 +199,32 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
         ],
       );
-    }else{
-      return Text("Questo è un tuo progetto\nnon puoi candidarti.", textAlign: TextAlign.center,);
+    } else {
+      return Text("Questo è un tuo progetto\nnon puoi candidarti.",
+        textAlign: TextAlign.center,);
     }
   }
+
+  Map<String, dynamic> _convertUserToMap()
+  {
+    Map<String, dynamic> map = {};
+    map[firebaseUser.uid] = statoCandidatura;
+
+    return map;
+  }
+
+  addApplication() async {
+    await DatabaseService().addCandidatura(_convertUserToMap(), widget.uid);
+
+  }
+
+  submit() async {
+    await addApplication();
+    //TODO verificare se il documento esiste già su firebase tramite key della mappa (firebaseUser.uid)
+    Toast.show("Candidatura inviata correttamente.", context,
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+  }
+
+
+
 }
