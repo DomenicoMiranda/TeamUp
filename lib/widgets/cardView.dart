@@ -421,8 +421,8 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                       Text("Num. Posti disponibili", style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.grey)),
-                      if(document['maxTeammate'] != null)
-                           Text(document['maxTeammate'].toString(),
+                      if(document['maxTeammate'] != null && document['maxTeammate'] != document['teammate'].length)
+                           Text((document['maxTeammate'] - document['teammate'].length).toString(),
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -433,6 +433,11 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                                 //fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey.shade700)),
+                      if(document['maxTeammate'] == document['teammate'].length)
+                        Text("Completo",style: TextStyle(
+                          //fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red)),
                     ],
                   ),
                 ),

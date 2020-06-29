@@ -255,11 +255,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
     setState(() {
       _cv = file;
-      uploadCv();
+
       //DatabaseService(uid: user.uid).updateUserCv(_currentCv);
     });
 
-
+    uploadCv();
 
   }
 
