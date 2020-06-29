@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
 
@@ -8,7 +9,7 @@ import 'package:getflutter/getflutter.dart';
 class ProjectDetails extends StatefulWidget {
 
 
-  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname});
+  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv});
   var title;
   var description;
   List<dynamic> qualities;
@@ -18,6 +19,7 @@ class ProjectDetails extends StatefulWidget {
   var ownerImage;
   var name;
   var surname;
+  var cv;
 
   @override
   _ProjectDetailsState createState() => _ProjectDetailsState();
@@ -31,6 +33,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   @override
   void initState() {
    getUser();
+   print("CV: "+widget.cv.toString());
     super.initState();
   }
 
@@ -148,11 +151,37 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               minWidth: double.infinity,
               height: 32,
               color: Colors.blue.shade500,
-              onPressed: () {},
-              child: Text("Visualizza profilo",
+              onPressed: () {
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (_) => OwnerProfile(
+                      name: widget.name,
+                      surname: widget.surname,
+                      image: widget.ownerImage,
+                      uid: widget.owner,
+                    )
+                  )
+                );
+              },
+              child: Text("Visualizza profilo ideatore",
                   style: TextStyle(color: Colors.white)),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              minWidth: double.infinity,
+              height: 32,
+              color: Colors.blue.shade500,
+              onPressed: () {},
+              child: Text("Segnala",
+                  style: TextStyle(color: Colors.white)),
+            ),
+          ),
+
         ],
       );
     }else{

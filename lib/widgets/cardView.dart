@@ -133,7 +133,7 @@ Widget buildAllCategories() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-
+                                  cv: snapshot.data.documents[index]['cv']
                                 )
                         ));
                   },
@@ -173,7 +173,7 @@ Widget buildArte() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['image'],
-
+                                  cv: snapshot.data.documents[index]['cv']
                                 )
                         ));
                   },
@@ -212,6 +212,7 @@ Widget buildMusica() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
+                                  cv: snapshot.data.documents[index]['cv']
 
                                 )
                         ));
@@ -251,6 +252,7 @@ Widget buildSport() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['image'],
+                                  cv: snapshot.data.documents[index]['cv']
 
                                 )
                         ));
@@ -290,6 +292,7 @@ Widget buildCinema() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['image'],
+                                  cv: snapshot.data.documents[index]['cv']
 
                                 )
                         ));
@@ -329,6 +332,7 @@ Widget buildBusiness() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['image'],
+                                  cv: snapshot.data.documents[index]['cv']
                                     )
                         ));
                   },

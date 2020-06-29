@@ -65,7 +65,7 @@ class DatabaseService {
         .map(_userDataFromSnapshot);
     }
 
-            Future<UserData> getUserData( String uid) async {
+    Future<UserData> getUserData( String uid) async {
     DocumentSnapshot documentSnapshot = await _firestoreInstance
         .collection("users")
         .document(uid)

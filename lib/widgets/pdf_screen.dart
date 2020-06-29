@@ -4,7 +4,7 @@ import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 class PDFScreen extends StatefulWidget {
   PDFScreen({this.cv});
 
-  String cv;
+  final String cv;
   @override
   _PDFScreenState createState() => _PDFScreenState();
 }
