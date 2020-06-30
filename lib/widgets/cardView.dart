@@ -172,7 +172,7 @@ Widget buildArte() {
                                   owner: snapshot.data.documents[index]['ownerId'],
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
-                                  ownerImage: snapshot.data.documents[index]['image'],
+                                  ownerImage: snapshot.data.documents[index]['ownerImage'],
                                   cv: snapshot.data.documents[index]['cv']
                                 )
                         ));
@@ -251,7 +251,7 @@ Widget buildSport() {
                                   owner: snapshot.data.documents[index]['ownerId'],
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
-                                  ownerImage: snapshot.data.documents[index]['image'],
+                                  ownerImage: snapshot.data.documents[index]['ownerImage'],
                                   cv: snapshot.data.documents[index]['cv']
 
                                 )
@@ -291,7 +291,7 @@ Widget buildCinema() {
                                   owner: snapshot.data.documents[index]['ownerId'],
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
-                                  ownerImage: snapshot.data.documents[index]['image'],
+                                  ownerImage: snapshot.data.documents[index]['ownerImage'],
                                   cv: snapshot.data.documents[index]['cv']
 
                                 )
@@ -331,7 +331,7 @@ Widget buildBusiness() {
                                   owner: snapshot.data.documents[index]['ownerId'],
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
-                                  ownerImage: snapshot.data.documents[index]['image'],
+                                  ownerImage: snapshot.data.documents[index]['ownerImage'],
                                   cv: snapshot.data.documents[index]['cv']
                                     )
                         ));

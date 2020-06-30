@@ -103,7 +103,8 @@ class _OwnerProfileState extends State<OwnerProfile> {
                                     style: TextStyle(color: Colors.white))
                               ],
                             ),
-                          )),
+                          )
+                      ),
                     ),
                   ],
                 ),

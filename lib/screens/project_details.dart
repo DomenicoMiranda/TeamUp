@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
+import 'package:teamup/models/report.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
@@ -30,10 +31,13 @@ class ProjectDetails extends StatefulWidget {
 
 class _ProjectDetailsState extends State<ProjectDetails> {
 
+  Report report = new Report();
   FirebaseUser firebaseUser;
   bool loading = true;
   ProjectData project = new ProjectData();
   static int statoCandidatura = 1;
+  String tmpContent;
+
 
   @override
   void initState() {
@@ -76,9 +80,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 Container(
                   child: Flexible(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Descrizione",
+                        Text("Descrizione",textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold,
                                 fontSize: 15)),
                         Text(widget.description, maxLines: 2,),
@@ -94,6 +97,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                if(widget.qualities.length == 0)
+                  Text("Non sono richieste particolari competenze per questo progetto.",maxLines:2 , textAlign: TextAlign.center,),
                 for (var name in widget.qualities)
                   Text(name, maxLines: 2,),
               ],
@@ -191,7 +196,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               minWidth: double.infinity,
               height: 32,
               color: Colors.blue.shade500,
-              onPressed: () {},
+              onPressed: () {
+                customAlertDialog(context);
+
+              },
               child: Text("Segnala",
                   style: TextStyle(color: Colors.white)),
             ),
@@ -225,6 +233,76 @@ class _ProjectDetailsState extends State<ProjectDetails> {
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
 
+  void customAlertDialog(BuildContext context){
+    Widget cancelButton = FlatButton(
+      child: Text("Cancella"),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+    Widget okButton = FlatButton(
+      child: Text("Ok"),
+      onPressed:  () {
+        print("Ok");
+        completeReport();
+      },
+    );
+    var dialog = AlertDialog(
+      title: Text("SEGNALAZIONE"),
+      content: TextField(
+        maxLines: null,
+        //catturo l'input inserito
+        onChanged: (content) {
+          setState(() => tmpContent = content);
+        },
+        decoration: InputDecoration(
+          labelText: 'Segnalazione',
+          hintText: 'Segnalazione',
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18.0)),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+        ),
+      )
+      ,
+      actions: [
+        okButton,
+        cancelButton,
+      ],
+      shape: RoundedRectangleBorder(
+          side: BorderSide(style: BorderStyle.none),
+          borderRadius: BorderRadius.circular(10)
+      ),
+      elevation: 10,
+      backgroundColor: Colors.white,
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return dialog;
+        });
+  }
 
+  createReport(){
+    setState(() {
+      report.projectId = widget.uid;
+      report.userId = firebaseUser.uid;
+      report.content = tmpContent;
+    });
+  }
 
+  completeReport() async {
+    await createReport();
+    DatabaseService().addReport(report);
+    print("AGGIUNTO");
+    Navigator.pop(context);
+    Toast.show("Segnalazione inviata correttamente", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+    setState(() {
+      tmpContent = "";
+    });
+  }
 }
+
+
+
+
