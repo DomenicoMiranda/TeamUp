@@ -9,6 +9,8 @@ import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:toast/toast.dart';
 
+import 'home.dart';
+
 
 class ProjectDetails extends StatefulWidget {
 
@@ -217,12 +219,18 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 ),
                 minWidth: double.infinity,
                 height: 32,
-                color: Colors.red.shade500,
+                color: Colors.red.shade300,
                 onPressed: () {
                   deleteMyProject();
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                      builder: (context) =>
+                          Homepage(),
+                      )
+                  );
                 },
-                child: Text("Elimina Progetto.",
-                textAlign: TextAlign.center),
+                child: Text("Elimina Progetto",
+                textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
           ),
           ),
           Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/screens/project_details.dart';
 import 'package:teamup/widgets/loading.dart';
 
 
@@ -99,10 +100,27 @@ Widget buildOnHold(String uid) {
             .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                    title: snapshot.data.documents[index]['name'],
+                                    description:snapshot.data.documents[index]['description'],
+                                    uid: snapshot.data.documents[index].documentID,
+                                    qualities: snapshot.data.documents[index]['qualities'],
+                                    owner: snapshot.data.documents[index]['ownerId'],
+                                    name: snapshot.data.documents[index]['ownerName'],
+                                    surname: snapshot.data.documents[index]['ownerSurname'],
+                                    ownerImage: snapshot.data.documents[index]['ownerImage'],
+                                    cv: snapshot.data.documents[index]['cv']
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
@@ -122,7 +140,25 @@ Widget buildCompleted(String uid) {
           if (!snapshot.hasData) return const Text('Loading');
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index])
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectDetails(
+                                    title: snapshot.data.documents[index]['name'],
+                                    description:snapshot.data.documents[index]['description'],
+                                    uid: snapshot.data.documents[index].documentID,
+                                    qualities: snapshot.data.documents[index]['qualities'],
+                                    owner: snapshot.data.documents[index]['ownerId'],
+                                    name: snapshot.data.documents[index]['ownerName'],
+                                    surname: snapshot.data.documents[index]['ownerSurname'],
+                                    ownerImage: snapshot.data.documents[index]['ownerImage'],
+                                    cv: snapshot.data.documents[index]['cv']
+                                )
+                        ));
+                  },
+                  child: _buildListItem(context, snapshot.data.documents[index]))
           );
         }
     ),
