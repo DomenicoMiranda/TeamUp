@@ -219,9 +219,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 ),
                 minWidth: double.infinity,
                 height: 32,
-                color: Colors.red.shade300,
+                color: Colors.red.shade400,
                 onPressed: () {
                   deleteMyProject();
+                  //TODO eliminare navBack quando fa la pop
                   Navigator.pop(context);
                 },
                 child: Text("Elimina Progetto",
