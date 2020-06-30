@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/project.dart';
+import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
 import 'auth.dart';
 
@@ -129,12 +130,24 @@ class DatabaseService {
           .setData(project.toMap());
   }
 
+  //---------------------CANDIDATURE----------------------------
+
   Future addCandidatura(Map<String, dynamic> m, String projectSelected) async {
     return await candidatureCollection.document(projectSelected).setData({
       'candidature': m,
 
     });
   }
+
+  //-----------------------REPORTS-----------------------------
+
+  Future addReport(Report report) async {
+    await _firestoreInstance
+        .collection("reports")
+        .document(report.uid)
+        .setData(report.toMap());
+  }
+
 
 }
 
