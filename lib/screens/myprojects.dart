@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/widgets/loading.dart';
 
 
 
@@ -11,9 +12,10 @@ class MyProjectsList extends StatefulWidget {
 
 class _MyProjectsListState extends State<MyProjectsList> {
 
-  FirebaseUser firebaseUser;
+  static FirebaseUser firebaseUser;
   //TODO modificare query per recuperare correttamente currentUser e mostrare MIEI PROGETTI
    static String uid;
+   bool loading = true;
   List<Widget> containersProjects = [
     buildOnHold(uid),
     buildCompleted(uid),
@@ -29,7 +31,7 @@ class _MyProjectsListState extends State<MyProjectsList> {
   }
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return loading? Loading() : Container(
       child: DefaultTabController(
         length: 2,
         child: new Scaffold(
@@ -81,6 +83,9 @@ class _MyProjectsListState extends State<MyProjectsList> {
     firebaseUser = await FirebaseAuth.instance.currentUser();
     print(firebaseUser.toString());
     uid = firebaseUser.uid;
+    setState(() {
+      loading = false;
+    });
   }
 
 }
