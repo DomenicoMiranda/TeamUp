@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamup/screens/home.dart';
 import 'package:teamup/screens/myprojects.dart';
-import 'package:teamup/screens/nominations.dart';
+import 'package:teamup/screens/applications.dart';
 import 'package:teamup/screens/settings.dart';
 
 
@@ -16,7 +16,7 @@ class _DestinationViewState extends State<DestinationView> {
 
   final List<Widget>_pageOption = [
     Homepage(),
-    Nominations(),
+    Applications(),
     MyProjectsList(),
     SettingsPage()
   ];
