@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/applications.dart';
 import 'auth.dart';
 
 
@@ -128,6 +129,13 @@ class DatabaseService {
           .collection("projects")
           .document(project.id)
           .setData(project.toMap());
+  }
+
+  Future<ProjectData> deleteProject(String uid) async {
+    await _firestoreInstance
+        .collection("projects")
+        .document(uid)
+        .delete();
   }
 
   //---------------------CANDIDATURE----------------------------

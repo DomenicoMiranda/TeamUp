@@ -204,26 +204,53 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   style: TextStyle(color: Colors.white)),
             ),
           ),
-
         ],
       );
     } else {
-      return Text("Questo è un tuo progetto\nnon puoi candidarti.",
-        textAlign: TextAlign.center,);
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minWidth: double.infinity,
+                height: 32,
+                color: Colors.red.shade500,
+                onPressed: () {
+                  deleteMyProject();
+                },
+                child: Text("Elimina Progetto.",
+                textAlign: TextAlign.center),
+          ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Questo è un tuo progetto\nnon puoi candidarti.",
+                textAlign: TextAlign.center),
+          ),
+        ],
+      );
     }
   }
 
   Map<String, dynamic> _convertUserToMap()
   {
-    Map<String, dynamic> map = {};
-    map[firebaseUser.uid] = statoCandidatura;
 
+    Map<String, dynamic> map = {};
+    map.putIfAbsent(firebaseUser.uid, () => statoCandidatura);
     return map;
   }
 
   addApplication() async {
     await DatabaseService().addCandidatura(_convertUserToMap(), widget.uid);
+  }
 
+  deleteMyProject() async {
+    await DatabaseService().deleteProject(widget.uid);
+    Toast.show("Progetto eliminato correttamente.", context,
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
 
   submit() async {
