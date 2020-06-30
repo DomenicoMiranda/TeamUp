@@ -1,7 +1,4 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
 import 'auth.dart';

@@ -12,6 +12,7 @@ class MyProjectsList extends StatefulWidget {
 class _MyProjectsListState extends State<MyProjectsList> {
 
   FirebaseUser firebaseUser;
+  //TODO modificare query per recuperare correttamente currentUser e mostrare MIEI PROGETTI
    static String uid;
   List<Widget> containersProjects = [
     buildOnHold(uid),
@@ -28,7 +29,6 @@ class _MyProjectsListState extends State<MyProjectsList> {
   }
   @override
   Widget build(BuildContext context) {
-    //TODO CAPIRE SE IMPORTARE LA CARDVIEW O LASCIARE IL CODICE INTERNAMENTE
     return new Container(
       child: DefaultTabController(
         length: 2,
@@ -129,18 +129,18 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 200.0,
+        height: 150.0,
         //margin: new EdgeInsets.only(right: 46.0),
         decoration: new BoxDecoration(
           //color: Colors.blueGrey.shade200,
-          color: Colors.blueGrey.shade200,
+          color: Colors.white,
           shape: BoxShape.rectangle,
           borderRadius: new BorderRadius.circular(30.0),
           boxShadow: <BoxShadow>[
             new BoxShadow(
               color: Colors.black12,
-              blurRadius: 10.0,
-              offset: new Offset(0.0, 10.0),
+              blurRadius: 8.0,
+              offset: new Offset(0.0, 0.0),
             ),
           ],
         ),
@@ -150,80 +150,94 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               Row(
-                children: <Widget>[
+                children: [
                   CircleAvatar(
                     radius: 40,
                     backgroundImage: NetworkImage(
-                        "http://49.231.30.115/emrcleft/assets/images/avatars/avatar2_big@2x.png"),
+                        document['ownerImage']),
                   ),
 
                   SizedBox(width: 20),
                   //titolo e material button
                   Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Text(document['name'],
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white70)),
-                        MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          minWidth: double.infinity,
-                          height: 32,
-                          color: Colors.blue.shade500,
-                          onPressed: () {},
-                          child: Text("Candidami!",
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                      ],),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.only(bottom: 30.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(document['name'],
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade700)),
+                        ],),
+                    ),
                   )
                 ],
               ),
 
-              SizedBox(height: 3),
+              SizedBox(height: 5),
 
-              //descrizione Card
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 40),
-
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text("Num. Posti disponibili", style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70)),
-                      Text(document['maxTeammate'].toString(),
-                          style: TextStyle(fontSize: 30,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white54)),
-                    ],
+              SizedBox(
+                width: double.infinity,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          document['ownerName'] + " " +
+                              document['ownerSurname'],
+                          textAlign: TextAlign.left,
+                          style: TextStyle(color: Colors.grey.shade700),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
 
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Num. Posti disponibili", style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey)),
+                      if(document['maxTeammate'] != null &&
+                          document['maxTeammate'] !=
+                              document['teammate'].length)
+                        Text((document['maxTeammate'] -
+                            document['teammate'].length).toString(),
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade700)),
+                      if(document['maxTeammate'] == null)
+                        Text("Illimitati",
+                            style: TextStyle(
+                              //fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade700)),
+                      if(document['maxTeammate'] ==
+                          document['teammate'].length)
+                        Text("Completo", style: TextStyle(
+                          //fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red)),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     ),
   );
-
-
-
 }
 
