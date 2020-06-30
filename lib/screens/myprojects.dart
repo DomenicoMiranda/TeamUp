@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/screens/project_details.dart';
 import 'package:teamup/widgets/loading.dart';
 
@@ -39,6 +40,18 @@ class _MyProjectsListState extends State<MyProjectsList> {
             appBar: new AppBar(
               title: const Text('Miei Progetti'),
               centerTitle: true,
+              actions: <Widget>[
+                // action button
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CreateProject()),
+                    );
+                  },
+                ),
+              ],
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(30.0),
                 child: Align(

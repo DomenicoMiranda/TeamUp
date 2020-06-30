@@ -66,7 +66,6 @@ class _TeamFormsState extends State<TeamForms> {
                   onChanged: (text) {
                     setState(() {
                       project.name = text;
-                      print(project.name);
                     });
                   },
                   decoration: InputDecoration(
