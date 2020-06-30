@@ -222,12 +222,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 color: Colors.red.shade300,
                 onPressed: () {
                   deleteMyProject();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                      builder: (context) =>
-                          Homepage(),
-                      )
-                  );
+                  Navigator.pop(context);
                 },
                 child: Text("Elimina Progetto",
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
