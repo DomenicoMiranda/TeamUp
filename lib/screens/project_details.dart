@@ -234,6 +234,23 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             child: Text("Questo è un tuo progetto\nnon puoi candidarti.",
                 textAlign: TextAlign.center),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              minWidth: double.infinity,
+              height: 32,
+              color: Colors.indigo,
+              onPressed: () {
+                //TODO invece della pop va fatta una push con la nuova pagina e i bundle sponsor 10-20-50 eur
+                Navigator.pop(context);
+              },
+              child: Text("Sponsorizza Progetto",
+                textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+            ),
+          ),
         ],
       );
     }
