@@ -143,8 +143,7 @@ class DatabaseService {
   Future addCandidatura(Map<String, dynamic> m, String projectSelected) async {
     return await candidatureCollection.document(projectSelected).setData({
       'candidature': m,
-
-    });
+    }, merge: true);
   }
 
   //-----------------------REPORTS-----------------------------
