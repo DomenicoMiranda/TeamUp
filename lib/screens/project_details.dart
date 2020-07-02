@@ -4,12 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
+import 'package:teamup/screens/profile/project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:toast/toast.dart';
-
-import 'home.dart';
 
 
 class ProjectDetails extends StatefulWidget {
@@ -232,9 +231,25 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Questo è un tuo progetto\nnon puoi candidarti.",
-                textAlign: TextAlign.center),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              minWidth: double.infinity,
+              height: 32,
+              color: Colors.green.shade900,
+              onPressed: () {
+                //TODO invece della pop va fatta una push con la nuova pagina e i bundle sponsor 10-20-50 eur
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProjectApplications()),
+                );
+              },
+              child: Text("Visualizza Candidature",
+                textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+            ),
           ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MaterialButton(
@@ -252,6 +267,11 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Questo è un tuo progetto\nnon puoi candidarti.",
+                textAlign: TextAlign.center),
+          ),
         ],
       );
     }
@@ -266,7 +286,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   addApplication() async {
     await DatabaseService().addCandidatura(_convertUserToMap(), widget.uid);
-    await DatabaseService().updateMaxTeammates(widget.uid, ProjectData().maxTeammate);
   }
 
   deleteMyProject() async {
@@ -352,7 +371,3 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     });
   }
 }
-
-
-
-

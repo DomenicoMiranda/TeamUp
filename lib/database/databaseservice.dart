@@ -152,19 +152,12 @@ class DatabaseService {
     return toReturn;
   }*/
 
+  
 
   Future addCandidatura(Map<String, dynamic> m, String projectSelected) async {
     return await candidatureCollection.document(projectSelected).setData({
       'candidature': m,
     }, merge: true);
-  }
-
-  Future updateMaxTeammates(String projectSelected, int maxTeammate) async {
-    if(maxTeammate != 0) {
-    return await projectCollection.document(projectSelected).updateData({
-    'maxTeammate': maxTeammate-1,
-    });
-    }
   }
 
   //-----------------------REPORTS-----------------------------

@@ -93,9 +93,8 @@ class _MyProjectsListState extends State<MyProjectsList> {
   }
 
 
-  getUser()async {
+  Future<dynamic> getUser() async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
-    print(firebaseUser.toString());
     uid = firebaseUser.uid;
     setState(() {
       loading = false;
@@ -109,7 +108,6 @@ Widget buildOnHold(String uid) {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("status", isEqualTo: "0")
             .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
@@ -146,7 +144,6 @@ Widget buildCompleted(String uid) {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("status", isEqualTo: "1")
             .where("ownerId", isEqualTo: uid)
             .snapshots(),
         builder: (context, snapshot) {
