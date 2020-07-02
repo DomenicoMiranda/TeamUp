@@ -39,7 +39,7 @@ class _AdminReportsState extends State<AdminReports> {
 
                           child: cardReport(ds.data["projectName"]));
               });
-              }
+              }else return CircularProgressIndicator();
             },
           ),
         )
@@ -54,7 +54,7 @@ class _AdminReportsState extends State<AdminReports> {
 
 Widget cardReport(String title) {
   return GestureDetector(
-    onTap: ,
+
     child: Card(
       child: Container(
           height: 50,
