@@ -55,8 +55,8 @@ class ProjectData {
     maxTeammate = documentSnapshot.data['maxTeammate'];
     category = documentSnapshot.data['category'];
     ownerId = documentSnapshot.data['ownerId'];
-    ownerName = documentSnapshot.data['ownareName'];
-    ownerSurname = documentSnapshot.data['ownareSurname'];
+    ownerName = documentSnapshot.data['ownerName'];
+    ownerSurname = documentSnapshot.data['ownerSurname'];
     ownerImage = documentSnapshot.data['ownerImage'];
     teammate = [];
     if(documentSnapshot.data['teammate'] != null) {

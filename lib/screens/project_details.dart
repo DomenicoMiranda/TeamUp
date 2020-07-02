@@ -118,7 +118,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   children: [
                     Text("Ideatore", style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15)),
-                    Text(widget.name + " " + widget.surname)
+                    Text(widget.name.toString() + " " + widget.surname.toString())
                   ],
                 ),
               ),

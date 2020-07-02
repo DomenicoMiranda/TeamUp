@@ -169,6 +169,13 @@ class DatabaseService {
         .setData(report.toMap());
   }
 
+  Future deleteReport(String uid) async {
+    await _firestoreInstance
+        .collection("reports")
+        .document(uid)
+        .delete();
+  }
+
 
 }
 

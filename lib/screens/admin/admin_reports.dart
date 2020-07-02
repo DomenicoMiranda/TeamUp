@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:teamup/models/report.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:teamup/screens/admin/admin_report_details.dart';
 
 class AdminReports extends StatefulWidget {
   @override
@@ -37,7 +38,22 @@ class _AdminReportsState extends State<AdminReports> {
                       return Container(
                           height:30,
 
-                          child: cardReport(ds.data["projectName"]));
+                          child: GestureDetector(
+                            onTap: () {
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (_) => AdminReportDetails(
+                                        projectId: ds.data["projectId"],
+                                        uid: ds.data["userId"],
+                                        content: ds.data["content"],
+                                        projectName: ds.data["projectName"],
+                                        documentId:  ds.documentID,
+                                      )
+                                  )
+                              );
+                            },
+                              child: cardReport(ds.data["projectName"])));
               });
               }else return CircularProgressIndicator();
             },
@@ -53,19 +69,16 @@ class _AdminReportsState extends State<AdminReports> {
 }
 
 Widget cardReport(String title) {
-  return GestureDetector(
-
-    child: Card(
-      child: Container(
-          height: 50,
-          color: Colors.grey,
-          child: Text(title,style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold
-          ),
-            textAlign: TextAlign.center,
-          )
-      ),
+  return Card(
+    child: Container(
+        height: 50,
+        color: Colors.grey,
+        child: Text(title,style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold
+        ),
+          textAlign: TextAlign.center,
+        )
     ),
   );
 }
