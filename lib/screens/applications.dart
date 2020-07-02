@@ -91,18 +91,27 @@ Widget buildCandidature() {
 }
 
 Widget buildListCandidature(String title) {
-  return new Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+  return new Container(
+    height: 100.0,
+    child: Card(
+    child: Padding(
+        padding: const EdgeInsetsDirectional.only(start: 8.0, bottom: 8.0, top: 8.0),
         child: ListTile(
           //leading: const Icon(Icons.account_circle),
           leading: CircleAvatar(
           radius: 40,
           backgroundImage: NetworkImage("https://www.clipartmax.com/png/middle/248-2487966_matthew-man-avatar-icon-png.png")),
+          trailing: MaterialButton(child: Text("Accetta"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.green.shade500)),
+            //TODO dichiarare funzione onPressed per il button accettaCandidato()
+            onPressed: () { },
+          ),
           title: new Text(title),
-          onTap: () {  }
+          //TODO onTap della Card >> visualizza profilo utente
+          //onTap: () {  }
         ),
       ),
+    ),
   );
 }
 
