@@ -140,10 +140,31 @@ class DatabaseService {
 
   //---------------------CANDIDATURE----------------------------
 
+/*  //TODO prova a recuperare il numero dei teammates
+  Future<int> totalApplications(String projectSelected) async {
+    int toReturn;
+    var respectsQuery = Firestore.instance
+        .collection('applications')
+        .where(candidatureCollection.document(projectSelected), isEqualTo: projectSelected);
+    var querySnapshot = await respectsQuery.getDocuments();
+    int totalEquals = querySnapshot.documents.length;
+    toReturn = Future.value().then((value) => totalEquals) as int;
+    return toReturn;
+  }*/
+
+
   Future addCandidatura(Map<String, dynamic> m, String projectSelected) async {
     return await candidatureCollection.document(projectSelected).setData({
       'candidature': m,
     }, merge: true);
+  }
+
+  Future updateMaxTeammates(String projectSelected, int maxTeammate) async {
+    if(maxTeammate != 0) {
+    return await projectCollection.document(projectSelected).updateData({
+    'maxTeammate': maxTeammate-1,
+    });
+    }
   }
 
   //-----------------------REPORTS-----------------------------

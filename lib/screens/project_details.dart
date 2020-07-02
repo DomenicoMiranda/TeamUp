@@ -14,9 +14,10 @@ import 'home.dart';
 
 class ProjectDetails extends StatefulWidget {
 
-  ProjectDetails({this.title, this.description, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv});
+  ProjectDetails({this.title, this.description, this.maxTeammate, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv});
   var title;
   var description;
+  var maxTeammate;
   List<dynamic> qualities;
   var category;
   var uid;
@@ -258,7 +259,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   Map<String, dynamic> _convertUserToMap()
   {
-
     Map<String, dynamic> map = {};
     map.putIfAbsent(firebaseUser.uid, () => statoCandidatura);
     return map;
@@ -266,6 +266,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   addApplication() async {
     await DatabaseService().addCandidatura(_convertUserToMap(), widget.uid);
+    await DatabaseService().updateMaxTeammates(widget.uid, ProjectData().maxTeammate);
   }
 
   deleteMyProject() async {
