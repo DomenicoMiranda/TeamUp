@@ -336,6 +336,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       report.projectId = widget.uid;
       report.userId = firebaseUser.uid;
       report.content = tmpContent;
+      report.projectName=widget.title;
     });
   }
 
