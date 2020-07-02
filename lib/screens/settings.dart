@@ -8,6 +8,7 @@ import 'package:teamup/database/auth.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/user.dart';
 import 'package:getflutter/getflutter.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/screens/admin/admin_panel.dart';
 import 'package:teamup/screens/profile/editprofile.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:teamup/widgets/pdf_screen.dart';
@@ -221,12 +222,25 @@ class _SettingsPageState extends State<SettingsPage> {
               MaterialPageRoute(builder: (context) => PDFScreen(cv: user.cv),
             ),
           ),
-          ),          RaisedButton(
-            child: Text("check PDF"),
-            onPressed: () {
-              print("CHECK "+user.cv.toString());
-            }
-          )
+          ),
+//          RaisedButton(
+//            child: Text("check PDF"),
+//            onPressed: () {
+//              print("CHECK "+user.cv.toString());
+//            }
+//          ),
+          if(user.admin == "true")
+            RaisedButton(
+                child: Text("ADMIN"),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context )=> AdminPanel()
+                          )
+                  );
+                }
+            )
+
 
         ],
       ),
