@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
-import 'package:teamup/screens/profile/project_applications.dart';
+import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
@@ -35,6 +36,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   Report report = new Report();
   FirebaseUser firebaseUser;
+  String uid;
+  UserData user;
   bool loading = true;
   ProjectData project = new ProjectData();
   static int statoCandidatura = 1;
@@ -134,6 +137,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   getUser() async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
+    await getData();
     print(firebaseUser.toString());
     print("OWNERID: " + widget.owner);
     print("UID CORRENTE: " + firebaseUser.uid);
@@ -277,15 +281,18 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     }
   }
 
-  Map<String, dynamic> _convertUserToMap()
-  {
-    Map<String, dynamic> map = {};
-    map.putIfAbsent(firebaseUser.uid, () => statoCandidatura);
-    return map;
+  getData() async {
+    uid = firebaseUser.uid;
+    user = await DatabaseService().getUserData(uid);
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   addApplication() async {
-    await DatabaseService().addCandidatura(_convertUserToMap(), widget.uid);
+    await DatabaseService().addCandidatura(firebaseUser.uid, user.name, user.surname, widget.owner, statoCandidatura, widget.title, widget.uid);
   }
 
   deleteMyProject() async {
@@ -299,6 +306,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     //TODO verificare se il documento esiste già su firebase tramite key della mappa (firebaseUser.uid)
     Toast.show("Candidatura inviata correttamente.", context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+  }
+
+  String projectId() {
+    return widget.uid;
   }
 
   void customAlertDialog(BuildContext context){

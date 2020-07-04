@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
-import 'package:teamup/screens/applications.dart';
 import 'auth.dart';
 
 
@@ -10,9 +9,10 @@ class DatabaseService {
 
   final String uid;  //UID USER
   final String id; //ID PROJECT
+  final String idCandidature; //ID APPLICATION
 
 
-  DatabaseService({ this.uid, this.id });
+  DatabaseService({ this.uid, this.id, this.idCandidature });
 
   // collection reference
   final CollectionReference usersCollection = Firestore.instance.collection('users');
@@ -140,25 +140,28 @@ class DatabaseService {
 
   //---------------------CANDIDATURE----------------------------
 
-/*  //TODO prova a recuperare il numero dei teammates
-  Future<int> totalApplications(String projectSelected) async {
-    int toReturn;
-    var respectsQuery = Firestore.instance
-        .collection('applications')
-        .where(candidatureCollection.document(projectSelected), isEqualTo: projectSelected);
-    var querySnapshot = await respectsQuery.getDocuments();
-    int totalEquals = querySnapshot.documents.length;
-    toReturn = Future.value().then((value) => totalEquals) as int;
-    return toReturn;
-  }*/
 
-  
-
-  Future addCandidatura(Map<String, dynamic> m, String projectSelected) async {
-    return await candidatureCollection.document(projectSelected).setData({
-      'candidature': m,
+  Future addCandidatura(String userID, String name, String surname, String ownerID, int statoCandidatura, String projectSelected, String idProj) async {
+    return await candidatureCollection.document().setData({
+      'utente': userID,
+      'name': name,
+      'surname': surname,
+      'ownerImage': ownerID,
+      'statoCandidatura': statoCandidatura,
+      'progettoCandidatura': projectSelected,
+      'progettoID': idProj,
     }, merge: true);
   }
+
+
+  deleteCandidatura(String projectApplication) async {
+    await _firestoreInstance
+        .collection("applications")
+        .document(projectApplication)
+        .delete();
+  }
+
+
 
   //-----------------------REPORTS-----------------------------
 
