@@ -43,7 +43,11 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:
-            AppBar(title: Text("Profilo"), centerTitle: true, actions: <Widget>[
+            AppBar(
+                automaticallyImplyLeading: false,
+                title: Text("Profilo"),
+                centerTitle: true,
+                actions: <Widget>[
           // action button
           IconButton(
             icon: Icon(Icons.mode_edit),

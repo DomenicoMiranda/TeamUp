@@ -30,6 +30,7 @@ class _CardViewState extends State<CardView> {
         length: 6,
         child: new Scaffold(
             appBar: new AppBar(
+              automaticallyImplyLeading: false,
               title: const Text('Home'),
               centerTitle: true,
                 actions: <Widget>[

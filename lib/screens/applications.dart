@@ -34,6 +34,7 @@ class ApplicationsState extends State<Applications> {
         length: 3,
         child: new Scaffold(
             appBar: new AppBar(
+              automaticallyImplyLeading: false,
               title: const Text('Candidature'),
               centerTitle: true,
               bottom: PreferredSize(

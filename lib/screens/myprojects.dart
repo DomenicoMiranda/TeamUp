@@ -38,6 +38,7 @@ class _MyProjectsListState extends State<MyProjectsList> {
         length: 2,
         child: new Scaffold(
             appBar: new AppBar(
+              automaticallyImplyLeading: false,
               title: const Text('Miei Progetti'),
               centerTitle: true,
               actions: <Widget>[
