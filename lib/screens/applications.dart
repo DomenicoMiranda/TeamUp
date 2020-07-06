@@ -4,6 +4,7 @@ import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/widgets/loading.dart';
 
 
 class Applications extends StatefulWidget {
@@ -28,7 +29,7 @@ class ApplicationsState extends State<Applications> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return loading? Loading() : Container(
       child: DefaultTabController(
         length: 3,
         child: new Scaffold(
