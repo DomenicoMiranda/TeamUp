@@ -138,10 +138,13 @@ Widget buildListCandidature(DocumentSnapshot application) {
             },
           ),
           title: new Text(application['progettoCandidatura']),
-          subtitle: new Text("STATO CANDIDATURA"),
+          subtitle:
+              application['statoCandidatura'] == 1 ?  Text("In attesa") :
+              application['statoCandidatura'] == 0 ?  Text("Confermata") : null,
+          //new Text("STATO CANDIDATURA"),
           //TODO onTap della Card
-          //onTap: () {  }
-        ),
+          onTap: () {  }
+        )
       ),
     ),
   );
