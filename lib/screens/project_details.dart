@@ -49,6 +49,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     getUser();
     print("CV: " + widget.cv.toString());
     super.initState();
+    print("UID: " + widget.uid);
   }
 
   @override
@@ -246,7 +247,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 //TODO invece della pop va fatta una push con la nuova pagina e i bundle sponsor 10-20-50 eur
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProjectApplications()),
+                  MaterialPageRoute(builder: (context) => ProjectApplications(
+                    projectID: widget.uid,
+                  )),
                 );
               },
               child: Text("Visualizza Candidature",

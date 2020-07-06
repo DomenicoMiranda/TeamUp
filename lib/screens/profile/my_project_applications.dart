@@ -9,10 +9,11 @@ import 'package:teamup/screens/project_details.dart';
 
 class ProjectApplications extends StatefulWidget {
 
-  ProjectApplications({this.userName, this.statoCand, this.projectApplication});
+  ProjectApplications({this.userName, this.statoCand, this.projectApplication, this.projectID});
   var userName;
   var statoCand;
   var projectApplication;
+  var projectID;
 
   @override
   _ProjectApplicationsState createState() => _ProjectApplicationsState();
@@ -63,14 +64,13 @@ class _ProjectApplicationsState extends State<ProjectApplications> {
   }
 
 
-@override
+
 Widget buildCandidatureToMyProjects() {
   return Container(
       child: StreamBuilder(
           stream: Firestore.instance
               .collection('applications')
-          //TODO sistemare query e recuperare id del progetto selezionato
-              .where("progettoID", isEqualTo: "vdy1T47CPuPKefdy6Vj5")
+              .where("progettoID", isEqualTo: widget.projectID)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Text('Loading data.. Please wait');
