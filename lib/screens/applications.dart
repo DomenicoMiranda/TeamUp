@@ -74,7 +74,7 @@ class ApplicationsState extends State<Applications> {
             body: TabBarView(
               children: containerApplications = [
                 buildCandidature(),
-                Container(),
+                buildCandidatureConfermate(),
                 Container(),
               ],
             )
@@ -110,6 +110,7 @@ Widget buildCandidature() {
           stream: Firestore.instance
               .collection('applications')
               .where("utente", isEqualTo: firebaseUser.uid)
+              .where("statoCandidatura", isEqualTo: 1)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Text('Loading data.. Please wait');
@@ -122,6 +123,27 @@ Widget buildCandidature() {
       )
   );
 }
+
+  Widget buildCandidatureConfermate() {
+    return Container(
+        child: StreamBuilder(
+            stream: Firestore.instance
+                .collection('applications')
+                .where("utente", isEqualTo: firebaseUser.uid)
+                .where("statoCandidatura", isEqualTo: 0)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return Text('Loading data.. Please wait');
+              return ListView(
+                children: snapshot.data.documents.map<Widget>((document) {
+                  return buildListCandidatureConfermate(document);
+                }).toList(),
+              );
+            }
+        )
+    );
+  }
+
 
 Widget buildListCandidature(DocumentSnapshot application) {
   return new Container(
@@ -139,8 +161,7 @@ Widget buildListCandidature(DocumentSnapshot application) {
           ),
           title: new Text(application['progettoCandidatura']),
           subtitle:
-              application['statoCandidatura'] == 1 ?  Text("In attesa") :
-              application['statoCandidatura'] == 0 ?  Text("Confermata") : null,
+              application['statoCandidatura'] == 1 ?  Text("In attesa") : null,
           //new Text("STATO CANDIDATURA"),
           //TODO onTap della Card
           onTap: () {  }
@@ -149,4 +170,30 @@ Widget buildListCandidature(DocumentSnapshot application) {
     ),
   );
 }
+
+
+  Widget buildListCandidatureConfermate(DocumentSnapshot application) {
+    return new Container(
+      height: 100.0,
+      child: Card(
+        child: Padding(
+            padding: const EdgeInsetsDirectional.only(start: 8.0, bottom: 8.0, top: 8.0),
+            child: ListTile(
+              //leading: const Icon(Icons.account_circle),
+                trailing: MaterialButton(child: Text("Confermata"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.green)),
+                  onPressed: () {
+                    return null;
+                  },
+                ),
+                title: new Text(application['progettoCandidatura']),
+                //new Text("STATO CANDIDATURA"),
+                //TODO onTap della Card
+                onTap: () {  }
+            )
+        ),
+      ),
+    );
+  }
+
 }
