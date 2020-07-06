@@ -4,6 +4,7 @@ import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/application_user_profile.dart';
 import 'package:teamup/screens/project_details.dart';
 
 
@@ -92,10 +93,13 @@ Widget buildListCandidaturetoMyProjects(DocumentSnapshot application) {
         padding: const EdgeInsetsDirectional.only(start: 8.0, bottom: 8.0, top: 8.0),
         child: ListTile(
           //leading: const Icon(Icons.account_circle),
-          trailing: MaterialButton(child: Text("Accetta"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
+          trailing: MaterialButton(child: Text("Visualizza"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.green.shade500)),
             onPressed: () {
-
+                  Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => ApplicationUserProfile(uid: application["utente"],),
+                  ));
             },
           ),
           title: new Text(application['progettoCandidatura']),
