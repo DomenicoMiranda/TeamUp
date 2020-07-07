@@ -2,15 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:teamup/widgets/pdf_screen.dart';
 
 class ApplicationUserProfile extends StatefulWidget {
 
-  ApplicationUserProfile({this.uid});
+  ApplicationUserProfile({this.uid,this.projectId, this.applicationID});
 
   final String uid;
+  final String projectId;
+  final String applicationID;
 
   @override
   _ApplicationUserProfileState createState() => _ApplicationUserProfileState();
@@ -20,6 +23,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
 
   bool loading = true;
   UserData user;
+  ProjectData project;
 
 
   @override
@@ -27,6 +31,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
   void initState() {
 
     getUser();
+    getProject();
   }
 
   @override
@@ -115,7 +120,8 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
                     MaterialButton(child: Text("Accetta"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
                         side: BorderSide(color: Colors.green.shade500)),
                       onPressed: () {
-                        print("PREMUTO");
+                      print(project.teammate.toList());
+                      acceptApplication();
                       },
                     ),
                     MaterialButton(child: Text("Rifiuta"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
@@ -130,6 +136,15 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
             ),
           )),
     );
+  }
+
+  getProject() async {
+    project = await DatabaseService().getProjectData(widget.projectId);
+  }
+
+  acceptApplication() async {
+    await DatabaseService().acceptCandidatura(widget.uid, widget.projectId, project.teammate);
+    DatabaseService().updateStatoCandidatura(widget.uid, widget.projectId, widget.applicationID);
   }
 
   checkPDF(){

@@ -15,7 +15,6 @@ class _AdminReportsState extends State<AdminReports> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getReports();
   }
 

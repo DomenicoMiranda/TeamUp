@@ -131,7 +131,7 @@ class DatabaseService {
           .setData(project.toMap());
   }
 
-  Future<ProjectData> deleteProject(String uid) async {
+  Future deleteProject(String uid) async {
     await _firestoreInstance
         .collection("projects")
         .document(uid)
@@ -152,6 +152,10 @@ class DatabaseService {
       'progettoID': idProj,
     }, merge: true);
   }
+  
+  updateStatoCandidatura(String uid, String projectID, String applicationID) async {
+    await Firestore.instance.collection("applications").document(applicationID).setData({"statoCandidatura" : 0}, merge: true);
+  }
 
 
   deleteCandidatura(String projectApplication) async {
@@ -159,6 +163,14 @@ class DatabaseService {
         .collection("applications")
         .document(projectApplication)
         .delete();
+  }
+
+  acceptCandidatura(String uid, String projectId, List<String> teammates) async {
+    teammates.add(uid);
+
+    await Firestore.instance.collection('projects').document(projectId).setData({
+      'teammate':FieldValue.arrayUnion(teammates)
+    }, merge: true);
   }
 
 

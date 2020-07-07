@@ -98,7 +98,7 @@ Widget buildListCandidaturetoMyProjects(DocumentSnapshot application) {
             onPressed: () {
                   Navigator.push(context,
                   MaterialPageRoute(
-                    builder: (context) => ApplicationUserProfile(uid: application["utente"],),
+                    builder: (context) => ApplicationUserProfile(uid: application["utente"], projectId: application["progettoID"], applicationID: application.documentID,),
                   ));
             },
           ),

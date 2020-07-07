@@ -33,7 +33,7 @@ class _MyProjectsListState extends State<MyProjectsList> {
   }
   @override
   Widget build(BuildContext context) {
-    return loading? Loading() : Container(
+    return loading ? Loading() : Container(
       child: DefaultTabController(
         length: 2,
         child: new Scaffold(
