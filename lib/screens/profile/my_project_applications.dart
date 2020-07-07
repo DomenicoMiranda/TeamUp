@@ -5,7 +5,7 @@ import 'package:teamup/models/project.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/application_user_profile.dart';
-import 'package:teamup/screens/project_details.dart';
+
 
 
 class ProjectApplications extends StatefulWidget {

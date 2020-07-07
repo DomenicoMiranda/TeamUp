@@ -127,6 +127,7 @@ Widget buildAllCategories() {
                             builder: (context) =>
                                 ProjectDetails(
                                   title: snapshot.data.documents[index]['name'],
+                                  sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
@@ -168,6 +169,7 @@ Widget buildArte() {
                             builder: (context) =>
                                 ProjectDetails(
                                   title: snapshot.data.documents[index]['name'],
+                                  sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
@@ -208,6 +210,7 @@ Widget buildMusica() {
                             builder: (context) =>
                                 ProjectDetails(
                                   title: snapshot.data.documents[index]['name'],
+                                  sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
@@ -249,6 +252,7 @@ Widget buildSport() {
                             builder: (context) =>
                                 ProjectDetails(
                                   title: snapshot.data.documents[index]['name'],
+                                  sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
@@ -290,6 +294,7 @@ Widget buildCinema() {
                             builder: (context) =>
                                 ProjectDetails(
                                   title: snapshot.data.documents[index]['name'],
+                                  sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
@@ -331,6 +336,7 @@ Widget buildBusiness() {
                             builder: (context) =>
                                 ProjectDetails(
                                   title: snapshot.data.documents[index]['name'],
+                                  sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
                                   qualities: snapshot.data.documents[index]['qualities'],
@@ -398,6 +404,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey.shade700)),
+                             document['sponsor'] ? Text('Sponsorizzato', style: TextStyle(color: Colors.grey.shade500, fontSize: 12),) : Text(''),
                         ],),
                     ),
                   )

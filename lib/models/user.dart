@@ -20,8 +20,9 @@ class UserData {
    String image;
    String date;
    String cv;
+   int avaiableSponsor = 0;
 
-  UserData({String uid, String name, String surname, String email, String nickname, String admin, String image, String date, String cv}){
+  UserData({String uid, String name, String surname, String email, String nickname, String admin, String image, String date, String cv, int avaiableSponsor}){
     this.uid = uid;
     this.name = name; 
     this.surname = surname; 
@@ -31,6 +32,7 @@ class UserData {
     this.image = image;
     this.date = date;
     this.cv = cv;
+    this.avaiableSponsor = avaiableSponsor;
     }
 
   UserData.fromFirestoreDocumentSnapshot(DocumentSnapshot documentSnapshot) {
@@ -45,6 +47,7 @@ class UserData {
     }else
     image = documentSnapshot.data["image"];
     cv = documentSnapshot.data["cv"];
+    avaiableSponsor = documentSnapshot.data["num_sponsor"];
   }
 
 

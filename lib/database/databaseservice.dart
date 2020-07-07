@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/sponsor/sponsor.dart';
 import 'auth.dart';
 
 
@@ -191,6 +192,31 @@ class DatabaseService {
         .delete();
   }
 
+
+
+
+  //-----------------------SPONSORIZZAZIONI-----------------------------
+
+  Future addBundlePromoToUser(String currentUser, SignedSponsor bundleSelected) async {
+    if(bundleSelected == SignedSponsor.five) {
+      return await usersCollection.document(currentUser).setData({"num_sponsor" : 2}, merge: true);
+    }
+    if(bundleSelected == SignedSponsor.ten) {
+      return await usersCollection.document(currentUser).setData({"num_sponsor" : 5}, merge: true);
+    }
+    else {
+        return await usersCollection.document(currentUser).setData({"num_sponsor" : 0}, merge: true);
+    }
+  }
+
+  Future setSponsored(String currentUser, int avaiableSponsor, String projectID) async {
+    updateAvaiableSponsorUser(currentUser, avaiableSponsor);
+      return await projectCollection.document(projectID).updateData({"sponsor" : true});
+    }
+
+  Future updateAvaiableSponsorUser(String currentUser, int avaiableSponsor) async {
+    return await usersCollection.document(currentUser).updateData({"num_sponsor" : avaiableSponsor-1});
+  }
 
 }
 

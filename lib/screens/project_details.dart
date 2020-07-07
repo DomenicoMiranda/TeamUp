@@ -7,6 +7,7 @@ import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
+import 'package:teamup/screens/sponsor/sponsor.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:toast/toast.dart';
@@ -14,8 +15,9 @@ import 'package:toast/toast.dart';
 
 class ProjectDetails extends StatefulWidget {
 
-  ProjectDetails({this.title, this.description, this.maxTeammate, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv, this.teammates});
+  ProjectDetails({this.title, this.sponsor, this.description, this.maxTeammate, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv, this.teammates});
   final String title;
+  bool sponsor;
   final String description;
   final int maxTeammate;
   final List<dynamic> qualities;
@@ -31,6 +33,9 @@ class ProjectDetails extends StatefulWidget {
 
   @override
   _ProjectDetailsState createState() => _ProjectDetailsState();
+
+
+
 }
 
 class _ProjectDetailsState extends State<ProjectDetails> {
@@ -274,8 +279,12 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               height: 32,
               color: Colors.indigo,
               onPressed: () {
-                //TODO invece della pop va fatta una push con la nuova pagina e i bundle sponsor 10-20-50 eur
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Sponsor(
+                        projectID: widget.uid,
+                    )),
+                );
               },
               child: Text("Sponsorizza Progetto",
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
@@ -433,4 +442,5 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     await getUser();
     getTeammates();
   }
+
 }
