@@ -14,18 +14,19 @@ import 'package:toast/toast.dart';
 
 class ProjectDetails extends StatefulWidget {
 
-  ProjectDetails({this.title, this.description, this.maxTeammate, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv});
-  var title;
-  var description;
-  var maxTeammate;
-  List<dynamic> qualities;
-  var category;
-  var uid;
-  var owner;
-  var ownerImage;
-  var name;
-  var surname;
-  var cv;
+  ProjectDetails({this.title, this.description, this.maxTeammate, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv, this.teammates});
+  final String title;
+  final String description;
+  final int maxTeammate;
+  final List<dynamic> qualities;
+  final List<dynamic> teammates;
+  final String category;
+  final String uid;
+  final String owner;
+  final String ownerImage;
+  final String name;
+  final String surname;
+  final String cv;
 
 
   @override
@@ -37,19 +38,23 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   Report report = new Report();
   FirebaseUser firebaseUser;
   String uid;
-  UserData user;
+  UserData user = new UserData();
   bool loading = true;
   ProjectData project = new ProjectData();
   static int statoCandidatura = 1;
   String tmpContent;
+  List<UserData> teamMates = List<UserData>();
 
 
   @override
   void initState() {
+    print("LISTA: "+ widget.teammates.length.toString());
     getUser();
+    getTeammates();
     print("CV: " + widget.cv.toString());
     super.initState();
     print("UID: " + widget.uid);
+
   }
 
   @override
@@ -107,9 +112,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   Text("Non sono richieste particolari competenze per questo progetto.",maxLines:2 , textAlign: TextAlign.center,),
                 for (var name in widget.qualities)
                   Text(name, maxLines: 2,),
+
               ],
             ),
-
+            ceckTeammates(),
             Card(
               color: Colors.grey,
               shape: RoundedRectangleBorder(
@@ -287,11 +293,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   getData() async {
     uid = firebaseUser.uid;
     user = await DatabaseService().getUserData(uid);
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
+
   }
 
   addApplication() async {
@@ -383,5 +385,45 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     setState(() {
       tmpContent = "";
     });
+  }
+
+  getTeammates()async {
+    for(var doc in widget.teammates){
+      user = await DatabaseService().getUserData(doc);
+      teamMates.add(user);
+      print("GET TEAMMATE: " + user.name +" "+ user.surname);
+    }
+
+      setState(() {
+        loading = false;
+      });
+    }
+
+
+  ceckTeammates() {
+    if (widget.owner == firebaseUser.uid){
+      print("LUNGHEZZA: "+ teamMates.length.toString());
+      //print(teamMates[1].toString());
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text("TEAMMATES", style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 15)),
+    for(var user in teamMates)
+            Text(user.name.toString() + " " + user.surname.toString())
+          ],
+        ),
+      );
+
+//    Container(
+//      child: ListView.builder(
+//          itemCount: teamMates.length,
+//          itemBuilder: (BuildContext context, int index){
+//             return Text(teamMates[index].name.toString() + " " + teamMates[index].surname.toString());
+//          }),
+//    );
+    }else
+      return null;
   }
 }

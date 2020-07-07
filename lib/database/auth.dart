@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:teamup/models/user.dart';
-
 import 'databaseservice.dart';
 
 
@@ -10,11 +9,11 @@ import 'databaseservice.dart';
    final FirebaseAuth _auth = FirebaseAuth.instance;
    final GoogleSignIn googleSignIn = GoogleSignIn();
 
+
    // create user obj based FirebaseUser
    User _userFromFirebaseUser(FirebaseUser user) {
      return user != null ? User(uid: user.uid) : null;
    }
-
 
 
   // auth change user stream 

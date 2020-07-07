@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/screens/project_details.dart';
 import 'package:teamup/widgets/loading.dart';
@@ -18,17 +19,13 @@ class _MyProjectsListState extends State<MyProjectsList> {
   //TODO modificare query per recuperare correttamente currentUser e mostrare MIEI PROGETTI
    static String uid;
    bool loading = true;
-  List<Widget> containersProjects = [
-    buildOnHold(uid),
-    buildCompleted(uid),
-  ];
-
+  List<Widget> containersProjects = [];
 
   @override
   void initState() {
-    getUser();
 
-
+    //getUid();
+getUser();
     super.initState();
   }
   @override
@@ -97,21 +94,31 @@ class _MyProjectsListState extends State<MyProjectsList> {
   Future<dynamic> getUser() async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
     uid = firebaseUser.uid;
+    if(mounted){
     setState(() {
+      containersProjects= [
+        buildOnHold(uid),
+        buildCompleted(uid),
+      ];
       loading = false;
     });
-  }
+  }}
 
 }
 
 Widget buildOnHold(String uid) {
+  print(uid);
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
             .where("ownerId", isEqualTo: uid)
+            .where("status", isEqualTo: "0")
             .snapshots(),
         builder: (context, snapshot) {
+          print("ciao");
+          if(snapshot.data == null ){
+            return Loading();}else{
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
@@ -128,12 +135,13 @@ Widget buildOnHold(String uid) {
                                     name: snapshot.data.documents[index]['ownerName'],
                                     surname: snapshot.data.documents[index]['ownerSurname'],
                                     ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                    cv: snapshot.data.documents[index]['cv']
+                                    cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate'],
                                 )
                         ));
                   },
                   child: _buildListItem(context, snapshot.data.documents[index]))
-          );
+          );}
         }
     ),
   );
@@ -146,6 +154,7 @@ Widget buildCompleted(String uid) {
         stream: Firestore.instance
             .collection('projects')
             .where("ownerId", isEqualTo: uid)
+        .where("status", isEqualTo: "1")
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -165,7 +174,8 @@ Widget buildCompleted(String uid) {
                                     name: snapshot.data.documents[index]['ownerName'],
                                     surname: snapshot.data.documents[index]['ownerSurname'],
                                     ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                    cv: snapshot.data.documents[index]['cv']
+                                    cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate'],
                                 )
                         ));
                   },
