@@ -48,9 +48,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   @override
   void initState() {
-    print("LISTA: "+ widget.teammates.length.toString());
-    getUser();
-    getTeammates();
+    //print("LISTA: "+ widget.teammates.length.toString());
+    //getUser();
+    //getTeammates();
+    initialCheck();
     print("CV: " + widget.cv.toString());
     super.initState();
     print("UID: " + widget.uid);
@@ -73,7 +74,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                     .of(context)
                     .size
                     .width,
-                child: Text(widget.title,
+                child: Text(widget.title.toString(),
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold
@@ -393,11 +394,12 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       teamMates.add(user);
       print("GET TEAMMATE: " + user.name +" "+ user.surname);
     }
-
+      if(mounted){
       setState(() {
         loading = false;
       });
     }
+  }
 
 
   ceckTeammates() {
@@ -424,6 +426,11 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 //          }),
 //    );
     }else
-      return null;
+      return Text("");
+  }
+
+  initialCheck() async {
+    await getUser();
+    getTeammates();
   }
 }

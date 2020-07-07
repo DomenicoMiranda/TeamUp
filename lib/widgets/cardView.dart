@@ -134,7 +134,8 @@ Widget buildAllCategories() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                  cv: snapshot.data.documents[index]['cv']
+                                  cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate']
                                 )
                         ));
                   },
@@ -174,7 +175,8 @@ Widget buildArte() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                  cv: snapshot.data.documents[index]['cv']
+                                  cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate']
                                 )
                         ));
                   },
@@ -213,7 +215,8 @@ Widget buildMusica() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                  cv: snapshot.data.documents[index]['cv']
+                                  cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate']
 
                                 )
                         ));
@@ -253,7 +256,8 @@ Widget buildSport() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                  cv: snapshot.data.documents[index]['cv']
+                                  cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate']
 
                                 )
                         ));
@@ -293,7 +297,8 @@ Widget buildCinema() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                  cv: snapshot.data.documents[index]['cv']
+                                  cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate']
 
                                 )
                         ));
@@ -333,7 +338,8 @@ Widget buildBusiness() {
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
-                                  cv: snapshot.data.documents[index]['cv']
+                                  cv: snapshot.data.documents[index]['cv'],
+                                    teammates: snapshot.data.documents[index]['teammate']
                                     )
                         ));
                   },
