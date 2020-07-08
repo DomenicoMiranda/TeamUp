@@ -5,6 +5,7 @@ import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/deleteTeammate.dart';
 import 'package:teamup/screens/myprojects.dart';
 import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
@@ -50,6 +51,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   static int statoCandidatura = 1;
   String tmpContent;
   List<UserData> teamMates = List<UserData>();
+
 
 
   @override
@@ -124,7 +126,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
               ],
             ),
-            ceckTeammates(),
+            checkTeammates(),
             Card(
               color: Colors.grey,
               shape: RoundedRectangleBorder(
@@ -260,7 +262,11 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               height: 32,
               color: Colors.red.shade400,
               onPressed: () {
-
+                Navigator.push(context,
+                MaterialPageRoute(
+                  builder: (_)=>DeleteTeammate(teamMates: teamMates,)
+                )
+                );
               },
               child: Text("Elimina Teammate",
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
@@ -433,7 +439,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   }
 
 
-  ceckTeammates() {
+  checkTeammates() {
     if (widget.owner == firebaseUser.uid){
       print("LUNGHEZZA: "+ teamMates.length.toString());
       //print(teamMates[1].toString());
