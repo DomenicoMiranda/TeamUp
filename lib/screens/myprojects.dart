@@ -137,6 +137,7 @@ Widget buildOnHold(String uid) {
                                     ownerImage: snapshot.data.documents[index]['ownerImage'],
                                     cv: snapshot.data.documents[index]['cv'],
                                     teammates: snapshot.data.documents[index]['teammate'],
+                                    maxTeammate: snapshot.data.documents[index]['maxTeammate'],
                                 )
                         ));
                   },
@@ -176,6 +177,7 @@ Widget buildCompleted(String uid) {
                                     ownerImage: snapshot.data.documents[index]['ownerImage'],
                                     cv: snapshot.data.documents[index]['cv'],
                                     teammates: snapshot.data.documents[index]['teammate'],
+                                    maxTeammate: snapshot.data.documents[index]['maxTeammate'],
                                 )
                         ));
                   },
