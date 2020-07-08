@@ -5,6 +5,7 @@ import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/myprojects.dart';
 import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/screens/sponsor/sponsor.dart';
@@ -243,13 +244,27 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 height: 32,
                 color: Colors.red.shade400,
                 onPressed: () {
-                  deleteMyProject();
-                  //TODO eliminare navBack quando fa la pop
-                  Navigator.pop(context);
+                  dialogDeleteProject(context);
                 },
                 child: Text("Elimina Progetto",
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
           ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              minWidth: double.infinity,
+              height: 32,
+              color: Colors.red.shade400,
+              onPressed: () {
+
+              },
+              child: Text("Elimina Teammate",
+                textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -448,6 +463,46 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   initialCheck() async {
     await getUser();
     getTeammates();
+  }
+
+  void dialogDeleteProject(BuildContext context){
+    Widget cancelButton = FlatButton(
+      child: Text("Indietro"),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+    Widget okButton = FlatButton(
+      child: Text("Si"),
+      onPressed:  () {
+        print("Ok");
+        deleteMyProject();
+        Navigator.push(context,
+        MaterialPageRoute(
+          builder: (_) => MyProjectsList()
+        )
+        );
+      },
+    );
+    var dialog = AlertDialog(
+      title: Text("ELIMINA PROGETTO"),
+      content: Text("Vuoi davvero cancellare questo  progetto?"),
+      actions: [
+        okButton,
+        cancelButton,
+      ],
+      shape: RoundedRectangleBorder(
+          side: BorderSide(style: BorderStyle.none),
+          borderRadius: BorderRadius.circular(10)
+      ),
+      elevation: 10,
+      backgroundColor: Colors.white,
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return dialog;
+        });
   }
 
 }
