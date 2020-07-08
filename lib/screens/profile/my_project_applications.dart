@@ -72,6 +72,7 @@ Widget buildCandidatureToMyProjects() {
           stream: Firestore.instance
               .collection('applications')
               .where("progettoID", isEqualTo: widget.projectID)
+              .where("statoCandidatura", isEqualTo: 1)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Text('Loading data.. Please wait');

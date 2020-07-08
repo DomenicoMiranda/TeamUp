@@ -4,8 +4,10 @@ import 'package:getflutter/getflutter.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
+import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:teamup/widgets/pdf_screen.dart';
+import 'package:toast/toast.dart';
 
 class ApplicationUserProfile extends StatefulWidget {
 
@@ -122,12 +124,25 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
                       onPressed: () {
                       print(project.teammate.toList());
                       acceptApplication();
+                      Toast.show("Utente aggiunto ai teammates", context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                      Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (context) => ProjectApplications())
+                      );
+
                       },
                     ),
                     MaterialButton(child: Text("Rifiuta"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
                         side: BorderSide(color: Colors.red.shade500)),
                       onPressed: () {
-                        print("PREMUTO");
+                        refuseApplication();
+                        Toast.show("Candidatura rifiutata", context,
+                            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                        Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (context) => ProjectApplications())
+                        );
                       },
                     ),
                   ],
@@ -145,6 +160,10 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
   acceptApplication() async {
     await DatabaseService().acceptCandidatura(widget.uid, widget.projectId, project.teammate);
     DatabaseService().updateStatoCandidatura(widget.uid, widget.projectId, widget.applicationID);
+  }
+
+  refuseApplication() async {
+    await DatabaseService().refuseCandidatura(widget.applicationID);
   }
 
   checkPDF(){

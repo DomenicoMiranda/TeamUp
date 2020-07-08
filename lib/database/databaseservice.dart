@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/sponsor/sponsor.dart';
 import 'auth.dart';
+import 'package:toast/toast.dart';
 
 
 class DatabaseService {
@@ -172,6 +174,10 @@ class DatabaseService {
     await Firestore.instance.collection('projects').document(projectId).setData({
       'teammate':FieldValue.arrayUnion(teammates)
     }, merge: true);
+  }
+
+  refuseCandidatura(String applicationID) async {
+    await Firestore.instance.collection("applications").document(applicationID).setData({"statoCandidatura" : 3}, merge: true);
   }
 
 

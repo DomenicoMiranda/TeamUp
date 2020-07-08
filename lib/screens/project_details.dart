@@ -60,6 +60,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     print("CV: " + widget.cv.toString());
     super.initState();
     print("UID: " + widget.uid);
+    print("MAXTEAMMATE: "+widget.maxTeammate.toString());
+    print("lunghezza: "+widget.teammates.length.toString());
 
   }
 
@@ -166,7 +168,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: MaterialButton(
+            child:
+            widget.maxTeammate == widget.teammates.length ?
+                Text("Questo progetto è al completo") :
+            MaterialButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -248,7 +253,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: MaterialButton(
+            child: widget.maxTeammate == widget.teammates.length ?
+            Text("Questo progetto è al completo\nnon puoi più accettare candidature.") :
+            MaterialButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -256,7 +263,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               height: 32,
               color: Colors.green.shade900,
               onPressed: () {
-                //TODO invece della pop va fatta una push con la nuova pagina e i bundle sponsor 10-20-50 eur
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProjectApplications(

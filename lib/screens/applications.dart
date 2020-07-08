@@ -55,7 +55,7 @@ class ApplicationsState extends State<Applications> {
                       ),
                       new Container(
                         width: MediaQuery.of(context).size.width / 3,
-                        child: new Tab(text: 'SCADUTE'),
+                        child: new Tab(text: 'RIFIUTATE'),
                       ),
                     ]),
                   ),
@@ -76,7 +76,7 @@ class ApplicationsState extends State<Applications> {
               children: containerApplications = [
                 buildCandidature(),
                 buildCandidatureConfermate(),
-                Container(),
+                buildCandidatureRifiutate(),
               ],
             )
 
@@ -103,6 +103,7 @@ class ApplicationsState extends State<Applications> {
     }
   }
 
+  //----------------------QUERY PER LE LISTE----------------------------------
 
 @override
 Widget buildCandidature() {
@@ -145,8 +146,30 @@ Widget buildCandidature() {
     );
   }
 
+  @override
+  Widget buildCandidatureRifiutate() {
+    return Container(
+        child: StreamBuilder(
+            stream: Firestore.instance
+                .collection('applications')
+                .where("utente", isEqualTo: firebaseUser.uid)
+                .where("statoCandidatura", isEqualTo: 3)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return Text('Loading data.. Please wait');
+              return ListView(
+                children: snapshot.data.documents.map<Widget>((document) {
+                  return buildListCandidatureRifiutate(document);
+                }).toList(),
+              );
+            }
+        )
+    );
+  }
 
-Widget buildListCandidature(DocumentSnapshot application) {
+//------------------LAYOUT LISTE---------------------
+
+  Widget buildListCandidature(DocumentSnapshot application) {
   return new Container(
     height: 100.0,
     child: Card(
@@ -196,5 +219,30 @@ Widget buildListCandidature(DocumentSnapshot application) {
       ),
     );
   }
+
+  Widget buildListCandidatureRifiutate(DocumentSnapshot application) {
+    return new Container(
+      height: 100.0,
+      child: Card(
+        child: Padding(
+            padding: const EdgeInsetsDirectional.only(start: 8.0, bottom: 8.0, top: 8.0),
+            child: ListTile(
+              //leading: const Icon(Icons.account_circle),
+                trailing: MaterialButton(child: Text("Rifiutata"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.red)),
+                  onPressed: () {
+                    return null;
+                  },
+                ),
+                title: new Text(application['progettoCandidatura']),
+                //new Text("STATO CANDIDATURA"),
+                //TODO onTap della Card
+                onTap: () {  }
+            )
+        ),
+      ),
+    );
+  }
+
 
 }
