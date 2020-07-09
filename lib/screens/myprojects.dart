@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/authentication/login.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/screens/project_details.dart';
@@ -30,7 +31,7 @@ getUser();
   }
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : Container(
+    return loading? Loading() : firebaseUser == null? notLoggedIn() : Container(
       child: DefaultTabController(
         length: 2,
         child: new Scaffold(
@@ -90,10 +91,47 @@ getUser();
     );
   }
 
+  notLoggedIn() {
+    return SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Center(
+            child: Column(children: [
+              Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: Text(
+                    "Per poter accedere alle funzionalità dell'app devi essere registrato",
+                    overflow: TextOverflow.visible,
+                    textAlign: TextAlign.center,
+                  )),
+              RaisedButton(
+                  color: Colors.lightBlueAccent,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 30,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Text(
+                      "LOGIN",
+                      textAlign: TextAlign.center,
+                    ),
+                  ))
+            ]),
+          ),
+        ));
+  }
 
-  Future<dynamic> getUser() async {
+
+
+  Future getUser() async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
-    uid = firebaseUser.uid;
+   if(firebaseUser != null){ uid = firebaseUser.uid;
     if(mounted){
     setState(() {
       containersProjects= [
@@ -102,7 +140,13 @@ getUser();
       ];
       loading = false;
     });
-  }}
+  }}else
+    {
+      setState(() {
+        loading=false;
+      });
+    }
+   }
 
 }
 
