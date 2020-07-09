@@ -41,29 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar:
-            AppBar(
-                automaticallyImplyLeading: false,
-                title: Text("Profilo"),
-                centerTitle: true,
-                actions: <Widget>[
-          // action button
-          IconButton(
-            icon: Icon(Icons.mode_edit),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditProfile(
-                          user: this.user,
-                          uid: this.uid,
-                        )),
-              );
-            },
-          ),
-        ]),
-        body: wrapper());
+    return wrapper();
   }
 
   wrapper() {
@@ -72,7 +50,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
       return loading ? Loading() : loggedIn();
     } else {
-      return notLoggedIn();
+      return Padding(
+          padding: EdgeInsets.only(top: 100),
+          child:notLoggedIn());
     }
   }
 
@@ -110,8 +90,30 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   loggedIn() {
-
-    return SingleChildScrollView(
+    return Scaffold(
+      appBar:
+      AppBar(
+          automaticallyImplyLeading: false,
+          title: Text("Profilo"),
+          centerTitle: true,
+          actions: <Widget>[
+            // action button
+            IconButton(
+              icon: Icon(Icons.mode_edit),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditProfile(
+                        user: this.user,
+                        uid: this.uid,
+                      )),
+                );
+              },
+            ),
+          ]),
+      body:
+     SingleChildScrollView(
         child: Center(
       child: Column(
         children: [
@@ -248,7 +250,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
         ],
       ),
-    ));
+    )));
   }
 
   getUser() async {
