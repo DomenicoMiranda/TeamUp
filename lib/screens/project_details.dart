@@ -56,9 +56,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   @override
   void initState() {
-    //print("LISTA: "+ widget.teammates.length.toString());
-    //getUser();
-    //getTeammates();
+    print(widget.teammates.toString());
     initialCheck();
     print("CV: " + widget.cv.toString());
     super.initState();
@@ -160,9 +158,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     print("OWNERID: " + widget.owner);
     print("UID CORRENTE: " + firebaseUser.uid);
     print("IMAGE " + widget.ownerImage.toString());
-    setState(() {
-      loading = false;
-    });
   }
 
   Widget showButton() {
@@ -264,7 +259,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               onPressed: () {
                 Navigator.push(context,
                 MaterialPageRoute(
-                  builder: (_)=>DeleteTeammate(teamMates: teamMates,)
+                  builder: (_)=>DeleteTeammate(teamMates: teamMates,projectId: widget.uid)
                 )
                 );
               },
@@ -428,6 +423,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   getTeammates()async {
     for(var doc in widget.teammates){
       user = await DatabaseService().getUserData(doc);
+      print(user.admin.toString());
       teamMates.add(user);
       print("GET TEAMMATE: " + user.name +" "+ user.surname);
     }
@@ -454,14 +450,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ],
         ),
       );
-
-//    Container(
-//      child: ListView.builder(
-//          itemCount: teamMates.length,
-//          itemBuilder: (BuildContext context, int index){
-//             return Text(teamMates[index].name.toString() + " " + teamMates[index].surname.toString());
-//          }),
-//    );
     }else
       return Text("");
   }

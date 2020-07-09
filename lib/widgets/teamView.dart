@@ -258,6 +258,7 @@ class _TeamFormsState extends State<TeamForms> {
     project.ownerImage = user.image;
     project.ownerName = user.name;
     project.ownerSurname = user.surname;
+    project.sponsor = false;
     print(project.toMap());
   }
 

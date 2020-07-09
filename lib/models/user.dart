@@ -16,13 +16,13 @@ class UserData {
    String surname;
    String email;
    String nickname;
-   String  admin;
+   int  admin;
    String image;
    String date;
    String cv;
    int avaiableSponsor = 0;
 
-  UserData({String uid, String name, String surname, String email, String nickname, String admin, String image, String date, String cv, int avaiableSponsor}){
+  UserData({String uid, String name, String surname, String email, String nickname, int admin, String image, String date, String cv, int avaiableSponsor}){
     this.uid = uid;
     this.name = name; 
     this.surname = surname; 
@@ -37,7 +37,7 @@ class UserData {
 
   UserData.fromFirestoreDocumentSnapshot(DocumentSnapshot documentSnapshot) {
     uid = documentSnapshot.documentID;
-    admin = documentSnapshot.data['admin'].toString();
+    admin = documentSnapshot.data['admin'];
     name = documentSnapshot.data['name'];
     surname = documentSnapshot.data['surname'];
     email = documentSnapshot.data['email'];

@@ -233,7 +233,7 @@ class _SettingsPageState extends State<SettingsPage> {
 //              print("CHECK "+user.cv.toString());
 //            }
 //          ),
-          if(user.admin == "true")
+          if(user.admin == 1)
             RaisedButton(
                 child: Text("ADMIN"),
                 onPressed: () {
