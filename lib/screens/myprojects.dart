@@ -105,8 +105,9 @@ getUser();
                     overflow: TextOverflow.visible,
                     textAlign: TextAlign.center,
                   )),
-              RaisedButton(
-                  color: Colors.lightBlueAccent,
+              MaterialButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  color: Theme.of(context).primaryColor,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -118,10 +119,11 @@ getUser();
                     height: 30,
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
-                      "LOGIN",
+                      "Login", style: TextStyle(color: Colors.grey.shade200, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                  ))
+                  )
+              ),
             ]),
           ),
         ));

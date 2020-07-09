@@ -202,12 +202,12 @@ class DatabaseService {
 
   //-----------------------SPONSORIZZAZIONI-----------------------------
 
-  Future addBundlePromoToUser(String currentUser, SignedSponsor bundleSelected) async {
+  Future addBundlePromoToUser(String currentUser, SignedSponsor bundleSelected, int avaiableSponsor) async {
     if(bundleSelected == SignedSponsor.five) {
-      return await usersCollection.document(currentUser).setData({"num_sponsor" : 2}, merge: true);
+      return await usersCollection.document(currentUser).setData({"num_sponsor" : avaiableSponsor+2}, merge: true);
     }
     if(bundleSelected == SignedSponsor.ten) {
-      return await usersCollection.document(currentUser).setData({"num_sponsor" : 5}, merge: true);
+      return await usersCollection.document(currentUser).setData({"num_sponsor" : avaiableSponsor+5}, merge: true);
     }
     else {
         return await usersCollection.document(currentUser).setData({"num_sponsor" : 0}, merge: true);

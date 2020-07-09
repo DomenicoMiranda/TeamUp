@@ -36,10 +36,10 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
               leading: new IconButton(
-              icon: new Icon(Icons.arrow_back, color: Colors.yellowAccent,),
+              icon: new Icon(Icons.arrow_back, color: Theme.of(context).accentColor,),
               onPressed: () => Navigator.pop(context),
                 ),
               backgroundColor: Colors.transparent,
@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
                           color: Colors.white,
                           child: Padding(
                             padding: const EdgeInsets.all(3),
-                            child: Text("scegli una data",style: TextStyle(color: Colors.black),),
+                            child: Text("scegli una data",style: TextStyle(color: Colors.grey.shade900),),
                           )),
                     ),
                     Text(date, style: TextStyle(color: Colors.white),),
@@ -154,10 +154,10 @@ class _SignInState extends State<SignIn> {
                 minWidth: 327.0,
                 height: 48.0,
                   child: RaisedButton(
-                  color: Colors.yellowAccent,
+                  color: Theme.of(context).accentColor,
                   child: Text(
                     'Registrati',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.grey.shade100),
                   ),
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
@@ -185,7 +185,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 12.0),
               Text(
-                'Creando un account accetti i nostri Termini di servizio e politica sulla privacy',
+                'Creando un account accetti i nostri Termini di servizio & politica sulla privacy',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 15.0),
               ),

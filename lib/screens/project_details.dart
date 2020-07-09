@@ -518,16 +518,20 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     return SingleChildScrollView(
         child: Center(
           child: Column(children: [
-            Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width / 2,
-                child: Text(
-                  "Per poter accedere alle funzionalità dell'app devi essere registrato",
-                  overflow: TextOverflow.visible,
-                  textAlign: TextAlign.center,
-                )),
-            RaisedButton(
-                color: Colors.lightBlueAccent,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    "Per poter accedere alle funzionalità dell'app devi essere registrato",
+                    overflow: TextOverflow.visible,
+                    textAlign: TextAlign.center,
+                  )),
+            ),
+            MaterialButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                color: Theme.of(context).primaryColor,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -539,10 +543,11 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   height: 30,
                   width: MediaQuery.of(context).size.width / 2,
                   child: Text(
-                    "LOGIN",
+                    "Login", style: TextStyle(color: Colors.grey.shade200, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                ))
+                )
+            ),
           ]),
         ));
   }

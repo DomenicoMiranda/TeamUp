@@ -67,6 +67,8 @@ dev_dependencies:
 
   flutter_plugin_pdf_viewer: ^1.0.7
 
+  email_validator: '^1.0.0'
+
 
 
 

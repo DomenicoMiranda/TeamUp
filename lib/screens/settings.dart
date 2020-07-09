@@ -68,8 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
               overflow: TextOverflow.visible,
               textAlign: TextAlign.center,
             )),
-        RaisedButton(
-            color: Colors.lightBlueAccent,
+        MaterialButton(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: Theme.of(context).primaryColor,
             onPressed: () {
               Navigator.push(
                 context,
@@ -81,10 +82,11 @@ class _SettingsPageState extends State<SettingsPage> {
               height: 30,
               width: MediaQuery.of(context).size.width / 2,
               child: Text(
-                "LOGIN",
+                "Login", style: TextStyle(color: Colors.grey.shade200, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-            ))
+            )
+        ),
       ]),
     ));
   }
@@ -113,144 +115,161 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ]),
       body:
-     SingleChildScrollView(
-        child: Center(
-      child: Column(
-        children: [
-          new GFAvatar(
-            maxRadius: 50,
-            backgroundImage: NetworkImage(user.image),
-            shape: GFAvatarShape.circle,
-          ),
-          RaisedButton(
-            color: Colors.black54,
-            onPressed: () => checkCV(),
-            child: Container(
-              alignment: Alignment.center,
-              height: 30,
-              width: MediaQuery.of(context).size.width / 2,
-              child: Text("CARICA CV", style: TextStyle(color: Colors.white)),
+     Padding(
+       padding: const EdgeInsetsDirectional.only(start: 8.0, top: 15, end: 8.0, bottom: 8.0),
+       child: SingleChildScrollView(
+          child: Center(
+        child: Column(
+          children: [
+            new GFAvatar(
+              maxRadius: 50,
+              backgroundImage: NetworkImage(user.image),
+              shape: GFAvatarShape.circle,
             ),
-          ),
-          if (user.cv != null)
-          Text("CV PRESENTE"),
-
-          if (user.cv == null)
-            Text("CV ASSENTE"),
-          Card(
-            child: Container(
-              child: Column(
-                children: [
-                  SizedBox(height: 30),
-                  Text("I MIEI DATI", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Card(
-                      color: Colors.black54,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width-100,
-                        height: 40,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Nome", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                              Text(user.name, textAlign: TextAlign.center, style: TextStyle(color: Colors.white))
-                            ],
-                          ),
-                      )
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Card(
-                        color: Colors.black54,
-                        child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width-100,
-                            height: 40,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Cognome", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                                Text(user.surname, textAlign: TextAlign.center, style: TextStyle(color: Colors.white))
-                              ],
-                            ),
-                        )
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Card(
-                        color: Colors.black54,
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width-100,
-                          height: 40,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Email", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                              Text(user.email, textAlign: TextAlign.center, style: TextStyle(color: Colors.white))
-                            ],
-                          ),
-                        )
-                    ),
-                  ),
-                ],
+            RaisedButton(
+              color: Colors.grey.shade100,
+              onPressed: () => checkCV(),
+              child: Container(
+                alignment: Alignment.center,
+                height: 30,
+                width: MediaQuery.of(context).size.width / 2,
+                child: Text("CARICA CV", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
               ),
             ),
-          ),
-          Card(
-            child: Container(
-                child: Column(
-              children: [
-              ],
-            )),
-          ),
-          RaisedButton(
-            onPressed: () async {
-              await AuthService().signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => DestinationView()));
-            },
-            child: Container(
-              alignment: Alignment.center,
-              height: 30,
-              width: MediaQuery.of(context).size.width / 2,
-              child: Text("LOGOUT"),
+            if (user.cv != null)
+            Text("CV PRESENTE ✔", style: TextStyle(color: Colors.green.shade800),),
+
+            if (user.cv == null)
+              Text("CV ASSENTE (completa il profilo)", style: TextStyle(color: Colors.blue.shade700),),
+
+            SizedBox(height: 10, width: MediaQuery.of(context).size.width,),
+
+            Card(
+              color: Theme.of(context).accentColor,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Text("I MIEI DATI", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Card(
+                          color: Colors.grey.shade100,
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width-100,
+                            height: 50,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Nome", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                                  Text(user.name, textAlign: TextAlign.center, style: TextStyle(color: Colors.black))
+                                ],
+                              ),
+                          )
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Card(
+                            color: Colors.grey.shade100,
+                            child: Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width-100,
+                                height: 50,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Cognome", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                                    Text(user.surname, textAlign: TextAlign.center, style: TextStyle(color: Colors.black))
+                                  ],
+                                ),
+                            )
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Card(
+                            color: Colors.grey.shade100,
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width-100,
+                              height: 50,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("e-mail", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                                  Text(user.email, textAlign: TextAlign.center, style: TextStyle(color: Colors.black))
+                                ],
+                              ),
+                            )
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-          RaisedButton(
-            child: Text("Open PDF"),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PDFScreen(cv: user.cv),
+            Card(
+              child: Container(
+                  child: Column(
+                children: [
+                ],
+              )),
             ),
-          ),
-          ),
+
+            RaisedButton(
+              child: Text("Open PDF"),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PDFScreen(cv: user.cv),
+              ),
+            ),
+            ),
 //          RaisedButton(
 //            child: Text("check PDF"),
 //            onPressed: () {
 //              print("CHECK "+user.cv.toString());
 //            }
 //          ),
-          if(user.admin == 1)
-            RaisedButton(
-                child: Text("ADMIN"),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context )=> AdminPanel()
-                          )
-                  );
-                }
-            )
+            if(user.admin == 1)
+              RaisedButton(
+                  color: Colors.green.shade800,
+                  child: Text("ADMIN"),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context )=> AdminPanel()
+                            )
+                    );
+                  }
+              ),
 
+            SizedBox(height: 40, width: MediaQuery.of(context).size.width),
 
-        ],
-      ),
-    )));
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                color: Colors.redAccent.shade700,
+                onPressed: () async {
+                  await AuthService().signOut();
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (_) => DestinationView()));
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  width: MediaQuery.of(context).size.width,
+                  child: Text("LOGOUT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                ),
+              ),
+            ),
+          ],
+        ),
+    )),
+     ));
   }
 
   getUser() async {

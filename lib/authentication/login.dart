@@ -6,6 +6,7 @@ import 'package:teamup/global/constants.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:teamup/authentication/sign_in.dart';
+import 'package:email_validator/email_validator.dart';
 
 class Login extends StatefulWidget {
 
@@ -30,7 +31,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey.shade300,
       body: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -46,11 +47,12 @@ class _LoginState extends State<Login> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Email',
-                  prefixIcon: Icon(Icons.email, color: Colors.white),                                                  
+                  prefixIcon: Icon(Icons.email, color: Theme.of(context).primaryColor),
                 ),
-                style: TextStyle(color: Colors.white),          //Colore dell'input text
-                validator: (val) => val.isEmpty ? 'Inserisci una email' : null,
+                style: TextStyle(color: Colors.black),          //Colore dell'input text
+                validator: (val) => val.isEmpty ? 'Inserisci una email valida' : null,
                 onChanged: (val) {
+                  !mailValidator(val) ? 'Inserisci una email valida' :
                   setState(() => email = val);
                 }
               ),
@@ -58,9 +60,10 @@ class _LoginState extends State<Login> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Password',                  
-                  prefixIcon: Icon(Icons.lock, color: Colors.white)        
+                  prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor,),
+
                 ),
-                style: TextStyle(color: Colors.white),          //Colore dell'input text
+                style: TextStyle(color: Colors.black),          //Colore dell'input text
                 validator: (val) => val.isEmpty ? 'Inserisci la password' : null,
                 obscureText: true,
                 onChanged: (val) {
@@ -72,10 +75,11 @@ class _LoginState extends State<Login> {
                 minWidth: 327.0,
                 height: 48.0,
               child: RaisedButton(
-                color: Colors.yellowAccent,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   'Accedi',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white, fontSize: 22),
                 ),
                 onPressed:  () async {
                  if(_formKey.currentState.validate()){
@@ -107,7 +111,7 @@ class _LoginState extends State<Login> {
                             builder: (context) => SignIn()));
                 },
                   child: new Text('Non hai un account? Registrati',
-                  style: TextStyle(color: Colors.white, fontSize: 14.0),
+                  style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14.0),
                   )
               ),
               new FlatButton(
@@ -118,7 +122,7 @@ class _LoginState extends State<Login> {
                   );
                 },
                   child: new Text('Password dimenticata?',
-                  style: TextStyle(color: Colors.yellowAccent, fontSize: 14.0),
+                  style: TextStyle(color: Colors.indigo.shade900, fontSize: 14.0),
                   )
               ),
               
@@ -126,7 +130,7 @@ class _LoginState extends State<Login> {
 
                  SignInButton(
                   Buttons.Google,
-                  text: "Accedi con Google",
+                  text: "  Accedi con Google",
                   onPressed: () {
                     _auth.signInWithGoogle();
                   }
@@ -142,5 +146,12 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-  
+
+  bool mailValidator(String v) {
+    bool result;
+    EmailValidator.validate(v) ? result = true : false;
+    print("IL RISULTATO " + result.toString());
+    return result;
+  }
+
 }

@@ -175,7 +175,7 @@ class _SponsorState extends State<Sponsor> {
             height: 40,
             color: Colors.indigo,
             onPressed: () {
-              DatabaseService().addBundlePromoToUser(firebaseUser.uid, _bundle);
+              DatabaseService().addBundlePromoToUser(firebaseUser.uid, _bundle, user.avaiableSponsor);
               Navigator.pop(
                 context,
                   Toast.show("Bundle Promo acquistato con successo.", context,

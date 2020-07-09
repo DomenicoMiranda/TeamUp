@@ -259,23 +259,25 @@ Widget buildCandidature() {
                     overflow: TextOverflow.visible,
                     textAlign: TextAlign.center,
                   )),
-              RaisedButton(
-                  color: Colors.lightBlueAccent,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 30,
-                    width: MediaQuery.of(context).size.width / 2,
-                    child: Text(
-                      "LOGIN",
-                      textAlign: TextAlign.center,
-                    ),
-                  ))
+              MaterialButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                color: Theme.of(context).primaryColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: Text(
+                    "Login", style: TextStyle(color: Colors.grey.shade200, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+            ),
             ]),
           ),
         ));
