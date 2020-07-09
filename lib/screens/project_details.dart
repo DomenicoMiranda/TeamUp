@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:teamup/authentication/login.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
@@ -46,6 +47,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   FirebaseUser firebaseUser;
   String uid;
   UserData user = new UserData();
+  UserData teammate = new UserData();
   bool loading = true;
   ProjectData project = new ProjectData();
   static int statoCandidatura = 1;
@@ -57,7 +59,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   @override
   void initState() {
     print(widget.teammates.toString());
-    initialCheck();
+    //initialCheck();
+    getUser();
     print("CV: " + widget.cv.toString());
     super.initState();
     print("UID: " + widget.uid);
@@ -153,15 +156,24 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   getUser() async {
     firebaseUser = await FirebaseAuth.instance.currentUser();
-    await getData();
-    print(firebaseUser.toString());
-    print("OWNERID: " + widget.owner);
-    print("UID CORRENTE: " + firebaseUser.uid);
-    print("IMAGE " + widget.ownerImage.toString());
+    if(firebaseUser != null)  {
+      getData();
+      getTeammates();
+      print(firebaseUser.toString());
+      print("OWNERID: " + widget.owner.toString());
+      //print("UID CORRENTE: " + firebaseUser.uid.toString());
+      print("IMAGE " + widget.ownerImage.toString());
+    }else{
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   Widget showButton() {
-    if (widget.owner != firebaseUser.uid) {
+     if(firebaseUser == null){
+      return notLoggedIn();
+    }else if (widget.owner != firebaseUser.uid) {
       return Column(
         children: [
           Padding(
@@ -228,7 +240,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ),
         ],
       );
-    } else {
+    } else if(widget.owner == firebaseUser.uid) {
       return Column(
         children: [
           Padding(
@@ -422,10 +434,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   getTeammates()async {
     for(var doc in widget.teammates){
-      user = await DatabaseService().getUserData(doc);
-      print(user.admin.toString());
-      teamMates.add(user);
-      print("GET TEAMMATE: " + user.name +" "+ user.surname);
+      teammate = await DatabaseService().getUserData(doc);
+      print(teammate.admin.toString());
+      teamMates.add(teammate);
+      print("GET TEAMMATE: " + teammate.name +" "+ teammate.surname);
     }
       if(mounted){
       setState(() {
@@ -436,7 +448,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
 
   checkTeammates() {
-    if (widget.owner == firebaseUser.uid){
+    if(firebaseUser == null) {
+      return Text("");
+    }
+    else if (widget.owner == firebaseUser.uid){
       print("LUNGHEZZA: "+ teamMates.length.toString());
       //print(teamMates[1].toString());
       return Padding(
@@ -450,8 +465,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ],
         ),
       );
-    }else
-      return Text("");
+    }
+
   }
 
   initialCheck() async {
@@ -498,5 +513,39 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           return dialog;
         });
   }
+
+  notLoggedIn() {
+    return SingleChildScrollView(
+        child: Center(
+          child: Column(children: [
+            Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width / 2,
+                child: Text(
+                  "Per poter accedere alle funzionalità dell'app devi essere registrato",
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.center,
+                )),
+            RaisedButton(
+                color: Colors.lightBlueAccent,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: Text(
+                    "LOGIN",
+                    textAlign: TextAlign.center,
+                  ),
+                ))
+          ]),
+        ));
+  }
+
 
 }
