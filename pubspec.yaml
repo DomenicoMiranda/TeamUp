@@ -63,6 +63,12 @@ dev_dependencies:
 
   intl: ^0.16.1
 
+  toast: ^0.1.5
+
+  flutter_plugin_pdf_viewer: ^1.0.7
+
+
+
 
 
 

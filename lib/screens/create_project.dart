@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:teamup/widgets/teamView.dart';
 
-import 'home.dart';
 
 class CreateProject extends StatefulWidget {
   @override

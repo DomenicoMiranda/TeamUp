@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamup/screens/home.dart';
 import 'package:teamup/screens/myprojects.dart';
-import 'package:teamup/screens/nominations.dart';
+import 'package:teamup/screens/applications.dart';
 import 'package:teamup/screens/settings.dart';
 
 
@@ -16,7 +16,7 @@ class _DestinationViewState extends State<DestinationView> {
 
   final List<Widget>_pageOption = [
     Homepage(),
-    Nominations(),
+    Applications(),
     MyProjectsList(),
     SettingsPage()
   ];
@@ -33,9 +33,9 @@ class _DestinationViewState extends State<DestinationView> {
       body: _pageOption[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.yellowAccent,
-        unselectedItemColor: Colors.white,
+        backgroundColor: Colors.white70,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey.shade700,
         currentIndex: _selectedPage,
         onTap: (int index) {
           setState(() {
@@ -49,7 +49,7 @@ class _DestinationViewState extends State<DestinationView> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              title: Text('Mie Candidature')
+              title: Text('Candidature')
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.list),

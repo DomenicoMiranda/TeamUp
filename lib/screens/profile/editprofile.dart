@@ -42,7 +42,6 @@ String _currentSurname;
 String _currentEmail;
 String _currentImage;
 String _uploadedFileURL;
-String _currentNickname;
 String _currentDate;
 
 Future chooseFile() async {    
@@ -75,9 +74,7 @@ Future chooseFile() async {
        _currentImage = _uploadedFileURL;    
      });    
    });    
- }  
-
-    
+ }
 
 
   @override
@@ -154,15 +151,6 @@ Future chooseFile() async {
 
                       SizedBox(height: 20.0),
                       TextFormField(
-                        readOnly: false,
-                        initialValue: widget.user.nickname,
-                        decoration: InputDecoration(labelText: "Nickname"),
-                        onChanged: (val) {
-                        setState(() => _currentNickname = val);
-                      }
-                      ),
-                      SizedBox(height: 20.0),
-                      TextFormField(
                         readOnly: true,
                         initialValue: widget.user.date,
                         decoration: InputDecoration(labelText: "Data di nascita"),
@@ -178,17 +166,16 @@ Future chooseFile() async {
                         minWidth: 327.0,
                           height: 48.0,
                           child: RaisedButton(
-                          color: Colors.yellowAccent,
+                          color: Colors.black54,
                           child: Text(
                             'Salva',
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                                ),
                                onPressed: () async {
                                       await DatabaseService(uid: widget.user.uid).updateUserData(
                                         _currentName ?? widget.user.name,
                                         _currentSurname ?? widget.user.surname,
                                         _currentEmail ?? widget.user.email,
-                                        _currentNickname ?? widget.user.nickname,
                                         _currentDate ?? widget.user.date,
                                         _uploadedFileURL ?? widget.user.image,
                                         null,

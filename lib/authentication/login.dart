@@ -3,7 +3,6 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:teamup/authentication/resetpassword.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/global/constants.dart';
-import 'package:teamup/screens/home.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:teamup/authentication/sign_in.dart';

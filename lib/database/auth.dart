@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:teamup/models/user.dart';
-
 import 'databaseservice.dart';
 
 
@@ -10,11 +9,11 @@ import 'databaseservice.dart';
    final FirebaseAuth _auth = FirebaseAuth.instance;
    final GoogleSignIn googleSignIn = GoogleSignIn();
 
+
    // create user obj based FirebaseUser
    User _userFromFirebaseUser(FirebaseUser user) {
      return user != null ? User(uid: user.uid) : null;
    }
-
 
 
   // auth change user stream 
@@ -63,7 +62,7 @@ import 'databaseservice.dart';
         FirebaseUser user = result.user;
 
         // create a new document for the user with the uid
-        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, nickname, date, image, false);
+        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, date, image, 0);
         return _userFromFirebaseUser(user);
       } catch(e) {
         print(e.toString);
