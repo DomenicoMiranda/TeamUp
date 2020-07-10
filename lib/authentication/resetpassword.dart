@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teamup/database/auth.dart';
 import 'package:teamup/global/constants.dart';
-import 'package:teamup/widgets/loading.dart';
 
 class Resetpassword extends StatefulWidget {
 
@@ -21,8 +20,14 @@ class _ResetpasswordState extends State<Resetpassword> {
   String error = '';
 
   @override
+  void initState() {
+    print("RECUPERA PASS");
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,

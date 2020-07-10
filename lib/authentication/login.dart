@@ -118,7 +118,7 @@ class _LoginState extends State<Login> {
               ),
               new FlatButton(
                 onPressed: () {
-                  Navigator.pop(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Resetpassword())
                   );
