@@ -61,13 +61,15 @@ dev_dependencies:
 
   image_picker: ^0.6.3+4
 
-  intl: ^0.16.1
+  intl: ^0.16.0
 
   toast: ^0.1.5
 
   flutter_plugin_pdf_viewer: ^1.0.7
 
   email_validator: '^1.0.0'
+
+  analyzer: ^0.39.12
 
 
 

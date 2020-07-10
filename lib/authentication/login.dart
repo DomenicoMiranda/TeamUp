@@ -1,4 +1,6 @@
+// ignore: prefer_double_quotes
 import 'package:flutter/material.dart';
+// ignore: prefer_double_quotes
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:teamup/authentication/resetpassword.dart';
 import 'package:teamup/database/auth.dart';
