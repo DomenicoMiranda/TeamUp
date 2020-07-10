@@ -220,7 +220,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
 
             RaisedButton(
-              child: Text("Open PDF"),
+              child: Text("Visualizza CV"),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PDFScreen(cv: user.cv),
@@ -235,8 +235,8 @@ class _SettingsPageState extends State<SettingsPage> {
 //          ),
             if(user.admin == 1)
               RaisedButton(
-                  color: Colors.green.shade800,
-                  child: Text("ADMIN"),
+                  color: Colors.blue.shade800,
+                  child: Text("PANNELLO AMMINISTRATORE", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                   onPressed: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(
