@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/authentication/login.dart';
-import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/screens/project_details.dart';
 import 'package:teamup/widgets/loading.dart';

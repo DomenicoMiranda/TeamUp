@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
                 style: TextStyle(color: Colors.black),          //Colore dell'input text
                 validator: (val) => val.isEmpty ? 'Inserisci una email valida' : null,
                 onChanged: (val) {
-                  !mailValidator(val) ? 'Inserisci una email valida' :
+                  !mailValidator(val) ? Text("Inserisci una email valida") :
                   setState(() => email = val);
                 }
               ),

@@ -106,7 +106,7 @@ class ApplicationsState extends State<Applications> {
 
   //----------------------QUERY PER LE LISTE----------------------------------
 
-@override
+
 Widget buildCandidature() {
   return Container(
       child: StreamBuilder(
@@ -147,7 +147,7 @@ Widget buildCandidature() {
     );
   }
 
-  @override
+
   Widget buildCandidatureRifiutate() {
     return Container(
         child: StreamBuilder(

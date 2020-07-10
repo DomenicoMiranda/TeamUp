@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/sponsor/sponsor.dart';
 import 'auth.dart';
-import 'package:toast/toast.dart';
 
 
 class DatabaseService {

@@ -26,8 +26,8 @@ class _OwnerProfileState extends State<OwnerProfile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getUser();
+    super.initState();
   }
 
   @override

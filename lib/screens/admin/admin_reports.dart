@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:teamup/models/report.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +15,7 @@ class _AdminReportsState extends State<AdminReports> {
   @override
   void initState() {
     getReports();
+    super.initState();
   }
 
   @override

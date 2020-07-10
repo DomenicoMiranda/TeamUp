@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/database/auth.dart';
 import 'package:teamup/screens/create_project.dart';
 import 'package:teamup/screens/project_details.dart';
 
@@ -151,7 +150,6 @@ Widget buildAllCategories() {
 
 @override
 Widget buildArte() {
-  AuthService authUser = new AuthService();
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
@@ -193,7 +191,6 @@ Widget buildArte() {
 
 @override
 Widget buildMusica() {
-  AuthService authUser = new AuthService();
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
@@ -236,7 +233,6 @@ Widget buildMusica() {
 
 @override
 Widget buildSport() {
-  AuthService authUser = new AuthService();
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
@@ -279,7 +275,6 @@ Widget buildSport() {
 
 @override
 Widget buildCinema() {
-  AuthService authUser = new AuthService();
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance
@@ -322,7 +317,6 @@ Widget buildCinema() {
 
 @override
 Widget buildBusiness() {
-  AuthService authUser = new AuthService();
   return Container(
     child: StreamBuilder(
         stream: Firestore.instance

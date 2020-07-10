@@ -20,7 +20,7 @@ class ProjectDetails extends StatefulWidget {
 
   ProjectDetails({this.title, this.sponsor, this.description, this.maxTeammate, this.qualities, this.uid, this.category, this.owner, this.ownerImage, this.name, this.surname, this.cv, this.teammates});
   final String title;
-  bool sponsor;
+  final bool sponsor;
   final String description;
   final int maxTeammate;
   final List<dynamic> qualities;

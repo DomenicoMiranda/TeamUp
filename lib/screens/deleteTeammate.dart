@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:teamup/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/screens/myprojects.dart';
 import 'package:teamup/widgets/destinationView.dart';
 
 class DeleteTeammate extends StatefulWidget {

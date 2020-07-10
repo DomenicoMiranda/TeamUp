@@ -23,7 +23,7 @@ class _SponsorState extends State<Sponsor> {
       body: Container(
         child: Column(
           children: <Widget>[
-            SponsorWidget(context),
+            sponsorWidget(context),
           ],
         )
       )
@@ -60,8 +60,7 @@ class _SponsorState extends State<Sponsor> {
 
   }
 
-  @override
-  Widget SponsorWidget(BuildContext context) {
+  Widget sponsorWidget(BuildContext context) {
     return Column(
       children: <Widget>[
         Padding(

@@ -11,8 +11,8 @@ import 'package:teamup/screens/application_user_profile.dart';
 class ProjectApplications extends StatefulWidget {
 
   ProjectApplications({this.userName, this.statoCand, this.projectApplication, this.projectID});
-  var userName;
-  var statoCand;
+  final String userName;
+  final int statoCand;
   var projectApplication;
   var projectID;
 
