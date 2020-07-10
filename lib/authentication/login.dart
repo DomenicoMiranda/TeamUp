@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade100,
       body: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
