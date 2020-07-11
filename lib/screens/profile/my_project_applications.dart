@@ -75,7 +75,7 @@ Widget buildCandidatureToMyProjects() {
               .where("statoCandidatura", isEqualTo: 1)
               .snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return Text('Loading data.. Please wait');
+            if (snapshot.connectionState == ConnectionState.waiting || snapshot.connectionState == ConnectionState.none) return Text('Loading data.. Please wait');
             return ListView(
               children: snapshot.data.documents.map<Widget>((document) {
                 return buildListCandidaturetoMyProjects(document);
