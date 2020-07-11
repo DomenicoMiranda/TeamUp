@@ -11,6 +11,7 @@ import 'package:teamup/screens/myprojects.dart';
 import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/screens/sponsor/sponsor.dart';
+import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:toast/toast.dart';
@@ -504,7 +505,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
         print("Ok");
         deleteMyProject();
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => MyProjectsList()));
+            context, MaterialPageRoute(builder: (_) => DestinationView()));
       },
     );
     var dialog = AlertDialog(
