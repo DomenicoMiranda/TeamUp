@@ -55,7 +55,7 @@ import 'databaseservice.dart';
    }
 
    //register with email & password
-   Future registerWithEmailAndPassword(String email, String password, String name, String surname, String nickname, String date, String image, int sponsor) async {
+   Future registerWithEmailAndPassword(String email, String password, String name, String surname, String date, String image, int sponsor) async {
     
       try{
         AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);

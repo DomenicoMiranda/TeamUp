@@ -34,6 +34,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Text("TeamUp!"),
         backgroundColor: Colors.blue.shade700,
         centerTitle: true,
