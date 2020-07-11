@@ -204,7 +204,6 @@ Widget buildCandidature() {
         child: Padding(
             padding: const EdgeInsetsDirectional.only(start: 8.0, bottom: 8.0, top: 8.0),
             child: ListTile(
-              //leading: const Icon(Icons.account_circle),
                 trailing: MaterialButton(child: Text("Confermata"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.green)),
                   onPressed: () {

@@ -116,7 +116,10 @@ Widget buildAllCategories() {
             .where("status", isEqualTo: "0").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
+          if (!snapshot.hasData) return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text('Caricamento in corso', textAlign: TextAlign.center,),
+          );
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
@@ -158,7 +161,10 @@ Widget buildArte() {
             .where("category", isEqualTo: "Arte").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
+          if (!snapshot.hasData) return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text('Non ci sono progetti disponibili.', textAlign: TextAlign.center,),
+          );
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
@@ -199,7 +205,10 @@ Widget buildMusica() {
             .where("category", isEqualTo: "Musica").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
+          if (!snapshot.hasData) return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text('Non ci sono progetti disponibili.', textAlign: TextAlign.center,),
+          );
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
@@ -241,7 +250,10 @@ Widget buildSport() {
             .where("category", isEqualTo: "Sport").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
+          if (!snapshot.hasData) return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text('Non ci sono progetti disponibili.', textAlign: TextAlign.center,),
+          );
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
@@ -283,7 +295,10 @@ Widget buildCinema() {
             .where("category", isEqualTo: "Cinema").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
+          if (!snapshot.hasData) return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text('Non ci sono progetti disponibili.', textAlign: TextAlign.center,),
+          );
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
@@ -325,7 +340,10 @@ Widget buildBusiness() {
             .where("category", isEqualTo: "Business").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading');
+          if (!snapshot.hasData) return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text('Non ci sono progetti disponibili.', textAlign: TextAlign.center,),
+          );
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) => GestureDetector(
