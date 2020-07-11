@@ -93,13 +93,15 @@ class _AdminReportDetailsState extends State<AdminReportDetails> {
                           builder: (_) => ProjectDetails(
                             title: projectData.name,
                             description: projectData.description,
-                            maxTeammate: projectData.maxTeammate,
+                            uid: projectData.id,
                             qualities: projectData.qualities,
                               owner: projectData.ownerId,
                               name: projectData.ownerName,
                               surname: projectData.ownerSurname,
                               ownerImage: projectData.ownerImage,
-                              cv: user.cv
+                              cv: user.cv,
+                            teammates: projectData.teammate,
+                            maxTeammate: projectData.maxTeammate,
 
                      )
                       )
