@@ -113,7 +113,7 @@ Widget buildAllCategories() {
     child: StreamBuilder(
         stream: Firestore.instance
             .collection('projects')
-            .where("status", isEqualTo: "0")
+            .where("status", isEqualTo: "0").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -155,7 +155,7 @@ Widget buildArte() {
         stream: Firestore.instance
             .collection('projects')
             .where("status", isEqualTo: "0")
-            .where("category", isEqualTo: "Arte")
+            .where("category", isEqualTo: "Arte").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -196,7 +196,7 @@ Widget buildMusica() {
         stream: Firestore.instance
             .collection('projects')
             .where("status", isEqualTo: "0")
-            .where("category", isEqualTo: "Musica")
+            .where("category", isEqualTo: "Musica").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -238,7 +238,7 @@ Widget buildSport() {
         stream: Firestore.instance
             .collection('projects')
             .where("status", isEqualTo: "0")
-            .where("category", isEqualTo: "Sport")
+            .where("category", isEqualTo: "Sport").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -280,7 +280,7 @@ Widget buildCinema() {
         stream: Firestore.instance
             .collection('projects')
             .where("status", isEqualTo: "0")
-            .where("category", isEqualTo: "Cinema")
+            .where("category", isEqualTo: "Cinema").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
@@ -322,7 +322,7 @@ Widget buildBusiness() {
         stream: Firestore.instance
             .collection('projects')
             .where("status", isEqualTo: "0")
-            .where("category", isEqualTo: "Business")
+            .where("category", isEqualTo: "Business").orderBy("sponsor", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading');
