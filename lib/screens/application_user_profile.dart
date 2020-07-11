@@ -181,7 +181,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
       );
     }else{
       return RaisedButton(
-        child: Text("Open PDF"),
+        child: Text("Visualizza CV"),
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
