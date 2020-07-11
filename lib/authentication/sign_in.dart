@@ -37,13 +37,15 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
+              backgroundColor: Colors.blue.shade700,
+              centerTitle: true,
+              title: Text("Registrazione"),
               leading: new IconButton(
               icon: new Icon(Icons.arrow_back, color: Theme.of(context).accentColor,),
               onPressed: () => Navigator.pop(context),
                 ),
-              backgroundColor: Colors.transparent,
               elevation: 0.0,
              ),
              extendBodyBehindAppBar: true,
@@ -62,7 +64,7 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Nome',
-                  prefixIcon: Icon(Icons.chevron_right, color: Colors.white),
+                  prefixIcon: Icon(Icons.chevron_right, color: Theme.of(context).primaryColor),
                 ),
                 style: TextStyle(color: Colors.white), 
                 validator: (val) => val.isEmpty ? 'Inserisci il tuo nome' : null,
@@ -74,7 +76,7 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Cognome',
-                  prefixIcon: Icon(Icons.chevron_right, color: Colors.white),
+                  prefixIcon: Icon(Icons.chevron_right, color: Theme.of(context).primaryColor),
                 ),
                 style: TextStyle(color: Colors.white), 
                 validator: (val) => val.isEmpty ? 'Inserisci il tuo cognome' : null,
@@ -82,26 +84,17 @@ class _SignInState extends State<SignIn> {
                   setState(() => surname = val);
                 }
               ),
-                            SizedBox(height: 20.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(
-                  hintText: 'Nickname',
-                  prefixIcon: Icon(Icons.chevron_right, color: Colors.white),
-                ),
-                style: TextStyle(color: Colors.white), 
-                validator: (val) => val.isEmpty ? 'Inserisci il tuo cognome' : null,
-                onChanged: (val) {
-                  setState(() => nickname = val);
-                }
-              ),
+
+
               SizedBox(height: 20.0),
               Container(
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(Icons.calendar_today, color: Colors.white,),
+                    Icon(Icons.calendar_today, color: Theme.of(context).primaryColor,),
                     RaisedButton(
+                      color: Theme.of(context).primaryColor,
                       onPressed: (){
                         showDatePicker(
                           context: context,
@@ -115,13 +108,12 @@ class _SignInState extends State<SignIn> {
                         });
                       },
                       child: Container(
-                          color: Colors.white,
                           child: Padding(
                             padding: const EdgeInsets.all(3),
-                            child: Text("scegli una data",style: TextStyle(color: Colors.grey.shade900),),
+                            child: Text("Data di nascita", style: TextStyle(color: Colors.white),),
                           )),
                     ),
-                    Text(date, style: TextStyle(color: Colors.white),),
+                    Text(date, style: TextStyle(color: Theme.of(context).primaryColor),),
                   ],
                 ),
               ),
@@ -129,9 +121,9 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Email',
-                  prefixIcon: Icon(Icons.email, color: Colors.white),
+                  prefixIcon: Icon(Icons.email, color: Theme.of(context).primaryColor),
                 ),
-                style: TextStyle(color: Colors.white), 
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 validator: (val) => val.isEmpty ? 'Inserisci una email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -141,9 +133,9 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 decoration: textInputDecoration.copyWith(
                   hintText: 'Password',
-                  prefixIcon: Icon(Icons.lock, color: Colors.white)
+                  prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor)
                 ),
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 validator: (val) => val.length < 6 ? 'La password deve essere superiorire di 6 caratteri' : null,
                 obscureText: true,
                 onChanged: (val) {
@@ -155,15 +147,15 @@ class _SignInState extends State<SignIn> {
                 minWidth: 327.0,
                 height: 48.0,
                   child: RaisedButton(
-                  color: Theme.of(context).accentColor,
+                  color: Colors.indigo.shade900,
                   child: Text(
                     'Registrati',
-                    style: TextStyle(color: Colors.grey.shade100),
+                    style: TextStyle(color: Colors.white),
                   ),
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim(), date.trim(), null, sponsor );
+                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), date.trim(), null, sponsor );
                     Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DestinationView()),
