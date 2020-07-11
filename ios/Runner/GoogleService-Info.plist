@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>530480275624-ueg85ktum7kmglajndm53amets5nj80u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.530480275624-ueg85ktum7kmglajndm53amets5nj80u</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCdIWF-57MufaRxpJzQdtQY9vTzbLvp2Xg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>530480275624</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>.it.intolleranti.teamup</string>
+	<key>PROJECT_ID</key>
+	<string>teamup-2489b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>teamup-2489b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:530480275624:ios:11b93447be44da1f33e29d</string>
+	<key>DATABASE_URL</key>
+	<string>https://teamup-2489b.firebaseio.com</string>
+</dict>
+</plist>
