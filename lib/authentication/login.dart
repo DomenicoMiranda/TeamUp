@@ -33,6 +33,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
+      appBar: AppBar(
+        title: Text("TeamUp!"),
+        backgroundColor: Colors.blue.shade700,
+        centerTitle: true,
+      ),
       backgroundColor: Colors.grey.shade100,
       body: Container(
         alignment: Alignment.center,

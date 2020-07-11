@@ -90,31 +90,34 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold
                   ),)),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GFAvatar(
-                    maxRadius: 50,
-                    backgroundImage: NetworkImage(widget.ownerImage),
-                    shape: GFAvatarShape.circle,
-                  ),
-                ),
-                Container(
-                  child: Flexible(
-                    child: Column(
-                      children: [
-                        Text("Descrizione",textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.bold,
-                                fontSize: 15)),
-                        Text(widget.description.toString(), maxLines: 2,),
-                      ],
-                    ),
 
-                  ),
-                ),
-              ],
+             Padding(
+               padding: const EdgeInsets.all(10.0),
+               child: GFAvatar(
+                maxRadius: 50,
+                backgroundImage: NetworkImage(widget.ownerImage),
+                shape: GFAvatarShape.circle,
             ),
+             ),
+
+
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Descrizione",textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    fontSize: 15)),
+                            Text(widget.description.toString()),
+                  ],
+                ),
+              ),
+            ),
+
+
             Text("Competenze richieste ",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
             Column(

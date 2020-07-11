@@ -166,7 +166,7 @@ class _TeamFormsState extends State<TeamForms> {
                   onChanged: (String newValue) {
                     setState(() {
                       dropdownValue = newValue;
-                      
+
                     });
                   },
                   items: <String> ['Tutte', 'Musica', 'Arte', 'Sport', 'Cinema', 'Business' ]
