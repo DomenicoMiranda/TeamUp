@@ -32,6 +32,7 @@ class _SignInState extends State<SignIn> {
   String error = '';
   String nickname = '';
   String date= '';
+  int sponsor = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +163,7 @@ class _SignInState extends State<SignIn> {
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim(), date.trim(), null);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), nickname.trim(), date.trim(), null, sponsor );
                     Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DestinationView()),

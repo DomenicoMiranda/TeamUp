@@ -43,6 +43,7 @@ String _currentEmail;
 String _currentImage;
 String _uploadedFileURL;
 String _currentDate;
+int _currentSponsor;
 
 Future chooseFile() async {    
    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {    
@@ -178,6 +179,7 @@ Future chooseFile() async {
                                         _currentEmail ?? widget.user.email,
                                         _currentDate ?? widget.user.date,
                                         _uploadedFileURL ?? widget.user.image,
+                                        _currentSponsor ?? widget.user.avaiableSponsor,
                                         null,
                                       );
                                     Navigator.pop(context);

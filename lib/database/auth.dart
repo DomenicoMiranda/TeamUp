@@ -7,7 +7,7 @@ import 'databaseservice.dart';
  class AuthService {
 
    final FirebaseAuth _auth = FirebaseAuth.instance;
-   final GoogleSignIn googleSignIn = GoogleSignIn();
+   final GoogleSignIn googleSignIn = new GoogleSignIn( scopes: ['email']);
 
 
    // create user obj based FirebaseUser
@@ -55,14 +55,14 @@ import 'databaseservice.dart';
    }
 
    //register with email & password
-   Future registerWithEmailAndPassword(String email, String password, String name, String surname, String nickname, String date, String image) async {
+   Future registerWithEmailAndPassword(String email, String password, String name, String surname, String nickname, String date, String image, int sponsor) async {
     
       try{
         AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
         FirebaseUser user = result.user;
 
         // create a new document for the user with the uid
-        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, date, image, 0);
+        await DatabaseService(uid: user.uid).updateUserData(name, surname, email, date, image, 0, sponsor);
         return _userFromFirebaseUser(user);
       } catch(e) {
         print(e.toString);
@@ -129,6 +129,15 @@ import 'databaseservice.dart';
 
 
      return 'signInWithGoogle succeeded: $user';
+   }
+
+   signiInGoogle() async {
+     try{
+       await googleSignIn.signIn();
+
+     }catch(err){
+       print(err);
+     }
    }
 
 
