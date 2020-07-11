@@ -91,6 +91,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       fontWeight: FontWeight.bold
                   ),)),
 
+
              Padding(
                padding: const EdgeInsets.all(10.0),
                child: GFAvatar(
@@ -100,7 +101,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             ),
              ),
 
+            Text(widget.name.toString() + " " + widget.surname.toString(), style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 15)),
 
+            SizedBox(height: 5,),
 
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -131,24 +135,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
               ],
             ),
+
+
             checkTeammates(),
-            Card(
-              color: Colors.grey,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Ideatore", style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15)),
-                    Text(widget.name.toString() + " " + widget.surname.toString())
-                  ],
-                ),
-              ),
-            ),
+
 
             // Text(widget.owner),
             showButton(),
