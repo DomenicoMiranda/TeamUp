@@ -17,6 +17,7 @@ class ApplicationUserProfile extends StatefulWidget {
   final String projectId;
   final String applicationID;
 
+
   @override
   _ApplicationUserProfileState createState() => _ApplicationUserProfileState();
 }
@@ -128,7 +129,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
                           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                       Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (context) => ProjectApplications())
+                          builder: (context) => ProjectApplications(projectID: widget.projectId))
                       );
 
                       },
@@ -141,7 +142,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
                             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                         Navigator.push(context,
                             MaterialPageRoute(
-                                builder: (context) => ProjectApplications())
+                                builder: (context) => ProjectApplications(projectID: widget.projectId,))
                         );
                       },
                     ),
