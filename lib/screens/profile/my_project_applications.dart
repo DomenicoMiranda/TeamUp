@@ -5,6 +5,7 @@ import 'package:teamup/models/project.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/application_user_profile.dart';
+import 'package:teamup/widgets/destinationView.dart';
 
 
 
@@ -59,6 +60,12 @@ class _ProjectApplicationsState extends State<ProjectApplications> {
       appBar: new AppBar(
         title: const Text('Candidature Mio Progetto'),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.push(context, MaterialPageRoute(
+            builder: (context) => DestinationView()
+          )),
+        ),
       ),
       body: buildCandidatureToMyProjects(),
     );
