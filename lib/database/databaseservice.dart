@@ -30,6 +30,7 @@ class DatabaseService {
   Future updateUserData(String name, String surname, String email, String date, String image, int admin) async {
 
     return await usersCollection.document(uid).setData({
+      'admin' : admin,
       'name': name,
       'surname': surname,
       'email' : email,

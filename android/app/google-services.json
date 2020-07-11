@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "530480275624-s6f9ko1i2hltsgmerga303me7t3u4mu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.intolleranti.teamup",
+            "certificate_hash": "d1556b8e20d60b0751a2ea688e1498182b6f465b"
+          }
+        },
+        {
           "client_id": "530480275624-fph0586vu1gkosiaq3a421jkfmvo7aui.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "530480275624-fph0586vu1gkosiaq3a421jkfmvo7aui.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "530480275624-ueg85ktum7kmglajndm53amets5nj80u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": ".it.intolleranti.teamup"
+              }
             }
           ]
         }

@@ -129,14 +129,14 @@ Widget buildAllCategories() {
                                   sponsor: snapshot.data.documents[index]['sponsor'],
                                   description:snapshot.data.documents[index]['description'],
                                   uid: snapshot.data.documents[index].documentID,
-                                    maxTeammate: snapshot.data.documents[index]['maxTeammate'],
+                                  maxTeammate: snapshot.data.documents[index]['maxTeammate'],
                                   qualities: snapshot.data.documents[index]['qualities'],
                                   owner: snapshot.data.documents[index]['ownerId'],
                                   name: snapshot.data.documents[index]['ownerName'],
                                   surname: snapshot.data.documents[index]['ownerSurname'],
                                   ownerImage: snapshot.data.documents[index]['ownerImage'],
                                   cv: snapshot.data.documents[index]['cv'],
-                                    teammates: snapshot.data.documents[index]['teammate']
+                                  teammates: snapshot.data.documents[index]['teammate']
                                 )
                         ));
                   },

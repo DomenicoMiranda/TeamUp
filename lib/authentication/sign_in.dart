@@ -190,13 +190,13 @@ class _SignInState extends State<SignIn> {
                 style: TextStyle(color: Colors.white, fontSize: 15.0),
               ),
                 SizedBox(height: 20,),
-                SignInButton(
+                /*SignInButton(
                 Buttons.Facebook,
                 text: "Registrati con Facebook",
                 onPressed: () {
 
                 },
-                ),
+                ),*/
                  SignInButton(
                   Buttons.Google,
                   text: "Registrati con Google",

@@ -58,7 +58,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   @override
   void initState() {
-    print(widget.teammates.toString());
+    print("TEAMMATES: "+widget.teammates.toString());
     //initialCheck();
     getUser();
     print("CV: " + widget.cv.toString());
@@ -107,7 +107,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         Text("Descrizione",textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold,
                                 fontSize: 15)),
-                        Text(widget.description, maxLines: 2,),
+                        Text(widget.description.toString(), maxLines: 2,),
                       ],
                     ),
 
@@ -122,8 +122,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               children: [
                 if(widget.qualities.length == 0)
                   Text("Non sono richieste particolari competenze per questo progetto.",maxLines:2 , textAlign: TextAlign.center,),
+                if(widget.qualities.length > 0)
                 for (var name in widget.qualities)
-                  Text(name, maxLines: 2,),
+                  Text(name.toString(), maxLines: 2,),
 
               ],
             ),
@@ -435,9 +436,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   getTeammates()async {
     for(var doc in widget.teammates){
       teammate = await DatabaseService().getUserData(doc);
-      print(teammate.admin.toString());
+      //print("ADMIN " +teammate.admin.toString());
       teamMates.add(teammate);
-      print("GET TEAMMATE: " + teammate.name +" "+ teammate.surname);
+      print("GET TEAMMATE: " + teammate.name.toString() +" "+ teammate.surname.toString());
     }
       if(mounted){
       setState(() {
@@ -452,7 +453,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
       return Text("");
     }
     else if (widget.owner == firebaseUser.uid){
-      print("LUNGHEZZA: "+ teamMates.length.toString());
+      print("LUNGHEZZA TEAMMATES: "+ teamMates.length.toString());
       //print(teamMates[1].toString());
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -465,6 +466,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ],
         ),
       );
+    }else if(widget.owner != firebaseUser.uid){
+      return Text("");
     }
 
   }
