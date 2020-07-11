@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
@@ -49,65 +50,68 @@ class _TeamFormsState extends State<TeamForms> {
       child: Column(
         children: [
           //FORM PER NOME E DESCRIZIONE
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                //NOME PROGETTO
-                TextFormField(
-                  validator: ( value) {
-                    if (value.isEmpty) {
-                      return 'Inserisci un nome';
-                    }
-                    return null;
-                  },
-                  maxLines: null,
-                  //catturo l'input inserito
-                  onChanged: (text) {
-                    setState(() {
-                      project.name = text;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Nome Progetto',
-                    hintText: 'Nome Progetto',
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blue),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(top: 8.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  //NOME PROGETTO
+                  TextFormField(
+                    validator: ( value) {
+                      if (value.isEmpty) {
+                        return 'Inserisci un nome';
+                      }
+                      return null;
+                    },
+                    maxLines: null,
+                    //catturo l'input inserito
+                    onChanged: (text) {
+                      setState(() {
+                        project.name = text;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Nome Progetto',
+                      hintText: 'Nome Progetto',
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20,),
+                  SizedBox(height: 20,),
 
-                //DESCRIZIONE PROGETTO
-                TextFormField(
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Inserisci una descrizione';
-                    }
-                    return null;
-                  },
-                  maxLines: null,
-                  //catturo l'input inserito
-                  onChanged: (value) {
-                     setState(() {
-                       project.description = value;
-                       print(_description);
-                     });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Descrizione progetto',
-                    hintText: 'Descrizione progetto',
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                      borderSide: BorderSide(color: Colors.blue),
+                  //DESCRIZIONE PROGETTO
+                  TextFormField(
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Inserisci una descrizione';
+                      }
+                      return null;
+                    },
+                    maxLines: null,
+                    //catturo l'input inserito
+                    onChanged: (value) {
+                       setState(() {
+                         project.description = value;
+                         print(_description);
+                       });
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Descrizione progetto',
+                      hintText: 'Descrizione progetto',
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )
+                ],
+              )
+            ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 15,),
 
           //NUMERO MASSIMO TEAMMATE
           TextField(
@@ -125,52 +129,58 @@ class _TeamFormsState extends State<TeamForms> {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 15,),
 
           //CATEGORIA PROGETTO
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width/3,
-                decoration: BoxDecoration(
-                  border: Border.all(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width/2,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black54
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                  ),
+                  child: Center(child: Text("Categoria",style: TextStyle(color: Colors.black54),)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style : TextStyle(
                     color: Colors.black54
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(18.0)),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.black54,
+                  ),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                      
+                    });
+                  },
+                  items: <String> ['Tutte', 'Musica', 'Arte', 'Sport', 'Cinema', 'Business' ]
+                      .map<DropdownMenuItem<String>>((String value){
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
-                child: Center(child: Text("Categoria",style: TextStyle(color: Colors.black54),)),
-              ),
-              DropdownButton<String>(
-                value: dropdownValue,
-                icon: Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
-                style : TextStyle(
-                  color: Colors.black54
-                ),
-                underline: Container(
-                  height: 2,
-                  color: Colors.black54,
-                ),
-                onChanged: (String newValue) {
-                  setState(() {
-                    dropdownValue = newValue;
-                    print(dropdownValue);
-                  });
-                },
-                items: <String> ['Tutte', 'Musica', 'Arte', 'Sport', 'Cinema', 'Business' ]
-                    .map<DropdownMenuItem<String>>((String value){
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
               )
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 15,),
 
           //COMPETENZE
           TextField(
@@ -190,22 +200,29 @@ class _TeamFormsState extends State<TeamForms> {
             ),
           ),
 
+          SizedBox(height: 5),
+
           //BOTTONE PER AGGIUNGERE COMPETENZA
-          MaterialButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              minWidth: double.infinity,
+              height: 42,
+              color: Colors.blue.shade500,
+              onPressed: () {
+                project.qualities.add(tmpQuality);
+                controller.clear();
+                Toast.show("Competenza aggiunta", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+              },
+              child: Text("AGGIUNGI COMPETENZA",
+                  style: TextStyle(color: Colors.white)),
             ),
-            minWidth: double.infinity,
-            height: 42,
-            color: Colors.blue.shade500,
-            onPressed: () {
-              project.qualities.add(tmpQuality);
-              controller.clear();
-              Toast.show("Competenza aggiunta", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
-            },
-            child: Text("AGGIUNGI COMPETENZA",
-                style: TextStyle(color: Colors.white)),
           ),
+
+          SizedBox(height: 20),
 
           //BOTTONE SUBMIT PROGETTO
           MaterialButton(
@@ -214,14 +231,14 @@ class _TeamFormsState extends State<TeamForms> {
             ),
             minWidth: double.infinity,
             height: 42,
-            color: Colors.blue.shade500,
+            color: Colors.indigo.shade900,
             onPressed: () {
               if (_formKey.currentState.validate()){
                 submit();
               }
             },
             child: Text("CREA PROGETTO",
-                style: TextStyle(color: Colors.white)),
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ],
       ),

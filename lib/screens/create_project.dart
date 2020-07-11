@@ -12,7 +12,7 @@ class _CreateProjectState extends State<CreateProject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: Text("Crea Progetto", style: TextStyle(
           fontSize: 25.0,
