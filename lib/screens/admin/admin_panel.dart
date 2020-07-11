@@ -15,20 +15,29 @@ class _AdminPanelState extends State<AdminPanel> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            RaisedButton(
-                child: Text("SEGNALAZIONI"),
-                onPressed: () {
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minWidth: double.infinity,
+                  height: 50,
+                  color: Colors.red.shade500,
+                  child: Text("SEGNALAZIONI", style: TextStyle(color: Colors.white)),
+                  onPressed: () {
 
-                    Navigator.push(context,
-                      MaterialPageRoute(
-                        builder: (_) => AdminReports()
-                      )
-                    );
-                }
-            )
-          ],
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (_) => AdminReports()
+                        )
+                      );
+                  }
+              )
+            ],
+          ),
         )
       ),
     );

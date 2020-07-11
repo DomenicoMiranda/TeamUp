@@ -35,7 +35,8 @@ class _AdminReportsState extends State<AdminReports> {
                     itemBuilder: (context, index){
                       DocumentSnapshot ds = snapshot.data.documents[index];
                       return Container(
-                          height:30,
+
+                          height:100,
 
                           child: GestureDetector(
                             onTap: () {
@@ -68,16 +69,31 @@ class _AdminReportsState extends State<AdminReports> {
 }
 
 Widget cardReport(String title) {
-  return Card(
-    child: Container(
-        height: 50,
-        color: Colors.grey,
-        child: Text(title,style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold
-        ),
-          textAlign: TextAlign.center,
-        )
-    ),
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+      child: Container(
+          decoration: new BoxDecoration(
+            //color: Colors.blueGrey.shade200,
+            color: Colors.white,
+            shape: BoxShape.rectangle,
+            borderRadius: new BorderRadius.circular(10.0),
+            boxShadow: <BoxShadow>[
+              new BoxShadow(
+                color: Colors.black12,
+                blurRadius: 8.0,
+                offset: new Offset(0.0, 0.0),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(title,style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold
+            ),
+              textAlign: TextAlign.center,
+            ),
+          )
+      ),
   );
 }

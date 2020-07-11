@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
@@ -39,99 +41,123 @@ class _AdminReportDetailsState extends State<AdminReportDetails> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Column(children: [
-                    Text(
-                      "Nome progetto",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(widget.projectName),
-                  ])),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: new BoxDecoration(
+              //color: Colors.blueGrey.shade200,
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.circular(30.0),
+              boxShadow: <BoxShadow>[
+                new BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8.0,
+                  offset: new Offset(0.0, 0.0),
+                ),
+              ],
             ),
-            Padding(
+
+            child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Column(children: [
-                    Text(
-                      "Segnalazione effettuata da:",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: Column(children: [
+                          Text(
+                            "Nome progetto",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(widget.projectName),
+                        ])),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: Column(children: [
+                          Text(
+                            "Segnalazione effettuata da:",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(user.name+" "+user.surname),
+                        ])),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: Column(children: [
+                          Text(
+                            "Segnalazione",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(widget.content),
+                        ])),
+                  ),
+                  MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Text(user.name+" "+user.surname),
-                  ])),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  alignment: Alignment.center,
-                  child: Column(children: [
-                    Text(
-                      "Segnalazione",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    minWidth: double.infinity,
+                    height: 50,
+                    color: Colors.blue.shade500,
+                    onPressed: ()
+
+                           {
+
+                        Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (_) => ProjectDetails(
+                                  title: projectData.name,
+                                  description: projectData.description,
+                                  uid: projectData.id,
+                                  qualities: projectData.qualities,
+                                    owner: projectData.ownerId,
+                                    name: projectData.ownerName,
+                                    surname: projectData.ownerSurname,
+                                    ownerImage: projectData.ownerImage,
+                                    cv: user.cv,
+                                  teammates: projectData.teammate,
+                                  maxTeammate: projectData.maxTeammate,
+
+                           )
+                            )
+                        );
+
+
+                    },
+                    child: Text("Vai al progetto",
+                        style: TextStyle(color: Colors.white)),
+                  ),
+
+                  SizedBox(height: 15),
+
+                  MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Text(widget.content),
-                  ])),
-            ),
-            MaterialButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                    minWidth: double.infinity,
+                    height: 32,
+                    color: Colors.redAccent.shade700,
+                    onPressed: () {
+                      DatabaseService().deleteReport(widget.documentId);
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                          builder: (_) => AdminReports()));
+                    },
+                    child: Text("Elimina segnalazione",
+                        style: TextStyle(color: Colors.white)),
+                  ),
+
+
+                ],
               ),
-              minWidth: double.infinity,
-              height: 32,
-              color: Colors.blue.shade500,
-              onPressed: ()
-
-                     {
-
-                  Navigator.push(context,
-                      MaterialPageRoute(
-                          builder: (_) => ProjectDetails(
-                            title: projectData.name,
-                            description: projectData.description,
-                            uid: projectData.id,
-                            qualities: projectData.qualities,
-                              owner: projectData.ownerId,
-                              name: projectData.ownerName,
-                              surname: projectData.ownerSurname,
-                              ownerImage: projectData.ownerImage,
-                              cv: user.cv,
-                            teammates: projectData.teammate,
-                            maxTeammate: projectData.maxTeammate,
-
-                     )
-                      )
-                  );
-
-
-              },
-              child: Text("Vai al progetto",
-                  style: TextStyle(color: Colors.white)),
             ),
-
-            MaterialButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              minWidth: double.infinity,
-              height: 32,
-              color: Colors.blue.shade500,
-              onPressed: () {
-                DatabaseService().deleteReport(widget.documentId);
-                Navigator.push(context,
-                    MaterialPageRoute(
-                    builder: (_) => AdminReports()));
-              },
-              child: Text("Elimina segnalazione",
-                  style: TextStyle(color: Colors.white)),
-            ),
-
-
-          ],
+          ),
         ),
       ),
     );
