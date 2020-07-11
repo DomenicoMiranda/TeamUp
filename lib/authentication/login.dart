@@ -139,7 +139,7 @@ class _LoginState extends State<Login> {
                   Buttons.Google,
                   text: "  Accedi con Google",
                   onPressed: () {
-                    _auth.signInWithGoogle();
+                    _auth.signInWithGoogle().then((value) => null);
                   }
               ),
             ],
