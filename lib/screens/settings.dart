@@ -133,7 +133,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 alignment: Alignment.center,
                 height: 30,
                 width: MediaQuery.of(context).size.width / 2,
-                child: Text("CARICA CV", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                child: user.cv == null? Text("CARICA CV", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)) : Text("AGGIORNA CV", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold))
               ),
             ),
             if (user.cv != null)
@@ -294,8 +294,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
     setState(() {
       _cv = file;
-
-      //DatabaseService(uid: user.uid).updateUserCv(_currentCv);
     });
 
     uploadCv();
@@ -319,13 +317,11 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   checkCV() async {
-    if(user.cv == null){
+
      await _openFileExplorer();
      uploadCVOnDB();
      print("current cv: "+_currentCv);
-    }else{
-      Toast.show("Hai già aggiunto il tuo curriculum", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
-    }
+
   }
 
   uploadCVOnDB() {
