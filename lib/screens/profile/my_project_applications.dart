@@ -61,7 +61,7 @@ class _ProjectApplicationsState extends State<ProjectApplications> {
         title: const Text('Candidature Mio Progetto'),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.push(context, MaterialPageRoute(
             builder: (context) => DestinationView()
           )),

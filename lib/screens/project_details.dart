@@ -7,7 +7,6 @@ import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/screens/deleteTeammate.dart';
-import 'package:teamup/screens/myprojects.dart';
 import 'package:teamup/screens/profile/my_project_applications.dart';
 import 'package:teamup/screens/project_owner_profile.dart';
 import 'package:teamup/screens/sponsor/sponsor.dart';
