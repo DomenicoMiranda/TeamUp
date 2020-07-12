@@ -148,7 +148,7 @@ class DatabaseService {
       'utente': userID,
       'name': name,
       'surname': surname,
-      'ownerImage': ownerID,
+      'ownerID': ownerID,
       'statoCandidatura': statoCandidatura,
       'progettoCandidatura': projectSelected,
       'progettoID': idProj,
