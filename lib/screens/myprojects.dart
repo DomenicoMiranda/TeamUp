@@ -278,9 +278,10 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                         children: [
                           Text(document['name'],
                               style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey.shade700)),
+                          document['sponsor'] ? Text('Sponsorizzato', style: TextStyle(color: Colors.grey.shade500, fontSize: 12),) : Text(''),
                         ],),
                     ),
                   )

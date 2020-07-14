@@ -189,7 +189,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     minWidth: double.infinity,
-                    height: 32,
+                    height: 40,
                     color: Colors.blue.shade500,
                     onPressed: () {
                       submit();
@@ -205,7 +205,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.blue.shade500,
               onPressed: () {
                 Navigator.push(
@@ -229,7 +229,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.blue.shade500,
               onPressed: () {
                 customAlertDialog(context);
@@ -249,7 +249,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.red.shade400,
               onPressed: () {
                 dialogDeleteProject(context);
@@ -269,7 +269,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.red.shade400,
               onPressed: () {
                 Navigator.push(
@@ -296,7 +296,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     minWidth: double.infinity,
-                    height: 32,
+                    height: 40,
                     color: Colors.green.shade900,
                     onPressed: () {
                       Navigator.push(
@@ -322,7 +322,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.indigo,
               onPressed: () {
                 Navigator.push(
@@ -477,7 +477,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
             Text("TEAMMATES",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             for (var user in teamMates)
-              Text(user.name.toString() + " " + user.surname.toString())
+              Text(user.name.toString().toUpperCase() + " " + user.surname.toString().toUpperCase())
           ],
         ),
       );
@@ -578,7 +578,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.red.shade400,
               onPressed: () {
                 dialogDeleteProject(context);
@@ -598,7 +598,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 borderRadius: BorderRadius.circular(10),
               ),
               minWidth: double.infinity,
-              height: 32,
+              height: 40,
               color: Colors.blue.shade500,
               onPressed: () {
                 Navigator.push(

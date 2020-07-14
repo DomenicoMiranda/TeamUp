@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/widgets/destinationView.dart';
@@ -26,16 +27,32 @@ class _DeleteTeammateState extends State<DeleteTeammate> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(
+        title: const Text('ELIMINA TEAMMATE'), centerTitle: true,
 
-        title: const Text('ELIMINA TEAMMATE'),
-    centerTitle: true,
         ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              Text("Scegli il teammate da eliminare", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Scegli il teammate da eliminare", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              ),
               Container(
+                //margin: new EdgeInsets.only(right: 46.0),
+                decoration: new BoxDecoration(
+                  //color: Colors.blueGrey.shade200,
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                  borderRadius: new BorderRadius.circular(30.0),
+                  boxShadow: <BoxShadow>[
+                    new BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8.0,
+                      offset: new Offset(0.0, 0.0),
+                    ),
+                  ],
+                ),
                 height: MediaQuery.of(context).size.height/1.5,
                 width: double.infinity,
                 child: ListView.builder(
@@ -48,8 +65,23 @@ class _DeleteTeammateState extends State<DeleteTeammate> {
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Container(
+                              height: 40.0,
+                              //margin: new EdgeInsets.only(right: 46.0),
+                              decoration: new BoxDecoration(
+                                //color: Colors.blueGrey.shade200,
+                                color: Colors.black54,
+                                shape: BoxShape.rectangle,
+                                borderRadius: new BorderRadius.circular(10.0),
+                                boxShadow: <BoxShadow>[
+                                  new BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 8.0,
+                                    offset: new Offset(0.0, 0.0),
+                                  ),
+                                ],
+                              ),
                             alignment: Alignment.center,
-                              child: Text(widget.teamMates[index].name+" "+widget.teamMates[index].surname)),
+                              child: Text(widget.teamMates[index].name.toUpperCase() + " " + widget.teamMates[index].surname.toUpperCase(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
                         ),
                       );
                 }),
@@ -61,8 +93,8 @@ class _DeleteTeammateState extends State<DeleteTeammate> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   minWidth: double.infinity,
-                  height: 32,
-                  color: Colors.green.shade400,
+                  height: 40,
+                  color: Colors.red.shade400,
                   onPressed: () {
                     updateTeammateList();
                     Navigator.push(context,
@@ -96,6 +128,7 @@ class _DeleteTeammateState extends State<DeleteTeammate> {
         newListUpdated.removeAt(index);
         widget.teamMates.removeAt(index);
         print(newListUpdated.toString());
+        DatabaseService().noFullProject(widget.projectId);
         Navigator.push(context,
             MaterialPageRoute(
                 builder: (_) => DeleteTeammate(teamMates: widget.teamMates,projectId: widget.projectId,)

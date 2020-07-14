@@ -148,6 +148,16 @@ class DatabaseService {
     );
   }
 
+  Future noFullProject(String uid) async {
+    await _firestoreInstance
+        .collection("projects")
+        .document(uid)
+        .updateData({
+      'status': '0',
+    }
+    );
+  }
+
   //---------------------CANDIDATURE----------------------------
 
 
