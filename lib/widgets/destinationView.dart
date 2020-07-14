@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teamup/screens/home.dart';
 import 'package:teamup/screens/myprojects.dart';
 import 'package:teamup/screens/applications.dart';
-import 'package:teamup/screens/settings.dart';
+import 'package:teamup/screens/profile.dart';
 
 
 class DestinationView extends StatefulWidget {

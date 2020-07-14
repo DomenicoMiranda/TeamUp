@@ -53,7 +53,7 @@ Future chooseFile() async {
      });    
    });    
  }  
- Future camera() async {    
+ Future imageFromCamera() async {
    await ImagePicker.pickImage(source: ImageSource.camera).then((image) {    
      setState(() {    
        _image = image; 
@@ -125,7 +125,7 @@ Future chooseFile() async {
                           ),
                           Expanded( child: FlatButton (
                                 onPressed: () {
-                                  camera();
+                                  imageFromCamera();
                                 },
                           child: new Text("Scatta foto"),
                           

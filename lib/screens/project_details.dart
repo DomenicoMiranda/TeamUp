@@ -354,6 +354,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
     }
   }
 
+
   getData() async {
     uid = firebaseUser.uid;
     user = await DatabaseService().getUserData(uid);
