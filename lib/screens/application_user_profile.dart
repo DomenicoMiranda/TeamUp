@@ -127,6 +127,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
                       acceptApplication();
                       Toast.show("Utente aggiunto ai teammates", context,
                           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                      project.maxTeammate == project.teammate.length ? DatabaseService().fullProject(widget.projectId) : null;
                       Navigator.push(context,
                       MaterialPageRoute(
                           builder: (context) => ProjectApplications(projectID: widget.projectId))

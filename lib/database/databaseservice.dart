@@ -36,7 +36,6 @@ class DatabaseService {
       'email' : email,
       'date' : date,
       'image' : image,
-      'num_sponsor' : sponsor
     }, merge: true);
   }
 
@@ -53,7 +52,6 @@ class DatabaseService {
         name: snapshot.data['name'],
         surname: snapshot.data['surname'],
         email: snapshot.data['email'],
-        nickname: snapshot.data['nickmane'],
         admin: snapshot.data['admin'],
       );
     }
@@ -138,6 +136,16 @@ class DatabaseService {
         .collection("projects")
         .document(uid)
         .delete();
+  }
+
+  Future fullProject(String uid) async {
+    await _firestoreInstance
+        .collection("projects")
+        .document(uid)
+        .updateData({
+          'status': '1',
+    }
+    );
   }
 
   //---------------------CANDIDATURE----------------------------
