@@ -82,77 +82,80 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               centerTitle: true,
             ),
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        widget.title.toString(),
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      )),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          widget.title.toString(),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
 
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GFAvatar(
-                      maxRadius: 50,
-                      backgroundImage: NetworkImage(widget.ownerImage),
-                      shape: GFAvatarShape.circle,
-                    ),
-                  ),
-
-                  Text(widget.name.toString() + " " + widget.surname.toString(),
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-
-                  SizedBox(
-                    height: 5,
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Descrizione",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15)),
-                          Text(widget.description.toString()),
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GFAvatar(
+                        maxRadius: 50,
+                        backgroundImage: NetworkImage(widget.ownerImage),
+                        shape: GFAvatarShape.circle,
                       ),
                     ),
-                  ),
 
-                  Text(
-                    "Competenze richieste ",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      if (widget.qualities.length == 0)
-                        Text(
-                          "Non sono richieste particolari competenze per questo progetto.",
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
+                    Text(widget.name.toString() + " " + widget.surname.toString(),
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+
+                    SizedBox(
+                      height: 5,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Descrizione",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15)),
+                            Text(widget.description.toString()),
+                          ],
                         ),
-                      if (widget.qualities.length > 0)
-                        for (var name in widget.qualities)
+                      ),
+                    ),
+
+                    Text(
+                      "Competenze richieste ",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        if (widget.qualities.length == 0)
                           Text(
-                            name.toString(),
+                            "Non sono richieste particolari competenze per questo progetto.",
                             maxLines: 2,
+                            textAlign: TextAlign.center,
                           ),
-                    ],
-                  ),
+                        if (widget.qualities.length > 0)
+                          for (var name in widget.qualities)
+                            Text(
+                              name.toString(),
+                              maxLines: 2,
+                            ),
+                      ],
+                    ),
 
-                  checkTeammates(),
+                    checkTeammates(),
 
-                  user.admin == 1 ? showButtonAdmin() :
-                  showButton(),
-                ],
+                    user.admin == 1 ? showButtonAdmin() :
+                    showButton(),
+                  ],
+                ),
               ),
             ),
           );
