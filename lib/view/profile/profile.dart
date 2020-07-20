@@ -3,20 +3,20 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teamup/authentication/login.dart';
-import 'package:teamup/database/auth.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/profileController.dart';
 import 'package:teamup/models/user.dart';
 import 'package:getflutter/getflutter.dart';
-import 'package:teamup/screens/admin/admin_panel.dart';
-import 'package:teamup/screens/profile/editprofile.dart';
+import 'package:teamup/view/admin/admin_panel.dart';
+import 'package:teamup/view/profile/editprofile.dart';
 import 'package:teamup/widgets/loading.dart';
-import 'package:teamup/widgets/pdf_screen.dart';
-import '../widgets/destinationView.dart';
+import 'package:teamup/view/profile/pdf_screen.dart';
+import '../../widgets/destinationView.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:async';
 import 'package:toast/toast.dart';
+
+import '../authentication/login.dart';
 
 
 class SettingsPage extends StatefulWidget {
@@ -27,11 +27,12 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   FirebaseUser firebaseUser;
   UserData user;
-  var uid;
+  String uid;
   bool loading = true;
   String _uploadedCvURL;
   String _currentCv;
   File _cv;
+  bool _isLogged = false;
 
   @override
   void initState() {
@@ -45,15 +46,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   wrapper() {
-    if (firebaseUser != null) {
-      getData();
-
-      return loading ? Loading() : loggedIn();
-    } else {
-      return Padding(
+      return loading ? Loading() : _isLogged ? loggedIn() : Padding(
           padding: EdgeInsets.only(top: 100),
           child:notLoggedIn());
-    }
   }
 
   notLoggedIn() {
@@ -254,7 +249,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 color: Colors.redAccent.shade700,
                 onPressed: () async {
-                  await AuthService().signOut();
+                  await ProfileController().signOut();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (_) => DestinationView()));
                 },
@@ -273,14 +268,26 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   getUser() async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-    print(firebaseUser.toString());
-    setState(() {});
+    uid = await UserData().getUser(uid);
+    print(uid.toString());
+    if (uid != null) {
+      await getData();
+      setState(() {
+        _isLogged = true;
+      });
+    }
+    else{
+      setState(() {
+        loading = false;
+        _isLogged = false;
+      });
+    }
+
   }
 
   getData() async {
-    uid = firebaseUser.uid;
-    user = await DatabaseService().getUserData(uid);
+
+    user = await UserData().getUserData(uid);
     if (mounted) {
       setState(() {
         loading = false;
@@ -325,7 +332,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   uploadCVOnDB() {
-    DatabaseService(uid: user.uid).updateUserCv(_currentCv);
+    ProfileController().updateUserCv(_currentCv, user.uid);
   }
 
 }

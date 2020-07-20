@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:teamup/database/auth.dart';
+import 'package:teamup/controller/profileController.dart';
 import 'package:teamup/global/constants.dart';
+import 'package:teamup/models/user.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:intl/intl.dart';
@@ -18,7 +19,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  final AuthService _auth = AuthService();
+  final ProfileController _profileController = ProfileController();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -155,7 +156,7 @@ class _SignInState extends State<SignIn> {
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), date.trim(), null, sponsor );
+                    dynamic result = await _profileController.registerWithEmailAndPassword(email.trim(), password, name.trim(), surname.trim(), date.trim(), null, sponsor );
                     Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DestinationView()),
@@ -194,7 +195,16 @@ class _SignInState extends State<SignIn> {
                   Buttons.Google,
                   text: "Registrati con Google",
                   onPressed: () {
-                  }
+                    ProfileController().signInWithGoogle().whenComplete(() {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return DestinationView();
+                          },
+                        ),
+                      );
+                    });
+                        }
               ),
             ],
           ),

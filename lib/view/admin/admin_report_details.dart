@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/reportController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
-import 'package:teamup/screens/admin/admin_reports.dart';
-import 'package:teamup/screens/project_details.dart';
+import 'package:teamup/view/admin/admin_reports.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/project_details.dart';
 import 'package:teamup/widgets/loading.dart';
 
 class AdminReportDetails extends StatefulWidget {
@@ -144,7 +144,7 @@ class _AdminReportDetailsState extends State<AdminReportDetails> {
                     height: 32,
                     color: Colors.redAccent.shade700,
                     onPressed: () {
-                      DatabaseService().deleteReport(widget.documentId);
+                      ReportController().deleteReport(widget.documentId);
                       Navigator.push(context,
                           MaterialPageRoute(
                           builder: (_) => AdminReports()));
@@ -164,8 +164,8 @@ class _AdminReportDetailsState extends State<AdminReportDetails> {
   }
 
   getData() async {
-    user = await DatabaseService().getUserData(widget.uid);
-    projectData = await DatabaseService().getProjectData(widget.projectId);
+    user = await UserData().getUserData(widget.uid);
+    projectData = await ProjectData().getProjectData(widget.projectId);
     if (mounted) {
       setState(() {
         loading = false;

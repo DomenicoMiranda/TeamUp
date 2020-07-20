@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/widgets/destinationView.dart';
@@ -128,7 +128,7 @@ class _DeleteTeammateState extends State<DeleteTeammate> {
         newListUpdated.removeAt(index);
         widget.teamMates.removeAt(index);
         print(newListUpdated.toString());
-        DatabaseService().noFullProject(widget.projectId);
+        ProjectData().noFullProject(widget.projectId);
         Navigator.push(context,
             MaterialPageRoute(
                 builder: (_) => DeleteTeammate(teamMates: widget.teamMates,projectId: widget.projectId,)

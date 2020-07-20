@@ -2,12 +2,12 @@
 import 'package:flutter/material.dart';
 // ignore: prefer_double_quotes
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:teamup/authentication/resetpassword.dart';
-import 'package:teamup/database/auth.dart';
+import 'package:teamup/controller/profileController.dart';
 import 'package:teamup/global/constants.dart';
+import 'package:teamup/view/authentication/resetpassword.dart';
+import 'package:teamup/view/authentication/sign_in.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
-import 'package:teamup/authentication/sign_in.dart';
 import 'package:email_validator/email_validator.dart';
 
 class Login extends StatefulWidget {
@@ -21,7 +21,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  final AuthService _auth = AuthService();
+  final ProfileController _profileController = ProfileController();
   final _formKey = GlobalKey<FormState>(); //Chiave Globale
   bool loading = false;
 
@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
                 onPressed:  () async {
                  if(_formKey.currentState.validate()){
                    setState(() => loading = true);
-                  dynamic result = await _auth.signinWithEmailAndPassword(email.trim(), password);
+                  dynamic result = await _profileController.loginWithEmailAndPassword(email.trim(), password);
                   if(result == null){
                     setState(() {
                     error = 'Utente non trovato';
@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
                   Buttons.Google,
                   text: "  Accedi con Google",
                   onPressed: () {
-                    _auth.signInWithGoogle().then((value) => null);
+                    _profileController.signInWithGoogle().then((value) => null);
                   }
               ),
             ],
@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
 
   bool mailValidator(String v) {
     bool result;
-    EmailValidator.validate(v) ? result = true : false;
+    EmailValidator.validate(v) ? result = true : result = false;
     print("IL RISULTATO " + result.toString());
     return result;
   }

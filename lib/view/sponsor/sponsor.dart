@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/projectController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,21 +43,18 @@ class _SponsorState extends State<Sponsor> {
   void initState() {
     print(widget.projectID);
     getUser();
+    print(uid);
+    print(user.toString());
     super.initState();
   }
 
+
   getUser() async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-    await getData();
+    uid = await UserData().getUser(uid);
+    user = await UserData().getUserData(uid);
     setState(() {
       loading = false;
     });
-  }
-
-  getData() async {
-    uid = firebaseUser.uid;
-    user = await DatabaseService().getUserData(uid);
-
   }
 
   Widget sponsorWidget(BuildContext context) {
@@ -77,7 +74,7 @@ class _SponsorState extends State<Sponsor> {
             height: 40,
             color: Colors.indigo,
             onPressed: () {
-              DatabaseService().setSponsored(firebaseUser.uid, user.avaiableSponsor, widget.projectID);
+              ProjectController().setSponsored(uid, user.avaiableSponsor, widget.projectID);
               Navigator.pop(
                   context,
                   Toast.show("Progetto sponsorizzato con successo.", context,
@@ -174,7 +171,7 @@ class _SponsorState extends State<Sponsor> {
             height: 40,
             color: Colors.indigo,
             onPressed: () {
-              DatabaseService().addBundlePromoToUser(firebaseUser.uid, _bundle, user.avaiableSponsor);
+              ProjectController().addBundlePromoToUser(uid, _bundle, user.avaiableSponsor);
               Navigator.pop(
                 context,
                   Toast.show("Bundle Promo acquistato con successo.", context,

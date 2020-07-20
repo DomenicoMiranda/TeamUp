@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
-import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/user.dart';
 import 'package:teamup/widgets/loading.dart';
-import 'package:teamup/widgets/pdf_screen.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/profile/pdf_screen.dart';
 
 class OwnerProfile extends StatefulWidget {
   OwnerProfile({this.name, this.surname, this.image, this.cv, this.email, this.uid});
@@ -150,7 +149,7 @@ class _OwnerProfileState extends State<OwnerProfile> {
   }
 
   getUser()async{
-    user = await DatabaseService().getUserData(widget.uid);
+    user = await UserData().getUserData(widget.uid);
     setState(() {
       loading = false;
     });

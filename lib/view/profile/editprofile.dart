@@ -6,8 +6,8 @@ import 'package:getflutter/getflutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as Path;
-import 'package:teamup/database/databaseservice.dart';
-import 'package:teamup/models/user.dart'; 
+import 'package:teamup/controller/profileController.dart';
+import 'package:teamup/models/user.dart';
 
 
 
@@ -83,7 +83,7 @@ Future chooseFile() async {
 
 
     return StreamBuilder<UserData>(
-      stream: DatabaseService(uid: widget.uid).userData,
+      stream: UserData().userData(widget.uid),
       builder: (contex, snapshot) {
         if(snapshot.hasData){
           if(_uploadedFileURL == null) {
@@ -173,7 +173,7 @@ Future chooseFile() async {
                             style: TextStyle(color: Colors.white),
                                ),
                                onPressed: () async {
-                                      await DatabaseService(uid: widget.user.uid).updateUserData(
+                                      await ProfileController().updateUserData(
                                         _currentName ?? widget.user.name,
                                         _currentSurname ?? widget.user.surname,
                                         _currentEmail ?? widget.user.email,
@@ -181,6 +181,7 @@ Future chooseFile() async {
                                         _uploadedFileURL ?? widget.user.image,
                                         _currentSponsor ?? widget.user.avaiableSponsor,
                                         null,
+                                          widget.user.uid
                                       );
                                     Navigator.pop(context);
                                 },

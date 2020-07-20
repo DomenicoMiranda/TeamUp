@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/applicationController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
-import 'package:teamup/screens/profile/my_project_applications.dart';
+import 'package:teamup/view/profile/my_project_applications.dart';
 import 'package:teamup/widgets/loading.dart';
-import 'package:teamup/widgets/pdf_screen.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/profile/pdf_screen.dart';
 import 'package:toast/toast.dart';
 
 class ApplicationUserProfile extends StatefulWidget {
@@ -127,7 +127,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
                       acceptApplication();
                       Toast.show("Utente aggiunto ai teammates", context,
                           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                      project.maxTeammate == project.teammate.length ? DatabaseService().fullProject(widget.projectId) : null;
+                      project.maxTeammate == project.teammate.length ? ProjectData().fullProject(widget.projectId) : null;
                       Navigator.push(context,
                       MaterialPageRoute(
                           builder: (context) => ProjectApplications(projectID: widget.projectId))
@@ -156,16 +156,16 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
   }
 
   getProject() async {
-    project = await DatabaseService().getProjectData(widget.projectId);
+    project = await ProjectData().getProjectData(widget.projectId);
   }
 
   acceptApplication() async {
-    await DatabaseService().acceptCandidatura(widget.uid, widget.projectId, project.teammate);
-    DatabaseService().updateStatoCandidatura(widget.uid, widget.projectId, widget.applicationID);
+    await ApplicationController().acceptCandidatura(widget.uid, widget.projectId, project.teammate);
+    ApplicationController().updateStatoCandidatura(widget.uid, widget.projectId, widget.applicationID);
   }
 
   refuseApplication() async {
-    await DatabaseService().refuseCandidatura(widget.applicationID);
+    await ApplicationController().refuseCandidatura(widget.applicationID);
   }
 
   checkPDF(){
@@ -195,7 +195,7 @@ class _ApplicationUserProfileState extends State<ApplicationUserProfile> {
   }
 
   getUser()async{
-    user = await DatabaseService().getUserData(widget.uid);
+    user = await UserData().getUserData(widget.uid);
     setState(() {
       loading = false;
     });

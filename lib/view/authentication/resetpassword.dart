@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/database/auth.dart';
+import 'package:teamup/controller/profileController.dart';
 import 'package:teamup/global/constants.dart';
 
 class Resetpassword extends StatefulWidget {
@@ -13,7 +13,7 @@ class Resetpassword extends StatefulWidget {
 
 class _ResetpasswordState extends State<Resetpassword> {
 
-  final AuthService _auth = AuthService();
+  final ProfileController _profileController = ProfileController();
   bool loading = false;
 
   String email = '';
@@ -62,7 +62,7 @@ class _ResetpasswordState extends State<Resetpassword> {
                         ),
                         onPressed:  () async {
                           setState(() => loading = true);
-                          await _auth.resetPassword(email);
+                          await _profileController.resetPassword(email);
                           Navigator.pop(context);
                         }
                       ),

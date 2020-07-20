@@ -1,19 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teamup/authentication/login.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/applicationController.dart';
+import 'package:teamup/controller/projectController.dart';
+import 'package:teamup/controller/reportController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
 import 'package:teamup/models/user.dart';
-import 'package:teamup/screens/deleteTeammate.dart';
-import 'package:teamup/screens/profile/my_project_applications.dart';
-import 'package:teamup/screens/project_owner_profile.dart';
-import 'package:teamup/screens/sponsor/sponsor.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/deleteTeammate.dart';
+import 'package:teamup/view/profile/my_project_applications.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/project_owner_profile.dart';
+import 'package:teamup/view/sponsor/sponsor.dart';
 import 'package:teamup/widgets/destinationView.dart';
 import 'package:teamup/widgets/loading.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:toast/toast.dart';
+
+import '../authentication/login.dart';
 
 class ProjectDetails extends StatefulWidget {
   ProjectDetails(
@@ -162,11 +165,10 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   }
 
   getUser() async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-    if (firebaseUser != null) {
+    uid = await UserData().getUser(uid);
+    if (uid != null) {
       getData();
       getTeammates();
-      print(firebaseUser.toString());
       print("OWNERID: " + widget.owner.toString());
       //print("UID CORRENTE: " + firebaseUser.uid.toString());
       print("IMAGE " + widget.ownerImage.toString());
@@ -178,9 +180,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   }
 
   Widget showButton() {
-    if (firebaseUser == null) {
+    if (uid == null) {
       return notLoggedIn();
-    } else if (widget.owner != firebaseUser.uid) {
+    } else if (widget.owner != uid) {
       return Column(
         children: [
           Padding(
@@ -242,7 +244,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ),
         ],
       );
-    } else if (widget.owner == firebaseUser.uid) {
+    } else if (widget.owner == uid) {
       return Column(
         children: [
           Padding(
@@ -356,17 +358,17 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
 
   getData() async {
-    uid = firebaseUser.uid;
-    user = await DatabaseService().getUserData(uid);
+
+    user = await UserData().getUserData(uid);
   }
 
   addApplication() async {
-    await DatabaseService().addCandidatura(firebaseUser.uid, user.name,
+    await ApplicationController().addCandidatura(uid, user.name,
         user.surname, widget.owner, statoCandidatura, widget.title, widget.uid);
   }
 
   deleteMyProject() async {
-    await DatabaseService().deleteProject(widget.uid);
+    await ProjectController().deleteProject(widget.uid);
     Toast.show("Progetto eliminato correttamente.", context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
@@ -433,7 +435,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   createReport() {
     setState(() {
       report.projectId = widget.uid;
-      report.userId = firebaseUser.uid;
+      report.userId = uid;
       report.content = tmpContent;
       report.projectName = widget.title;
     });
@@ -441,7 +443,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   completeReport() async {
     await createReport();
-    DatabaseService().addReport(report);
+    ReportController().addReport(report);
     print("AGGIUNTO");
     Navigator.pop(context);
     Toast.show("Segnalazione inviata correttamente", context,
@@ -453,7 +455,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
   getTeammates() async {
     for (var doc in widget.teammates) {
-      teammate = await DatabaseService().getUserData(doc);
+      teammate = await UserData().getUserData(doc);
       //print("ADMIN " +teammate.admin.toString());
       teamMates.add(teammate);
       print("GET TEAMMATE: " +
@@ -469,9 +471,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   }
 
   checkTeammates() {
-    if (firebaseUser == null) {
+    if (uid == null) {
       return Text("");
-    } else if (widget.owner == firebaseUser.uid) {
+    } else if (widget.owner == uid) {
       print("LUNGHEZZA TEAMMATES: " + teamMates.length.toString());
       //print(teamMates[1].toString());
       return Padding(

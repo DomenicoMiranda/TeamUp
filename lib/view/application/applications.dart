@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/authentication/login.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/applicationController.dart';
 import 'package:teamup/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/widgets/loading.dart';
+
+import '../authentication/login.dart';
 
 
 class Applications extends StatefulWidget {
@@ -30,7 +31,7 @@ class ApplicationsState extends State<Applications> {
 
   @override
   Widget build(BuildContext context) {
-   return loading? Loading() : firebaseUser == null? notLoggedIn() : Container(
+   return loading? Loading() : uid == null? notLoggedIn() : Container(
       child: DefaultTabController(
         length: 3,
         child: new Scaffold(
@@ -87,16 +88,17 @@ class ApplicationsState extends State<Applications> {
   }
 
   getUser() async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-    if(firebaseUser != null)await getData();
+    //firebaseUser = await FirebaseAuth.instance.currentUser();
+    uid = await UserData().getUser(uid);
+    if(uid != null)await getData();
     setState(() {
       loading = false;
     });
   }
 
   getData() async {
-    uid = firebaseUser.uid;
-    user = await DatabaseService().getUserData(uid);
+
+    user = await UserData().getUserData(uid);
     if (mounted) {
       setState(() {
         loading = false;
@@ -112,7 +114,7 @@ Widget buildCandidature() {
       child: StreamBuilder(
           stream: Firestore.instance
               .collection('applications')
-              .where("utente", isEqualTo: firebaseUser.uid)
+              .where("utente", isEqualTo: uid)
               .where("statoCandidatura", isEqualTo: 1)
               .snapshots(),
           builder: (context, snapshot) {
@@ -132,7 +134,7 @@ Widget buildCandidature() {
         child: StreamBuilder(
             stream: Firestore.instance
                 .collection('applications')
-                .where("utente", isEqualTo: firebaseUser.uid)
+                .where("utente", isEqualTo: uid)
                 .where("statoCandidatura", isEqualTo: 0)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -153,7 +155,7 @@ Widget buildCandidature() {
         child: StreamBuilder(
             stream: Firestore.instance
                 .collection('applications')
-                .where("utente", isEqualTo: firebaseUser.uid)
+                .where("utente", isEqualTo: uid)
                 .where("statoCandidatura", isEqualTo: 3)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -181,7 +183,7 @@ Widget buildCandidature() {
           trailing: MaterialButton(child: Text("Elimina candidatura"), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.red.shade500)),
             onPressed: () {
-                  DatabaseService().deleteCandidatura(application.documentID);
+              ApplicationController().deleteCandidatura(application.documentID);
             },
           ),
           title: new Text(application['progettoCandidatura']),

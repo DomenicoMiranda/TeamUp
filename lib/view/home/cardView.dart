@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/screens/create_project.dart';
-import 'package:teamup/screens/project_details.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/create_project.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/project_details.dart';
 
 class CardView extends StatefulWidget {
   @override

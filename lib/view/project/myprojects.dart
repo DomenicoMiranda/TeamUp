@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teamup/authentication/login.dart';
-import 'package:teamup/screens/create_project.dart';
-import 'package:teamup/screens/project_details.dart';
+import 'package:teamup/models/user.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/create_project.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/project_details.dart';
 import 'package:teamup/widgets/loading.dart';
+
+import '../authentication/login.dart';
 
 
 
@@ -15,10 +16,8 @@ class MyProjectsList extends StatefulWidget {
 
 class _MyProjectsListState extends State<MyProjectsList> {
 
-  static FirebaseUser firebaseUser;
-  //TODO modificare query per recuperare correttamente currentUser e mostrare MIEI PROGETTI
-   static String uid;
-   bool loading = true;
+  static String uid;
+  bool loading = true;
   List<Widget> containersProjects = [];
 
   @override
@@ -30,7 +29,7 @@ getUser();
   }
   @override
   Widget build(BuildContext context) {
-    return loading? Loading() : firebaseUser == null? notLoggedIn() : Container(
+    return loading? Loading() : uid == null? notLoggedIn() : Container(
       child: DefaultTabController(
         length: 2,
         child: new Scaffold(
@@ -131,8 +130,7 @@ getUser();
 
 
   Future getUser() async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-   if(firebaseUser != null){ uid = firebaseUser.uid;
+    uid = await UserData().getUser(uid);
     if(mounted){
     setState(() {
       containersProjects= [
@@ -141,7 +139,7 @@ getUser();
       ];
       loading = false;
     });
-  }}else
+  }else
     {
       setState(() {
         loading=false;

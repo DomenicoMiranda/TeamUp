@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/screens/admin/admin_reports.dart';
+import 'package:teamup/view/admin/admin_reports.dart';
 
 class AdminPanel extends StatefulWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:teamup/screens/home.dart';
-import 'package:teamup/screens/myprojects.dart';
-import 'package:teamup/screens/applications.dart';
-import 'package:teamup/screens/profile.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/home/home.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/myprojects.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/application/applications.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/profile/profile.dart';
 
 
 class DestinationView extends StatefulWidget {

@@ -15,13 +15,13 @@ class Report {
      this.projectName = projectName;
    }
 
-   Report.fromFirestoreDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+   /*Report.fromFirestoreDocumentSnapshot(DocumentSnapshot documentSnapshot) {
      uid = documentSnapshot.documentID;
      userId = documentSnapshot.data['userId'];
      projectId = documentSnapshot.data['projectId'];
      content = documentSnapshot.data["content"];
      projectName = documentSnapshot.data["projectName"];
-   }
+   }*/
 
    Map<String, dynamic> toMap(){
      var data = {

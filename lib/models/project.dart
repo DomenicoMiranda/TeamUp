@@ -93,12 +93,59 @@ class ProjectData {
     return data;
   }
 
-  setData(String variabile) {
-    return this.name = variabile;
+
+  Future<ProjectData> getProjectData(String uid) async {
+    DocumentSnapshot documentSnapshot = await Firestore.instance
+        .collection("projects")
+        .document(uid)
+        .get();
+
+    return ProjectData.fromFirestoreDocumentSnapshot(documentSnapshot);
   }
 
-  getData(){
-    return this.name;
+  ProjectData _projectDataFromSnapshot(DocumentSnapshot snapshot) {
+    return ProjectData(
+      id : id,
+      name : snapshot.data['name'],
+      description : snapshot.data['description'],
+      maxTeammate : snapshot.data['maxTeammate'],
+      category : snapshot.data['category'],
+    );
   }
+
+  //get user stream
+  Stream<QuerySnapshot> get projects {
+    return Firestore.instance.collection('projects').snapshots();
+  }
+
+  // get user doc stream
+  Stream<ProjectData> get projectData {
+
+    return Firestore.instance.collection('projects').document(id).snapshots()
+        .map(_projectDataFromSnapshot);
+  }
+
+  Future fullProject(String uid) async {
+    await Firestore.instance
+        .collection("projects")
+        .document(uid)
+        .updateData({
+      'status': '1',
+    }
+    );
+  }
+
+  Future noFullProject(String uid) async {
+    await Firestore.instance
+        .collection("projects")
+        .document(uid)
+        .updateData({
+      'status': '0',
+    }
+    );
+  }
+
+
+
 
 }

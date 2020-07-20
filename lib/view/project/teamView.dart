@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:teamup/database/databaseservice.dart';
+import 'package:teamup/controller/projectController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/user.dart';
 import 'package:toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'destinationView.dart';
-import 'loading.dart';
+import '../../widgets/destinationView.dart';
+import '../../widgets/loading.dart';
 
 
 class TeamForms extends StatefulWidget {
@@ -21,15 +21,17 @@ class _TeamFormsState extends State<TeamForms> {
 
   FirebaseUser firebaseUser;
   UserData user;
+  String uid;
 
 
   final controller = TextEditingController();
 
-  String dropdownValue = "Tutte";
+  String dropdownValue = "Musica";
   String tmpCategory;
   String _description;
 
   final _formKey = GlobalKey<FormState>();
+  final _formKeyDesc = GlobalKey<FormState>();
 
   ProjectData project = new ProjectData();
 // text field state
@@ -84,7 +86,7 @@ class _TeamFormsState extends State<TeamForms> {
 
                   //DESCRIZIONE PROGETTO
                   TextFormField(
-                    validator: (value) {
+                    validator: ( value) {
                       if (value.isEmpty) {
                         return 'Inserisci una descrizione';
                       }
@@ -92,10 +94,10 @@ class _TeamFormsState extends State<TeamForms> {
                     },
                     maxLines: null,
                     //catturo l'input inserito
-                    onChanged: (value) {
+                    onChanged: (text) {
                        setState(() {
-                         project.description = value;
-                         print(_description);
+                         project.description = text;
+                         //print("descrizione: "+_description);
                        });
                     },
                     decoration: InputDecoration(
@@ -169,7 +171,7 @@ class _TeamFormsState extends State<TeamForms> {
 
                     });
                   },
-                  items: <String> ['Tutte', 'Musica', 'Arte', 'Sport', 'Cinema', 'Business' ]
+                  items: <String> [ 'Musica', 'Arte', 'Sport', 'Cinema', 'Business' ]
                       .map<DropdownMenuItem<String>>((String value){
                     return DropdownMenuItem<String>(
                       value: value,
@@ -246,13 +248,13 @@ class _TeamFormsState extends State<TeamForms> {
   }
 
   addProject() async {
-    await DatabaseService().addProject(project);
+    await ProjectController().addProject(project);
     print(project.toMap());
   }
 
   getUser()async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-    print(firebaseUser.toString());
+    uid = await UserData().getUser(uid);
+    print("UID "+uid.toString());
 //    setState(() {
 //      loading = false;
 //    });
@@ -260,8 +262,7 @@ class _TeamFormsState extends State<TeamForms> {
   }
 
   getData() async {
-    user = await DatabaseService().getUserData(firebaseUser.uid);
-    print(user.nickname);
+    user = await UserData().getUserData(uid);
     if(mounted){
       setState(() {
         loading = false;
@@ -269,14 +270,14 @@ class _TeamFormsState extends State<TeamForms> {
   }
 
   saveToProject()  {
-    project.ownerId = firebaseUser.uid;
+    project.ownerId = uid;
     project.status = "0";
     project.category = dropdownValue;
     project.ownerImage = user.image;
     project.ownerName = user.name;
     project.ownerSurname = user.surname;
     project.sponsor = false;
-    print(project.toMap());
+    print( "PROGETTO: "+ project.toMap().toString());
   }
 
   getUserData() async {

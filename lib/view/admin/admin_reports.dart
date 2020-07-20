@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:teamup/models/report.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/screens/admin/admin_report_details.dart';
+import 'package:teamup/view/admin/admin_report_details.dart';
 
 class AdminReports extends StatefulWidget {
   @override

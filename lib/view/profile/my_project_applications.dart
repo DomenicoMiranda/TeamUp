@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/database/databaseservice.dart';
 import 'package:teamup/models/project.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/models/user.dart';
-import 'package:teamup/screens/application_user_profile.dart';
+import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/application/application_user_profile.dart';
 import 'package:teamup/widgets/destinationView.dart';
 
 
@@ -32,25 +31,26 @@ class _ProjectApplicationsState extends State<ProjectApplications> {
 
   @override
   void initState() {
-    getUser();
+    getUser(firebaseUser);
     super.initState();
   }
 
-  getUser() async {
-    firebaseUser = await FirebaseAuth.instance.currentUser();
-    await getData();
+  getUser(FirebaseUser firebaseUser) async {
+    firebaseUser = await UserData().getCurrentUser(firebaseUser);//FirebaseAuth.instance.currentUser();
+    await getData(user, firebaseUser);
     setState(() {
       loading = false;
     });
   }
 
-  getData() async {
-    uid = firebaseUser.uid;
-    user = await DatabaseService().getUserData(uid);
+  getData(UserData user, FirebaseUser firebaseUser) async {
+    //uid = firebaseUser.uid;
+    user = await UserData().getUserData(firebaseUser.uid);
     if (mounted) {
       setState(() {
         loading = false;
       });
+      return user;
     }
   }
 

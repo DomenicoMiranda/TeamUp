@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class User {
@@ -49,6 +50,52 @@ class UserData {
     cv = documentSnapshot.data["cv"];
     avaiableSponsor = documentSnapshot.data["num_sponsor"];
   }
+
+
+  getUser(String uid) async {
+    var firebaseUser = await FirebaseAuth.instance.currentUser();
+    if(firebaseUser != null) {
+      uid = firebaseUser.uid;
+      return uid;
+    }
+  }
+
+  getCurrentUser(FirebaseUser firebaseUser) async {
+    firebaseUser = await FirebaseAuth.instance.currentUser();
+    return firebaseUser;
+  }
+
+   Future<UserData> getUserData( String uid) async {
+     DocumentSnapshot documentSnapshot = await Firestore.instance
+         .collection("users")
+         .document(uid)
+         .get();
+
+     return UserData.fromFirestoreDocumentSnapshot(documentSnapshot);
+   }
+
+   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+     return UserData(
+       uid: uid,
+       name: snapshot.data['name'],
+       surname: snapshot.data['surname'],
+       email: snapshot.data['email'],
+       admin: snapshot.data['admin'],
+     );
+   }
+
+   //get user stream
+   Stream<QuerySnapshot> get users {
+     return Firestore.instance.collection('users').snapshots();
+   }
+
+   // get user doc stream
+   Stream<UserData>  userData(String uid) {
+
+     return Firestore.instance.collection('users').document(uid).snapshots()
+         .map(_userDataFromSnapshot);
+   }
+
 
 
 }
