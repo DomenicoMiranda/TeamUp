@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:teamup/widgets/destinationView.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'TeamUp',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('it', 'IT'),
+      ],
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.blueAccent,
+        accentColor: Colors.grey.shade400,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'TeamUp'),
+      home: DestinationView(),
     );
   }
 }

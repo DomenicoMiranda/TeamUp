@@ -1,4 +1,4 @@
-package com.example.teamup
+package it.intolleranti.teamup
 
 import io.flutter.embedding.android.FlutterActivity
 
