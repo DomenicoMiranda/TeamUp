@@ -487,7 +487,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ],
         ),
       );
-    } else if (widget.owner != firebaseUser.uid) {
+    } else if (widget.owner != uid) {
       return Text("");
     }
   }

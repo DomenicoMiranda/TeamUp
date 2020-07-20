@@ -28,10 +28,8 @@ class _TeamFormsState extends State<TeamForms> {
 
   String dropdownValue = "Musica";
   String tmpCategory;
-  String _description;
 
   final _formKey = GlobalKey<FormState>();
-  final _formKeyDesc = GlobalKey<FormState>();
 
   ProjectData project = new ProjectData();
 // text field state

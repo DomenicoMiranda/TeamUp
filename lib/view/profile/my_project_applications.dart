@@ -10,11 +10,10 @@ import 'package:teamup/widgets/destinationView.dart';
 
 class ProjectApplications extends StatefulWidget {
 
-  ProjectApplications({this.userName, this.statoCand, this.projectApplication, this.projectID});
+  ProjectApplications({this.userName, this.statoCand,  this.projectID});
   final String userName;
   final int statoCand;
-  var projectApplication;
-  var projectID;
+  final String projectID;
 
   @override
   _ProjectApplicationsState createState() => _ProjectApplicationsState();
