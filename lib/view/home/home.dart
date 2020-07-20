@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/home/cardView.dart';
+import 'package:teamup/view/home/cardView.dart';
 
 class Homepage extends StatefulWidget {
   @override

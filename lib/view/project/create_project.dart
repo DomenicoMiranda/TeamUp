@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/miran/Documents/GitHub/teamup/lib/view/project/teamView.dart';
+import 'package:teamup/view/project/teamView.dart';
 
 
 class CreateProject extends StatefulWidget {

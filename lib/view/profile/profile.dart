@@ -332,7 +332,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   uploadCVOnDB() {
-    ProfileController().updateUserCv(_currentCv, user.uid);
+    ProfileController().updateUserCv(_currentCv, uid);
   }
 
 }
