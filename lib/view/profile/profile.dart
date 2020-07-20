@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teamup/controller/profileController.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:teamup/view/admin/admin_panel.dart';
 import 'package:teamup/view/profile/editprofile.dart';

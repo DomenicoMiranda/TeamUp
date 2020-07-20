@@ -3,7 +3,7 @@ import 'package:teamup/controller/projectController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 
 class Sponsor extends StatefulWidget {
   final String projectID;

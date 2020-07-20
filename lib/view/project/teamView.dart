@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:teamup/controller/projectController.dart';
 import 'package:teamup/models/project.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:teamup/view/project/create_project.dart';
 import 'package:teamup/view/project/project_details.dart';
 import 'package:teamup/widgets/loading.dart';

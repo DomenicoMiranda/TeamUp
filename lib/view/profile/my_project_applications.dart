@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/models/project.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:teamup/view/application/application_user_profile.dart';
 import 'package:teamup/widgets/destinationView.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:teamup/controller/applicationController.dart';
 import 'package:teamup/models/project.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:teamup/view/profile/my_project_applications.dart';
 import 'package:teamup/view/profile/pdf_screen.dart';
 import 'package:teamup/widgets/loading.dart';

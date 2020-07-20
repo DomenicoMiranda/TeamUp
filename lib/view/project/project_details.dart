@@ -6,7 +6,7 @@ import 'package:teamup/controller/projectController.dart';
 import 'package:teamup/controller/reportController.dart';
 import 'package:teamup/models/project.dart';
 import 'package:teamup/models/report.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:teamup/view/profile/my_project_applications.dart';
 import 'package:teamup/view/project/deleteTeammate.dart';
 import 'package:teamup/view/project/project_owner_profile.dart';

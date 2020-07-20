@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:teamup/models/project.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teamup/widgets/destinationView.dart';
 

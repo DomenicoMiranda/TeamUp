@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as Path;
 import 'package:teamup/controller/profileController.dart';
-import 'package:teamup/models/user.dart';
+import 'package:teamup/models/teammate.dart';
 
 
 
