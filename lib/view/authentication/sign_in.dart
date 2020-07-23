@@ -66,7 +66,7 @@ class _SignInState extends State<SignIn> {
                   hintText: 'Nome',
                   prefixIcon: Icon(Icons.chevron_right, color: Theme.of(context).primaryColor),
                 ),
-                style: TextStyle(color: Colors.white), 
+                style: TextStyle(color: Colors.black),
                 validator: (val) => val.isEmpty ? 'Inserisci il tuo nome' : null,
                 onChanged: (val) {
                   setState(() => name = val);
@@ -78,7 +78,7 @@ class _SignInState extends State<SignIn> {
                   hintText: 'Cognome',
                   prefixIcon: Icon(Icons.chevron_right, color: Theme.of(context).primaryColor),
                 ),
-                style: TextStyle(color: Colors.white), 
+                style: TextStyle(color: Colors.black),
                 validator: (val) => val.isEmpty ? 'Inserisci il tuo cognome' : null,
                 onChanged: (val) {
                   setState(() => surname = val);
@@ -110,7 +110,7 @@ class _SignInState extends State<SignIn> {
                       child: Container(
                           child: Padding(
                             padding: const EdgeInsets.all(3),
-                            child: Text("Data di nascita", style: TextStyle(color: Colors.white),),
+                            child: Text("Data di nascita", style: TextStyle(color: Colors.black),),
                           )),
                     ),
                     Text(date, style: TextStyle(color: Theme.of(context).primaryColor),),
@@ -150,7 +150,7 @@ class _SignInState extends State<SignIn> {
                   color: Colors.indigo.shade900,
                   child: Text(
                     'Registrati',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
                   onPressed:  () async {
                   if(_formKey.currentState.validate()){
@@ -180,7 +180,7 @@ class _SignInState extends State<SignIn> {
               Text(
                 'Creando un account accetti i nostri Termini di servizio & politica sulla privacy',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 15.0),
+                style: TextStyle(color: Colors.black, fontSize: 15.0),
               ),
                 SizedBox(height: 20,),
                 /*SignInButton(
